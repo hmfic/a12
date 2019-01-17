@@ -35,7 +35,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ```/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
 
 ### install node
-brew install node
+```brew install node```
 
 Make sure you have NPM installed and updated:
 ```npm install -g npm``` to update
