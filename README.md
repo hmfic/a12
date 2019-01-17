@@ -57,9 +57,10 @@ npm -v
 
 ### install angular
 
-```sudo npm install -g @angular/cli```
-
-```sudo chown -R $USER:$(id -gn $USER) /Users/bubba/.config```
+```
+sudo npm install -g @angular/cli
+sudo chown -R $USER:$(id -gn $USER) /Users/bubba/.config
+```
 
 ### create a new project…
 cd to your top level directory (one directory **above** the place where you want it ; e.g. Desktop)
