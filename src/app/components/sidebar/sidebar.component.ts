@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+
+import { Router, Route, Routes, NavigationEnd } from '@angular/router';
+// import { SidebarService } from "../sidebar/sidebar.service";
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-sidebar',
