@@ -31,22 +31,36 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### one time stuff …
 
+### get brew installed
+```/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
+
+### install node
+```brew install node```
+
 Make sure you have NPM installed and updated:
 ```npm install -g npm``` to update
 
+### check node and npm installs
+```
+node -v
+npm -v
+```
+
+### upgrade node
+```brew upgrade node```
+
 ```npm version```
 
-get the extension for sublime…
+### get the extension for sublime…
 
 ```git clone --depth 1 https://github.com/Microsoft/TypeScript-Sublime-Plugin.git TypeScript```
-    
-```brew install node```
 
-node -v and npm -v should work
+### install angular
 
-```sudo npm install -g @angular/cli```
-
-```sudo chown -R $USER:$(id -gn $USER) /Users/bubba/.config```
+```
+sudo npm install -g @angular/cli
+sudo chown -R $USER:$(id -gn $USER) /Users/bubba/.config
+```
 
 ### create a new project…
 cd to your top level directory (one directory **above** the place where you want it ; e.g. Desktop)
