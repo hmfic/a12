@@ -13,6 +13,12 @@ import { MenubarComponent } from './components/menubar/menubar.component';
 import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, MatCheckboxModule, 
          MatToolbarModule, MatListModule, MatMenuModule, MatDialogModule, MatFormFieldModule, 
          MatSelectModule, MatInputModule } from '@angular/material';
+import { Globals } from './components/globals';
+import { SidebarService } from './components/sidebar/sidebar.service';
+import { JmodalComponent } from './components/jmodal/jmodal.component';
+import { HelpmodalComponent } from './components/helpmodal/helpmodal.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,9 @@ import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, Ma
     AboutComponent,
     SettingsComponent,
     SidebarComponent,
-    MenubarComponent
+    MenubarComponent,
+    JmodalComponent,
+    HelpmodalComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +43,19 @@ import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, Ma
     MatListModule,
     MatMenuModule,
     MatDialogModule,
+    MatTooltipModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    Globals,
+    SidebarService
+    ],
+  //providers: [],
+  bootstrap: [AppComponent],
+  entryComponents: [ JmodalComponent, HelpmodalComponent]
 })
 export class AppModule { }
-

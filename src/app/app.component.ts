@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { DragDropModule } from '@angular/cdk/drag-drop'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Globals } from './components/globals';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'application12';
+	constructor(
+	    private globals: Globals
+      )
+	      { }
+
 }

@@ -1,40 +1,26 @@
-<mat-sidenav-container autosize hasBackdrop>
+<mat-sidenav-container autosize hasBackdrop >
 
-  <mat-sidenav #sidebar class="sidenav-contents" mode="over">
+  <mat-sidenav #sidebar class="sidenav-contents" mode="over" fixedInViewport="true">
   	<mat-list>
-		 <mat-list-item > 
-		 	<a routerLink="about" class="sidenav-links" >
+		 <mat-list-item routerLinkActive="{{getBackground(globals.theme)}}"> 
+		 	<a routerLink="about" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}" >
 				<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">people</i>&nbsp; Users
+					<i class="material-icons">people</i>&nbsp; About
 				</div>
 			</a> 
 		 </mat-list-item>
-		 <mat-list-item> 
-		 	<a routerLink="settings" class="sidenav-links" >
+		 <mat-list-item routerLinkActive="{{getBackground(globals.theme)}}"> 
+		 	<a routerLink="settings" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}">
 		 		<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">message</i>&nbsp; Posts
-				</div>
-			</a>
-	 	 </mat-list-item>
-	 	 <mat-list-item > 
-		 	<a routerLink="todos" class="sidenav-links" >
-		 		<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">list</i>&nbsp; To-Do's
-				</div>
-			</a>
-	 	 </mat-list-item>
-	 	 <mat-list-item > 
-		 	<a routerLink="graphcentral" class="sidenav-links" >
-		 		<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">multiline_chart</i>&nbsp; Graphs
+					<i class="material-icons">message</i>&nbsp; Settings
 				</div>
 			</a>
 	 	 </mat-list-item>
 	</mat-list>
   	
   </mat-sidenav>
+
   <mat-sidenav-container class="drawer-contents">
       	<router-outlet></router-outlet>
   </mat-sidenav-container>
 </mat-sidenav-container> 
-yup

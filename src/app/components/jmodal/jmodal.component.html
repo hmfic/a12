@@ -1,0 +1,47 @@
+
+<h1 mat-dialog-title>{{modalTitle}}</h1>
+<mat-dialog-content>
+    <form [formGroup]="form" class="jcontainer">
+      <mat-form-field>
+        <input matInput  placeholder="Name" [(ngModel)]="globals.name" [ngModelOptions]="{standalone: true}">
+        <mat-hint>Enter your full name</mat-hint>
+      </mat-form-field>
+      <p>
+      <mat-form-field>
+        <input matInput placeholder="Email" [(ngModel)]="globals.email" [ngModelOptions]="{standalone: true}">
+        <mat-hint>Enter your email address</mat-hint>
+      </mat-form-field>
+      <p>
+      <mat-form-field>
+        <mat-select [(value)]="globals.region">
+          <mat-option >-- None --</mat-option>
+          <mat-option value="nvir">US East (N. Virginia)</mat-option>
+          <mat-option value="ohio">US East (Ohio)</mat-option>
+          <mat-option value="ncal">US West (N. California)</mat-option>
+          <mat-option value="west">US West (Oregon)</mat-option>
+          <mat-option value="canada">Canada (Central)</mat-option>
+          <mat-option value="ireland">EU (Frankfurt)</mat-option>
+          <mat-option value="ireland">EU (Ireland)</mat-option>
+          <mat-option value="london">EU (London)</mat-option>
+          <mat-option value="paris">EU (Paris)</mat-option>
+          <mat-option value="sanpalo">South America (Sao Paulo)</mat-option>
+        </mat-select>
+        <mat-hint>Pick your AWS region</mat-hint>
+      </mat-form-field>
+      <p>
+      <mat-form-field>
+        <mat-select [(value)]="globals.theme">
+          <mat-option value="default-theme">Default</mat-option>
+          <mat-option value="dark-theme">Dark</mat-option>
+          <mat-option value="light-theme">Light</mat-option>
+          <mat-option value="bigmotion-theme">Big Motion</mat-option>
+          <mat-option value="candy-theme">Candy</mat-option>
+        </mat-select>
+        <mat-hint>Choose your theme</mat-hint>
+      </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" mat-dialog-close color="primary">DONE</button>
+</mat-dialog-actions>

@@ -1,5 +1,12 @@
+.fill-remaining-space {
+	flex: 1 1 auto;
+}
 
-body {
-    padding: 2em 23em;
-    background:lightgray;
+.smaller {
+	font-size: small;
+}
+
+.bigger {
+	font-size:larger;
+	font-weight:100;
 }

@@ -1,0 +1,48 @@
+.drawer-contents{
+	margin:1rem;
+}
+
+.sidenav-contents {
+	padding:.5rem;
+}
+
+.topleft {
+	top:0;
+	left:0;
+}
+
+.mat-list-item {
+	border-radius: .4rem;
+}
+
+
+a.sidenav-links:hover {
+	color:darkgray;
+	outline: 0;
+    box-shadow: none!important;
+}
+
+.sidenav-links[_ngcontent-c2] {
+	outline: 0;
+}
+
+.mat-nav-list {
+	background: darkgray;
+}
+
+.sidenav-links-dark {
+	font-size: 1rem;
+	text-decoration: none;
+	background:lightgray;
+	vertical-align: middle;
+	text-align:left;
+	width:100% 
+}
+.sidenav-links-light {
+	font-size: 1rem;
+	text-decoration: none;
+	background:#222;
+	vertical-align: middle;
+	text-align:left;
+	width:100% 
+}

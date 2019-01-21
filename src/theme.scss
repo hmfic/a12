@@ -1,0 +1,73 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+// SCSS  Typography
+$custom-typography: mat-typography-config(
+  $font-family: Lato,
+  $headline: mat-typography-level(24px, 48px, 400),
+  $body-1: mat-typography-level(14px, 16px, 400)
+);
+
+@include angular-material-typography($custom-typography);
+// Default colors
+$default-primary: mat-palette($mat-blue, 700, 100, 800);
+$default-accent:  mat-palette($mat-blue, 600, 100, 800);
+$default-theme: mat-light-theme($default-primary, $default-accent);
+.default-theme {
+  a:visited, a:link {
+    color: mat-color($default-accent);
+  }
+  @include angular-material-theme($default-theme);
+}
+
+//@include angular-material-theme($default-theme);
+
+
+// Dark theme
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A800);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+.dark-theme {
+  a:visited, a:link {
+    color: mat-color($dark-accent);
+  }
+  @include angular-material-theme($dark-theme);
+}
+
+
+// Light theme
+$light-primary: mat-palette($mat-grey, 500, 800, 800);
+$light-accent: mat-palette($mat-gray, 700);
+$light-warn: mat-palette($mat-deep-orange, 200);
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+.light-theme {
+  a:visited, a:link {
+    color: mat-color($light-accent);
+  }
+  @include angular-material-theme($light-theme)
+}
+
+
+// bigmotion theme
+.bigmotion-theme {
+  $bigmotion-primary: mat-palette($mat-light-blue);
+  $bigmotion-accent:  mat-palette($mat-yellow, 400);
+  $bigmotion-theme: mat-light-theme($bigmotion-primary, $bigmotion-accent);
+  a:visited, a:link {
+    color: mat-color($bigmotion-accent);
+  }
+  @include angular-material-theme($bigmotion-theme);
+}
+
+
+.candy-theme {
+	$candy-primary: mat-palette($mat-blue);
+	$candy-accent:  mat-palette($mat-pink, A200, A100, A400);
+	$candy-warn:    mat-palette($mat-red);
+	$candy-theme:   mat-light-theme($candy-primary, $candy-accent, $candy-warn);
+  a:visited, a:link {
+    color: mat-color($candy-accent);
+  }
+	@include angular-material-theme($candy-theme);
+}

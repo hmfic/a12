@@ -1,14 +1,10 @@
-<p>
-  menubar works!
-</p>
-
 <mat-toolbar color="primary">
 
   <button [class.active]="toggleActive" (click)="toggleSidebar()" mat-icon-button>
     <i class="material-icons">menu</i>
     </button> &nbsp;  &nbsp; 
 
-    <div matTooltip="Application8 -- 1 better than Application7" class="bigger">{{globals.title}} </div>
+    <div matTooltip="Application12 -- 1 better than Application11" class="bigger">{{globals.title}} </div>
     <span class="fill-remaining-space"></span>
     <button mat-button (click)="openHelpDialog()" matTooltip="Get more help">
     	<i class="material-icons">help</i> Help
@@ -23,7 +19,7 @@
     </button>
     <mat-menu #usermenu="matMenu">
         <button mat-menu-item (click)="openDialog()">Settings</button>
-        <button mat-menu-item>Logout</button>
+        <button mat-menu-item>Logout </button>
     </mat-menu>
     
 </mat-toolbar>
