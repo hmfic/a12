@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AboutComponent } from './components/about/about.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenubarComponent } from './components/menubar/menubar.component';
@@ -24,7 +23,6 @@ import { AboutmodalComponent } from './components/aboutmodal/aboutmodal.componen
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
     SidebarComponent,
     MenubarComponent,
     JmodalComponent,
