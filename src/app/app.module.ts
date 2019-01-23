@@ -13,7 +13,7 @@ import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, Ma
          MatSelectModule, MatInputModule } from '@angular/material';
 import { Globals } from './components/globals';
 import { SidebarService } from './components/sidebar/sidebar.service';
-import { JmodalComponent } from './components/jmodal/jmodal.component';
+import { SettingsmodalComponent } from './components/settingsmodal/settingsmodal.component';
 import { HelpmodalComponent } from './components/helpmodal/helpmodal.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +25,7 @@ import { AboutmodalComponent } from './components/aboutmodal/aboutmodal.componen
     AppComponent,
     SidebarComponent,
     MenubarComponent,
-    JmodalComponent,
+    SettingsmodalComponent,
     HelpmodalComponent,
     MainComponent,
     AboutmodalComponent
@@ -56,6 +56,6 @@ import { AboutmodalComponent } from './components/aboutmodal/aboutmodal.componen
     ],
   //providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ JmodalComponent, HelpmodalComponent, AboutmodalComponent]
+  entryComponents: [ SettingsmodalComponent, HelpmodalComponent, AboutmodalComponent]
 })
 export class AppModule { }

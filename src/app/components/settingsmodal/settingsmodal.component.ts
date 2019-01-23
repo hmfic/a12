@@ -5,11 +5,11 @@ import { Globals } from '../globals';
 import { Inject } from '@angular/core';
 
 @Component({
-  selector: 'app-jmodal',
-  templateUrl: './jmodal.component.html',
-  styleUrls: ['./jmodal.component.scss']
+  selector: 'app-settingsmodal',
+  templateUrl: './settingsmodal.component.html',
+  styleUrls: ['./settingsmodal.component.scss']
 })
-export class JmodalComponent  {
+export class SettingsmodalComponent  {
 
 	form: FormGroup;
     name: string;
@@ -20,7 +20,7 @@ export class JmodalComponent  {
 	constructor(
 		private formBuilder: FormBuilder,
     	private globals: Globals,
-    	private dialogRef: MatDialogRef<JmodalComponent>,
+    	private dialogRef: MatDialogRef<SettingsmodalComponent>,
         @Inject(MAT_DIALOG_DATA) data
 		) { 
 			this.modalTitle = data.title;

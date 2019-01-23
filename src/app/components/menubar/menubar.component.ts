@@ -3,7 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Globals } from '../globals';
 import { SidebarService } from '../sidebar/sidebar.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
-import { JmodalComponent } from "../jmodal/jmodal.component";
+import { SettingsmodalComponent } from "../settingsmodal/settingsmodal.component";
 import { HelpmodalComponent } from "../helpmodal/helpmodal.component";
 import { AboutmodalComponent } from "../aboutmodal/aboutmodal.component"
 @Component({
@@ -36,7 +36,7 @@ export class MenubarComponent implements OnInit {
               title: 'Settings'
           };
         // dialogConfig.direction = "rtl";
-        this.dialog.open(JmodalComponent, dialogConfig);
+        this.dialog.open(SettingsmodalComponent, dialogConfig);
     } 
 
     openAboutDialog():void {
@@ -51,17 +51,7 @@ export class MenubarComponent implements OnInit {
         this.dialog.open(AboutmodalComponent, dialogConfig);
     } 
 
-  openSysDialog():void {
-        const dialogConfig = new MatDialogConfig();
-//        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.data = {
-              id: 1,
-              title: 'System settings'
-          };
-        // dialogConfig.direction = "rtl";
-        this.dialog.open(JmodalComponent, dialogConfig);
-    }
+
    openHelpDialog():void {
         //console.log("in openhelpmodal");
         const dialogConfig = new MatDialogConfig();
