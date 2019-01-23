@@ -3,19 +3,12 @@
   <mat-sidenav #sidebar class="sidenav-contents" mode="over" fixedInViewport="true">
   	<mat-list>
 		 <mat-list-item routerLinkActive="{{getBackground(globals.theme)}}"> 
-		 	<a routerLink="about" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}" >
+			<a routerLink="main" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}" >
 				<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">people</i>&nbsp; About
-				</div>
-			</a> 
-		 </mat-list-item>
-		 <mat-list-item routerLinkActive="{{getBackground(globals.theme)}}"> 
-		 	<a routerLink="settings" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}">
-		 		<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">message</i>&nbsp; Settings
+					<i class="material-icons">home</i>&nbsp; Home
 				</div>
 			</a>
-	 	 </mat-list-item>
+		 </mat-list-item>
 	</mat-list>
   	
   </mat-sidenav>

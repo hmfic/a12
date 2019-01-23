@@ -1,6 +1,39 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
+$mat-cc: (
+  50: #fff8e1,
+  100: #ffecb3,
+  200: #ffe082,
+  300: #ffd54f,
+  400: #ffca28,
+  500: #ffc107,
+  600: #ffb300,
+  700: #ffa300,
+  800: #ff8f00,
+  900: #ff6f00,
+  A100: #ffe57f,
+  A200: #ffd740,
+  A400: #ffc400,
+  A700: #ffab00,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $dark-primary-text,
+    800: $dark-primary-text,
+    900: $dark-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
 // SCSS  Typography
 $custom-typography: mat-typography-config(
   $font-family: Lato,
@@ -49,15 +82,15 @@ $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
 }
 
 
-// bigmotion theme
-.bigmotion-theme {
-  $bigmotion-primary: mat-palette($mat-light-blue);
-  $bigmotion-accent:  mat-palette($mat-yellow, 400);
-  $bigmotion-theme: mat-light-theme($bigmotion-primary, $bigmotion-accent);
+// coyotecreek theme
+.coyotecreek-theme {
+  $coyotecreek-primary: mat-palette($mat-cc, 700);
+  $coyotecreek-accent:  mat-palette($mat-gray, 400);
+  $coyotecreek-theme: mat-light-theme($coyotecreek-primary, $coyotecreek-accent);
   a:visited, a:link {
-    color: mat-color($bigmotion-accent);
+    color: mat-color($coyotecreek-accent);
   }
-  @include angular-material-theme($bigmotion-theme);
+  @include angular-material-theme($coyotecreek-theme);
 }
 
 

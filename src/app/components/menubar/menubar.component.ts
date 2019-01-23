@@ -4,7 +4,8 @@ import { Globals } from '../globals';
 import { SidebarService } from '../sidebar/sidebar.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { JmodalComponent } from "../jmodal/jmodal.component";
-import { HelpmodalComponent } from "../helpmodal/helpmodal.component"
+import { HelpmodalComponent } from "../helpmodal/helpmodal.component";
+import { AboutmodalComponent } from "../aboutmodal/aboutmodal.component"
 @Component({
   selector: 'app-menubar',
   templateUrl: './menubar.component.html',
@@ -36,6 +37,18 @@ export class MenubarComponent implements OnInit {
           };
         // dialogConfig.direction = "rtl";
         this.dialog.open(JmodalComponent, dialogConfig);
+    } 
+
+    openAboutDialog():void {
+        const dialogConfig = new MatDialogConfig();
+//        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+              id: 1,
+              title: 'About'
+          };
+        // dialogConfig.direction = "rtl";
+        this.dialog.open(AboutmodalComponent, dialogConfig);
     } 
 
   openSysDialog():void {

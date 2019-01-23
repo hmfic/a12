@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
-import { SettingsComponent } from './components/settings/settings.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenubarComponent } from './components/menubar/menubar.component';
@@ -19,16 +18,19 @@ import { JmodalComponent } from './components/jmodal/jmodal.component';
 import { HelpmodalComponent } from './components/helpmodal/helpmodal.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MainComponent } from './components/main/main.component';
+import { AboutmodalComponent } from './components/aboutmodal/aboutmodal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    SettingsComponent,
     SidebarComponent,
     MenubarComponent,
     JmodalComponent,
-    HelpmodalComponent
+    HelpmodalComponent,
+    MainComponent,
+    AboutmodalComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ],
   //providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ JmodalComponent, HelpmodalComponent]
+  entryComponents: [ JmodalComponent, HelpmodalComponent, AboutmodalComponent]
 })
 export class AppModule { }
