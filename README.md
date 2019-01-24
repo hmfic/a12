@@ -217,3 +217,6 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 ```npm install --save d3-sankey```
 
 ```npm install --save @types/d3-sankey```
+
+### Drag and drop
+```npm new dragdrop```
