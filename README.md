@@ -220,3 +220,6 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### Drag and drop
 ```npm new dragdrop```
+
+### Flex layout
+```npm install @angular/flex-layout@latest --save```
