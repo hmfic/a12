@@ -1,6 +1,6 @@
 <mat-sidenav-container autosize hasBackdrop >
 
-  <mat-sidenav #sidebar class="sidenav-contents" mode="over" fixedInViewport="true">
+  <mat-sidenav #sidebar class="sidenav-contents" mode="push" fixedInViewport="true">
   	<mat-list>
 		 <mat-list-item routerLinkActive="{{getBackground(globals.theme)}}"> 
 			<a routerLink="main" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}" >
@@ -9,6 +9,7 @@
 				</div>
 			</a>
 		 </mat-list-item>
+		 
 	</mat-list>
   	
   </mat-sidenav>
