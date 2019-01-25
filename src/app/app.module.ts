@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenubarComponent } from './components/menubar/menubar.component';
-
 // new stuff
 import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, MatCheckboxModule, 
          MatToolbarModule, MatListModule, MatMenuModule, MatDialogModule, MatFormFieldModule, 
@@ -20,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './components/main/main.component';
 import { AboutmodalComponent } from './components/aboutmodal/aboutmodal.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    FlexLayoutModule
   ],
   providers: [
     Globals,
@@ -60,4 +61,22 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   bootstrap: [AppComponent],
   entryComponents: [ SettingsmodalComponent, HelpmodalComponent, AboutmodalComponent]
 })
+
+
 export class AppModule { }
+
+/*
+@Component({
+  selector: 'app-card',
+  template: `<div>Card: {{name}}</div>`,
+  styles: [`
+  :host {
+    display: block;
+    padding: 32px;
+    border: 1px solid black;
+    border-radius: 8px;
+  }
+  `]
+})
+export class CardComponent {}
+*/

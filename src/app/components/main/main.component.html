@@ -1,4 +1,4 @@
-<mat-grid-list cols="2" rowHeight="3:1">
+<!-- <mat-grid-list cols="2" rowHeight="3:1">
 	<mat-grid-tile style="width:90%;">
 		<div cdkDropList style="width:90%;">
 			<mat-list role="list" style="width:90%;">
@@ -9,11 +9,63 @@
 				  <mat-list-item role="listitem" cdkDrag>Item 2 pretty long stuff</mat-list-item>
 				  <mat-list-item role="listitem" cdkDrag>Item 3 longer stuff</mat-list-item>
 			</mat-list>
-		</div>
+		</div> 
 
 
 </mat-grid-tile>
   <mat-grid-tile>
   	right stuff
   </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->
+
+<div fxLayout="column" fxLayoutGap="32px" cdkDropList >
+   <!-- <div style="display: block;padding:32px;border: 1px solid black; border-radius: 8px;" cdkDrag>  -->
+   	<mat-card cdkDrag class="mat-elevation-z8">
+   		<div gdAreas="header header | side content | footer footer" gdGap="8px" gdRows="auto auto auto">
+			<div gdArea="header">
+			    Header1
+			</div>
+			<div gdArea="side">
+			    Side1
+			</div>
+			<div gdArea="content">
+			    Content
+			</div>
+			<div gdArea="footer">
+			    Footer
+			</div>
+		</div>
+   </mat-card>
+   <mat-card cdkDrag class="mat-elevation-z8">
+   		<div gdAreas="header header | side content | footer footer" gdGap="8px" gdRows="auto auto auto">
+			<div gdArea="header">
+			    Header2
+			</div>
+			<div gdArea="side">
+			    Side2
+			</div>
+			<div gdArea="content">
+			    Content
+			</div>
+			<div gdArea="footer">
+			    Footer
+			</div>
+		</div>
+   </mat-card>
+   <mat-card cdkDrag class="mat-elevation-z8" style="margin-bottom:8px;">
+   		<div gdAreas="header header | side content | footer footer" gdGap="8px" gdRows="auto auto auto" >
+			<div gdArea="header">
+			    Header3
+			</div>
+			<div gdArea="side">
+			    Side3
+			</div>
+			<div gdArea="content">
+			    Content
+			</div>
+			<div gdArea="footer">
+			    Footer
+			</div>
+		</div>
+   </mat-card>
+</div>
