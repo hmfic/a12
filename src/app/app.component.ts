@@ -2,6 +2,7 @@ import { Component, DoCheck, HostBinding, } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MainComponent} from './components/main/main.component';
 import { Globals } from './components/globals';
 
 import { OverlayContainer} from '@angular/cdk/overlay';

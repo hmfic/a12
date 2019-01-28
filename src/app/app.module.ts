@@ -20,6 +20,7 @@ import { MainComponent } from './components/main/main.component';
 import { AboutmodalComponent } from './components/aboutmodal/aboutmodal.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     ReactiveFormsModule,
     DragDropModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatIconModule
   ],
   providers: [
     Globals,

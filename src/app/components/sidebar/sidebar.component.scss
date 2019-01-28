@@ -2,9 +2,9 @@
 	margin:1rem;
 }
 
-.sidenav-contents {
-	padding:.5rem;
-}
+//.sidenav-contents 
+//	padding:.5rem;
+//}
 
 .topleft {
 	top:0;
@@ -12,7 +12,11 @@
 }
 
 .mat-list-item {
-	border-radius: .4rem;
+	border-radius: 0rem;
+}
+
+.mat-sidenav {
+	width: 250px;
 }
 
 
@@ -24,6 +28,7 @@ a.sidenav-links:hover {
 
 .sidenav-links[_ngcontent-c2] {
 	outline: 0;
+	font-size: .75rem;
 }
 
 .mat-nav-list {
@@ -31,7 +36,7 @@ a.sidenav-links:hover {
 }
 
 .sidenav-links-dark {
-	font-size: 1rem;
+	font-size: .75rem;
 	text-decoration: none;
 	background:lightgray;
 	vertical-align: middle;
@@ -39,10 +44,24 @@ a.sidenav-links:hover {
 	width:100% 
 }
 .sidenav-links-light {
-	font-size: 1rem;
+	font-size: .75rem;
 	text-decoration: none;
 	background:#222;
 	vertical-align: middle;
 	text-align:left;
 	width:100% 
+}
+
+.sidebar-header {
+	text-align:left;
+	padding: 10px;
+	font-size: 1.2rem;
+	color:#222;
+	background-color: #dcdcdc;
+	display:flex;
+	min-width:10px !important;
+}
+
+.fill-remaining-space {
+	flex: 1 1 auto;
 }

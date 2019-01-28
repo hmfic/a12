@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
     	) { }
 
   	getBackground (theme){
-	    //console.log("in getbackground; theme=",theme);
+	    console.log("in getbackground; theme=",theme);
 	    if (theme == "dark-theme") return "sidenav-links-light"
 	      else return "sidenav-links-dark"
 	  }

@@ -10,7 +10,32 @@
 }
 
 .mat-card {
-  background: lightgray;
+  background: white;
   text-decoration: none;
   margin-bottom:2em;
+  border-radius: .5rem;
+  width:47%;
+  padding:0 !important;
 }
+
+.card-warn {
+  width: 94%;
+  margin: 2% !important;
+  background-color:#f4f4f4;
+  padding:8px !important;
+}
+
+.mat-card-header {
+  background-color: lightgray;
+  //margin-bottom: 1% !important;
+  padding:0 !important;
+  border-radius: .5rem .5rem 0rem 0rem;
+}
+
+.mat-card-content{
+  padding:5px !important;
+}
+
+//.mat-card-header-text {
+//	margin:8px !important;
+//}

@@ -10,5 +10,19 @@ a {
 	text-decoration: none;
 }
 
+.mat-app-background {
+	background-color:#dcdcdc;
+}
+
+.mat-drawer-content {
+    background-color: #f0f0f0;
+    color: rgba(0,0,0,.87);
+    height: 100vh !important;
+}
+
+.blue {
+	color: steelblue;
+}
+
 
 @import "./theme.scss";
