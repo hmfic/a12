@@ -7,20 +7,20 @@
     <div matTooltip="Application12 -- 1 better than Application11" class="bigger">{{globals.title}} </div>
     <span class="fill-remaining-space"></span>
     <button mat-button (click)="openHelpDialog()" matTooltip="Get more help">
-    	<i class="material-icons">help</i> Help
+    	<i class="material-icons">help_outline</i> HELP
 	</button>
 
     <button mat-button matTooltip="Search for more information">
-        <i class="material-icons">search</i> Search
+        <i class="material-icons">search</i> SEARCH
     </button>
 
     <button mat-button [matMenuTriggerFor]="usermenu" matTooltip="These are the settings for your system">
-         <i class="material-icons">expand_more</i> {{ globals.name}}
+        <i class="material-icons">expand_more</i>  {{getInitials(globals.name)}}  
     </button>
     <mat-menu #usermenu="matMenu">
-        <button mat-menu-item (click)="openDialog()">Settings</button>
-        <button mat-menu-item (click)="openAboutDialog()">About</button>
-        <button mat-menu-item>Logout </button>
+        <button mat-menu-item (click)="openDialog()">SETTINGS</button>
+        <button mat-menu-item (click)="openAboutDialog()">ABOUT</button>
+        <button mat-menu-item>LOGOUT </button>
     </mat-menu>
     
 </mat-toolbar>

@@ -1,30 +1,31 @@
-<mat-sidenav-container autosize hasBackdrop >
+<mat-sidenav-container autosize  >
 
-  <mat-sidenav #sidebar class="sidenav-contents" mode="push" fixedInViewport="true">
+  <mat-sidenav #sidebar class="sidenav-contents" mode="over" fixedInViewport="true">
+
   	<div class="sidebar-header">
   		<div text-align="left" >Coyote Creek Acuity </div>
   		<span class="fill-remaining-space"></span>
-  		<button mat-flat-button (click)="sidebar.close()" style="line-height: 18px !important;padding-right:0px; padding-left:0px;min-width:20px;">
-  			<mat-icon (click)="sidebar.close()" >close</mat-icon>
+  		<button mat-mini-fab (click)="sidebar.close()" style="line-height: 18px !important;padding-right:0px; padding-left:0px;min-width:20px;">
+  			<i class="material-icons"(click)="sidebar.close()" >close</i>
   		</button>
   	</div> 
   	<mat-list>
-		 <mat-list-item routerLinkActive="{{getBackground(globals.theme)}}"> 
-			<a routerLink="main" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}" >
+		 <mat-list-item routerLinkActive="active"> 
+			<a routerLink="main" class="sidenav-links"  >
 				<div (click)="sidebar.close()" style="display: flex;align-items: center;">
 					<i class="material-icons">home</i>&nbsp; Home
 				</div>
 			</a>
 		 </mat-list-item>
-		 <mat-list-item routerLinkActive="{{getBackground(globals.theme)}}"> 
-			<a routerLink="next" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}" >
+		 <mat-list-item routerLinkActive="active"> 
+			<a routerLink="next" class="sidenav-links"  >
 				<div (click)="sidebar.close()" style="display: flex;align-items: center;">
 					<i class="material-icons">settings</i>&nbsp; Settings
 				</div>
 			</a>
 		 </mat-list-item>
-		 <mat-list-item routerLinkActive="{{getBackground(globals.theme)}}"> 
-			<a routerLink="next2" class="sidenav-links" routerLinkActive="{{getBackground(globals.theme)}}" >
+		 <mat-list-item routerLinkActive="active"> 
+			<a routerLink="next2" class="sidenav-links">
 				<div (click)="sidebar.close()" style="display: flex;align-items: center;">
 					<i class="material-icons">build</i>&nbsp; Build
 				</div>
@@ -38,10 +39,3 @@
       	<router-outlet></router-outlet>
   </mat-sidenav-container>
 </mat-sidenav-container> 
-
-<!--
-	<mat-card-header color="success">
-			<span fxFlex="90" style="margin:8px;">Early Warning Dashboard1</span>
-			<div style="margin:8px;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
-		</mat-card-header>
-	-->

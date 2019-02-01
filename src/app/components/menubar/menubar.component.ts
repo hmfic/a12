@@ -33,7 +33,7 @@ export class MenubarComponent implements OnInit {
         dialogConfig.autoFocus = true;
         dialogConfig.data = {
               id: 1,
-              title: 'Settings'
+              title: 'SETTINGS'
           };
         // dialogConfig.direction = "rtl";
         this.dialog.open(SettingsmodalComponent, dialogConfig);
@@ -45,7 +45,7 @@ export class MenubarComponent implements OnInit {
         dialogConfig.autoFocus = true;
         dialogConfig.data = {
               id: 1,
-              title: 'About'
+              title: 'ABOUT'
           };
         // dialogConfig.direction = "rtl";
         this.dialog.open(AboutmodalComponent, dialogConfig);
@@ -59,11 +59,22 @@ export class MenubarComponent implements OnInit {
         dialogConfig.autoFocus = true;
         dialogConfig.data = {
               id: 1,
-              title: 'Help'
+              title: 'HELP'
           };
         // dialogConfig.direction = "rtl";
         this.dialog.open(HelpmodalComponent, dialogConfig);
     } 
+    getInitials(string){
+
+      var names = string.split(' '),
+        initials = names[0].substring(0, 1).toUpperCase();
+    
+    if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+    return initials;
+      //return "SG";
+    }
 
   ngOnInit() {
   }
