@@ -3,15 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+//import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MenubarComponent } from './components/menubar/menubar.component';
+//import { MenubarComponent } from './components/menubar/menubar.component';
 // new stuff
 import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, MatCheckboxModule, 
          MatToolbarModule, MatListModule, MatMenuModule, MatDialogModule, MatFormFieldModule, 
          MatSelectModule, MatInputModule } from '@angular/material';
 import { Globals } from './components/globals';
-import { SidebarService } from './components/sidebar/sidebar.service';
+//import { SidebarService } from './components/sidebar/sidebar.service';
 import { SettingsmodalComponent } from './components/settingsmodal/settingsmodal.component';
 import { HelpmodalComponent } from './components/helpmodal/helpmodal.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -21,16 +21,19 @@ import { AboutmodalComponent } from './components/aboutmodal/aboutmodal.componen
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { LayoutModule } from '@angular/cdk/layout'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
-    MenubarComponent,
+    //SidebarComponent,
+    //MenubarComponent,
     SettingsmodalComponent,
     HelpmodalComponent,
     MainComponent,
-    AboutmodalComponent
+    AboutmodalComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -53,11 +56,12 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     DragDropModule,
     FlexLayoutModule,
-    MatIconModule
+    MatIconModule,
+    LayoutModule
   ],
   providers: [
     Globals,
-    SidebarService
+    //SidebarService
     ],
   //providers: [],
   bootstrap: [AppComponent],

@@ -1,71 +1,28 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 300px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.active {
+  color: #3F51B5 !important;
+  background-color: lightgray;
+}
+
 .drawer-contents{
-	margin:1rem;
-}
-
-//.sidenav-contents 
-//	padding:.5rem;
-//}
-
-.topleft {
-	top:0;
-	left:0;
-}
-
-.mat-list-item {
-	border-radius: 0rem;
-}
-
-.mat-sidenav {
-	width: 300px;
-}
-
-
-//a.sidenav-links:hover {
-//	color:darkgray;
-//	outline: 0;
-//    box-shadow: none!important;
-//}
-
-//.sidenav-links[_ngcontent-c2] {
-//	outline: 0;
-//	font-size: .75rem;
-//}
-
-//.mat-nav-list {
-//	background: darkgray;
-//}
-
-// .sidenav-links-dark {
-//	font-size: .75rem;
-//	text-decoration: none;
-//	background:lightgray;
-//	vertical-align: middle;
-//	text-align:left;
-//	width:100% 
-//}
-//.sidenav-links-light {
-//	font-size: .75rem;
-//	text-decoration: none;
-//	background:#222;
-//	vertical-align: middle;
-//	text-align:left;
-//	width:100% 
-//} 
-
-.sidebar-header {
-	text-align:left;
-	padding-top: 30px;
-	padding-bottom: 30px;
-	padding-left: 30px;
-	padding-right: 10px;
-	font-size: 1.3rem;
-	color:#444;
-	background-color: white;
-	display:flex;
-	min-width:10px !important;
-	display: flex;
-  	align-items: center;
-  	justify-content: center;
+	margin:5rem;
 }
 
 .fill-remaining-space {
@@ -77,12 +34,35 @@
 	font-weight:100;
 }
 
-.mat-icon {
-	background-color: white;
+.paw {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	width:37px;
+	height:40px;
+	//max-width:100%;
+	//max-height:100%;
+	background-image: url(/assets/paw40.png);
+	display: inline-block;
 }
 
-//.active {
-//  color: #3F51B5 !important;
-//  background-color: lightgray;
-//}
+.paww {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	width:37px;
+	height:40px;
+	//max-width:100%;
+	//max-height:100%;
+	background-image: url(/assets/paw40w.png);
+	display: inline-block;
+}
 
+.pawb {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	width:37px;
+	height:40px;
+	//max-width:100%;
+	//max-height:100%;
+	background-image: url(/assets/paw40b.png);
+	display: inline-block;
+}

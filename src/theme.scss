@@ -85,7 +85,7 @@ $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
 // coyotecreek theme
 .coyotecreek-theme {
   $coyotecreek-primary: mat-palette($mat-cc, 700);
-  $coyotecreek-accent:  mat-palette($mat-gray, 400);
+  $coyotecreek-accent:  mat-palette($mat-gray, 700);
   $coyotecreek-theme: mat-light-theme($coyotecreek-primary, $coyotecreek-accent);
   a:visited, a:link {
     color: mat-color($coyotecreek-accent);

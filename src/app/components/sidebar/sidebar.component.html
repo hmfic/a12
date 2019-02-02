@@ -1,41 +1,76 @@
-<mat-sidenav-container autosize  >
-
-  <mat-sidenav #sidebar class="sidenav-contents" mode="over" fixedInViewport="true">
-
-  	<div class="sidebar-header">
-  		<div text-align="left" >Coyote Creek Acuity </div>
-  		<span class="fill-remaining-space"></span>
-  		<button mat-mini-fab (click)="sidebar.close()" style="line-height: 18px !important;padding-right:0px; padding-left:0px;min-width:20px;">
-  			<i class="material-icons"(click)="sidebar.close()" >close</i>
-  		</button>
-  	</div> 
-  	<mat-list>
-		 <mat-list-item routerLinkActive="active"> 
-			<a routerLink="main" class="sidenav-links"  >
-				<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">home</i>&nbsp; Home
-				</div>
-			</a>
-		 </mat-list-item>
-		 <mat-list-item routerLinkActive="active"> 
-			<a routerLink="next" class="sidenav-links"  >
-				<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">settings</i>&nbsp; Settings
-				</div>
-			</a>
-		 </mat-list-item>
-		 <mat-list-item routerLinkActive="active"> 
-			<a routerLink="next2" class="sidenav-links">
-				<div (click)="sidebar.close()" style="display: flex;align-items: center;">
-					<i class="material-icons">build</i>&nbsp; Build
-				</div>
-			</a>
-		 </mat-list-item>
-	</mat-list>
-  	
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="over">
+    <mat-toolbar>
+        <div text-align="left" >Acuity </div>
+        <span class="fill-remaining-space"></span>
+        <button mat-mini-fab (click)="drawer.toggle()">
+          <i class="material-icons" >close</i>
+        </button>
+    </mat-toolbar>
+    <mat-nav-list>
+          <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
+          <a routerLink="main" class="sidenav-links"  >
+            <div  style="display: flex;align-items: center;">
+              <i class="material-icons">home</i>&nbsp; Home
+            </div>
+          </a>
+         </mat-list-item>
+         <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
+          <a routerLink="next" class="sidenav-links"  >
+            <div  style="display: flex;align-items: center;">
+              <i class="material-icons">settings</i>&nbsp; Settings
+            </div>
+          </a>
+         </mat-list-item>
+         <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
+          <a routerLink="next2" class="sidenav-links">
+            <div  style="display: flex;align-items: center;">
+              <i class="material-icons">build</i>&nbsp; Build
+            </div>
+          </a>
+         </mat-list-item>
+    </mat-nav-list>
   </mat-sidenav>
+  <mat-sidenav-content >
+    <mat-toolbar color="primary" style="margin-bottom: 10px;">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        style="margin-right: 2rem;">
+       <!--  *ngIf="isHandset$ | async "> -->
+        	<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+     	</button>
+     	<div class="bigger"> 
+      		Coyote Creek
+     	</div>
+      <div *ngIf='globals.theme == "dark-theme" ' class="paww" ></div>
+      <div *ngIf='globals.theme == "default-theme" || globals.theme == "light-theme" || globals.theme == "candy-theme"' class="paw"></div>
+      <div *ngIf='globals.theme == "coyotecreek-theme" ' class="pawb"></div>
+      <div class="bigger"> 
+          {{globals.title}} 
+      </div>
+	 	<span class="fill-remaining-space"></span>
+		<button   mat-button (click)="openHelpDialog()" matTooltip="Get more help">
+	    	<i class="material-icons">help_outline</i> HELP
+		</button>
 
-  <mat-sidenav-container class="drawer-contents">
-      	<router-outlet></router-outlet>
-  </mat-sidenav-container>
-</mat-sidenav-container> 
+	    <button  mat-button matTooltip="Search for more information">
+	        <i class="material-icons">search</i> SEARCH
+	    </button>
+
+	    <button mat-button [matMenuTriggerFor]="usermenu" matTooltip="These are the settings for your system">
+	        <i class="material-icons">expand_more</i>  {{getInitials(globals.name)}}  
+	    </button>
+	    <mat-menu  #usermenu="matMenu">
+	        <button mat-menu-item (click)="openDialog()">SETTINGS</button>
+	        <button mat-menu-item (click)="openAboutDialog()">ABOUT</button>
+	        <button mat-menu-item>LOGOUT </button>
+	    </mat-menu>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+	</mat-sidenav-content>
+</mat-sidenav-container>
