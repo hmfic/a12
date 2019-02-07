@@ -223,3 +223,6 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### Flex layout
 ```npm install @angular/flex-layout@latest --save```
+
+### Use schematics
+```ng generate @angular/material:nav components/sidebar```
