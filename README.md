@@ -226,3 +226,6 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### Use schematics
 ```ng generate @angular/material:nav components/sidebar```
+
+### D3 Tree
+```npm install d3 angular-d3-tree --save```
