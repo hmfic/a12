@@ -195,7 +195,7 @@ then add to app.modules:
 
 ```npm i @types/d3 @types/socket.io-client -D``` this is optional in case you want sockets
 
-```import * as d3 from "d3";``` iin your app.config.ts
+```import * as d3 from "d3";``` iin your xxxxx.component.ts for each component it needs
 
 ```npm install --save-dev @types/d3```
 
