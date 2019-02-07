@@ -22,7 +22,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { LayoutModule } from '@angular/cdk/layout'; 
+import { LayoutModule } from '@angular/cdk/layout';
+import { Force10Component } from './components/force10/force10.component'; 
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     HelpmodalComponent,
     MainComponent,
     AboutmodalComponent,
-    SidebarComponent
+    SidebarComponent,
+    Force10Component
   ],
   imports: [
     BrowserModule,
