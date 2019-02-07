@@ -3,11 +3,9 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="over">
     <mat-toolbar>
-        <div text-align="left" >Acuity </div>
+        <div text-align="left" >Navigation</div>
         <span class="fill-remaining-space"></span>
-        <button mat-mini-fab (click)="drawer.toggle()">
-          <i class="material-icons" >close</i>
-        </button>
+        <i class="material-icons" (click)="drawer.toggle()" style="cursor:pointer;">close</i>
     </mat-toolbar>
     <mat-nav-list>
           <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
