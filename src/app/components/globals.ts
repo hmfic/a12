@@ -12,5 +12,7 @@ export class Globals {
   myinfo:any;
   weatherhash:any;
   genderhash:any;
-  todos:any;
+  force10:any;
+  nodes:any;
+  links:any;
 }

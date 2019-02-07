@@ -7,6 +7,7 @@ import { Globals } from './components/globals';
 
 import { OverlayContainer} from '@angular/cdk/overlay';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -26,11 +27,9 @@ oldTheme:string;
 ngOnInit(): void {
    this.oldName = this.globals.name;
    this.oldTheme = this.globals.theme;
-}
+  } 
 
 ngDoCheck() {
-//    console.log("in ngdocheck");
-//    console.log("in ngdocheck;user=",this.globals.name);
     
       if (this.oldTheme != this.globals.theme) {
         console.log("in ngdocheck; global new theme=",this.globals.theme);
