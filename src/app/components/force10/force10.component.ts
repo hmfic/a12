@@ -25,17 +25,18 @@ import { Globals } from "../globals";
 
     ngAfterViewInit() {
       console.log("force; after view element host height=",this.chartContainer.nativeElement.offsetHeight);
-      this.width=this.chartContainer.nativeElement.offsetWidth -50;
-      this.height=this.chartContainer.nativeElement.offsetHeight -50;
+      //this.width=this.chartContainer.nativeElement.offsetWidth -50;
+      //this.height=this.chartContainer.nativeElement.offsetHeight -10;
     }
 
     ngOnInit() {
-
+      console.log("nginit force");
       this.hostElement = this.chartContainer.nativeElement;
       //console.log("element host =",this.hostElement);
 
       this.width=this.hostElement.offsetWidth -30;
-      this.height=this.hostElement.offsetHeight -30;
+      // this.height=this.hostElement.offsetHeight -30;
+      this.height=this.chartContainer.nativeElement.offsetHeight;
       console.log("in nginit; force; width:height",this.width,":",this.height);
 
       var zoom = d3.zoom()
@@ -49,7 +50,7 @@ import { Globals } from "../globals";
       let svg = d3.select(this.hostElement)
         .append('svg')
         .attr('width',"100%")
-        .attr('height',"100vh")
+        .attr('height',"70vh")
         //.attr('style',"margin-bottom:70px;")
         .call(zoom)
         .append('g');
@@ -111,13 +112,13 @@ import { Globals } from "../globals";
 		        {"source": "CountessdeLo", "target": "Myriel"},
 		        {"source": "Geborand", "target": "Myriel"}
 		    ];
-      var holdem=0;
+      //var holdem=0;
 
       var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d:any) {return d.id; }))
+        .force("link", d3.forceLink().distance(100).id(function(d:any) {return d.id; }))
         .force('charge', d3.forceManyBody().strength(-1000))
         .force('center', d3.forceCenter(this.width / 2, this.height / 2))
-        .force('collision', d3.forceCollide().radius(25));
+        .force('collision', d3.forceCollide().radius(30).strength(2));
 
       var link = svg.append('g')
         .attr('class', 'links')
@@ -185,22 +186,14 @@ import { Globals } from "../globals";
              .on("end", dragended))
         .on('mouseover', (d) => {
           // send info to emitter
-          this.eventHover.emit(d);
-          // end emitter section
-              //console.log("in transcircle mouseover;d=",d);
+              this.eventHover.emit(d);
               div2.transition()
                  .duration(200)
                  .style('opacity', .9);
               div2 .html(
                 function() {
-                    if(d.type=="todo") {
-                        return d.title + "<br/>Completed: " + d.completed
+                        return d.id + "(" + d.name + ")"; 
                       }
-                      else {
-                        //console.log("in mouseover;d=",d);
-                        return d.name + "</br/>" + d.email + "</br/>" + d.company; 
-                      }
-                    }
                     )
                  .style('left', (d3.event.pageX) + 'px')
                  .style('top', (d3.event.pageY - 28) + 'px');
@@ -216,7 +209,14 @@ import { Globals } from "../globals";
       simulation.force<d3.ForceLink<any, any>>('link').links(links);
 
 
-	  function ticked() {
+	  function ticked(e) {
+
+      var k = -60 * simulation.alpha();
+      links.forEach(function(d, i) {
+        d.source.y -= k;
+        d.target.y += k;
+      });
+
 		    link
           .attr('x1', function(d: any) { return d.source.x; })
           .attr('y1', function(d: any) { return d.source.y; })
@@ -226,8 +226,6 @@ import { Globals } from "../globals";
         node.attr('transform', function (d) {
             return 'translate(' + d.x + ', ' + d.y + ')';
         });
-
-        //  .attr('y', function(d: any) { return d.y -10; });
 
 		  } // end ticked
 
@@ -261,8 +259,4 @@ import { Globals } from "../globals";
 
    }  // end nginit
 
-    findGender(name) {
-        name=name.split(" ")[0];
-        return this.globals.genderhash[name];
-      }
 } // end  export class ForceComponent

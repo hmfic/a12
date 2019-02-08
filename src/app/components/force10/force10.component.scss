@@ -43,3 +43,19 @@
 .mat-card-content{
   padding:5px !important;
 }
+
+div2.tooltip {   
+    position: fixed; 
+    pointer-events: none;
+    z-index:1500;   
+    text-align: center; 
+    //width: 200px;    
+   // height: 28px;   
+    padding: 4px; 
+    color:white;
+    font: 10px sans-serif;    
+    background: #222; 
+    border: 0px;    
+    border-radius: 8px; 
+    text-align:left;
+    }

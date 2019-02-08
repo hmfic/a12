@@ -23,19 +23,21 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { Force10Component } from './components/force10/force10.component'; 
+import { Force10Component } from './components/force10/force10.component';
+import { Tree10Component } from './components/tree10/tree10.component';
+import { RiskcentralComponent } from './components/riskcentral/riskcentral.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    //SidebarComponent,
-    //MenubarComponent,
     SettingsmodalComponent,
     HelpmodalComponent,
     MainComponent,
     AboutmodalComponent,
     SidebarComponent,
-    Force10Component
+    Force10Component,
+    Tree10Component,
+    RiskcentralComponent
   ],
   imports: [
     BrowserModule,
