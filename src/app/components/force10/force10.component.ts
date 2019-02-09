@@ -8,6 +8,7 @@ import { Globals } from "../globals";
   templateUrl: './force10.component.html',
   styleUrls: ['./force10.component.scss'],
   encapsulation: ViewEncapsulation.None
+  //encapsulation: ViewEncapsulation.Native
 })
 
   export class Force10Component implements OnInit, AfterViewInit {
@@ -37,6 +38,9 @@ import { Globals } from "../globals";
       this.width=this.hostElement.offsetWidth -30;
       // this.height=this.hostElement.offsetHeight -30;
       this.height=this.chartContainer.nativeElement.offsetHeight;
+
+      var boxwidth=60;
+      var boxheight=20;
       console.log("in nginit; force; width:height",this.width,":",this.height);
 
       var zoom = d3.zoom()
@@ -62,7 +66,7 @@ import { Globals } from "../globals";
         .attr("stroke", "black")
         .attr("stroke-width", 0)
         .attr('text-anchor','middle')
-        .attr("opacity", ".1")
+        .attr("opacity", ".06")
         .attr('font-size', "2em" )
         //.style("position","absolute")
         .text(function(d){
@@ -98,24 +102,24 @@ import { Globals } from "../globals";
 
       var nodes:any=
        		[
-		        {"id": "Myriel", "name": 1},
-		        {"id": "Napoleon", "name": 2},
-		        {"id": "Mlle.Baptistine", "name": 3},
-		        {"id": "CountessdeLo", "name": 4},
-		        {"id": "Geborand", "name": 5}
+		        {"id": "Myriel", "name": 1, "type":"person"},
+		        {"id": "Napoleon", "name": 2, "type":"tablet"},
+		        {"id": "Mlle.Baptistine", "name": 3, "type":"computer"},
+		        {"id": "CountessdeLo", "name": 4, "type":"computer"},
+		        {"id": "Geborand", "name": 5, "type":"laptop"}
 		      ];
 
       var links:any=
       		[
-		        {"source": "Napoleon", "target": "Myriel"},
-		        {"source": "Mlle.Baptistine", "target": "Myriel"},
-		        {"source": "CountessdeLo", "target": "Myriel"},
-		        {"source": "Geborand", "target": "Myriel"}
+		        {"source": "Napoleon", "target": "Myriel","status":"red"},
+		        {"source": "Mlle.Baptistine", "target": "Myriel","status":"red"},
+		        {"source": "CountessdeLo", "target": "Myriel","status":"red"},
+		        {"source": "Geborand", "target": "Myriel","status":"red"}
 		    ];
       //var holdem=0;
 
       var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().distance(100).id(function(d:any) {return d.id; }))
+        .force("link", d3.forceLink().distance(200).id(function(d:any) {return d.id; }))
         .force('charge', d3.forceManyBody().strength(-1000))
         .force('center', d3.forceCenter(this.width / 2, this.height / 2))
         .force('collision', d3.forceCollide().radius(30).strength(2));
@@ -129,6 +133,39 @@ import { Globals } from "../globals";
         .attr("stroke","gray")
         .attr("opacity",.5)
         .attr('stroke-width', "1px");
+
+      var linkrect = svg.selectAll("line.link")
+        .data(links)
+        .enter().append("rect")
+        .attr("height",boxheight)
+        .attr("width",boxwidth)
+        .attr("rx", 8)
+        .attr("ry", 8)
+        .attr("y", function(d) { return d.target.y; })
+        .attr("x", function(d) { return d.source.x; })
+        .attr("stroke",function (d) { return d.status})
+        .attr("stroke-width",1)
+        .attr("fill","darkgray")
+        .style("filter", function(d) {return "url(#drop-shadow)"});
+
+      var rectscorecirc = svg.selectAll("line.link")
+        .data(links)
+        .enter().append("circle")
+        .attr("cx",0)
+        .attr("cy", 0)
+        .attr('r', 10)
+        .attr('fill', "white");
+
+      var rectscoretext = svg.selectAll("line.link")
+        .data(links)
+        .enter().append("text")
+        .attr("x",0)
+        .attr("y", 0)
+        .style("font-size","10px")
+        .text( 
+          function (d) {
+            return Math.random().toFixed(2).replace(/^[0\.]+/, ".")
+          });
 
       var nodex = svg.append('g')
             .attr('class', 'nodes');
@@ -146,13 +183,11 @@ import { Globals } from "../globals";
         .attr('r', 15)
         .attr('fill', function(d) {
           //console.log("in node svg append;d=",d);
-          if (d.type == "user") 
-            {return "lightgray"} else 
-            { if (d.completed == true) {
-              return "green"} else return "orange"}
+          if (d.type == "person") 
+            {return "lightgray"} else { return "orange"}
             })
         .style("filter", function(d) {
-          if(d.type=="user") { return "url(#drop-shadow)"} else {return "none"}
+          if(d.type=="person") { return "url(#drop-shadow)"} else {return "none"}
           });
 
       var text= node.append('text')
@@ -172,7 +207,7 @@ import { Globals } from "../globals";
             .attr('height', '20')
             .attr('width', '20')
             .html( function(d) { 
-                  return '<i class="material-icons" style="font-size:1.3rem;cursor: pointer;">list</i>'
+                  return '<i class="material-icons" style="font-size:1.3rem;cursor: pointer;">' + d.type + '</i>'
               }); 
 
       var transcircle = node.append("circle")
@@ -211,10 +246,10 @@ import { Globals } from "../globals";
 
 	  function ticked(e) {
 
-      var k = -60 * simulation.alpha();
+      var k = -50 * simulation.alpha();
       links.forEach(function(d, i) {
-        d.source.y -= k;
-        d.target.y += k;
+        d.source.x -= k;
+        d.target.x += k;
       });
 
 		    link
@@ -226,6 +261,18 @@ import { Globals } from "../globals";
         node.attr('transform', function (d) {
             return 'translate(' + d.x + ', ' + d.y + ')';
         });
+
+        linkrect
+          .attr("y", function(d) { return (d.source.y + d.target.y -boxheight/2)/2; })
+          .attr("x", function(d) { return (d.source.x + d.target.x -boxwidth/2)/2 ; });
+
+        rectscorecirc
+          .attr("cy", function(d) { return (d.source.y + d.target.y)/2 +boxheight/2-5; })
+          .attr("cx", function(d) { return (d.source.x + d.target.x)/2 +boxwidth/2+5;  });
+
+        rectscoretext
+          .attr("y", function(d) { return (d.source.y + d.target.y)/2 +boxheight/2-2; })
+          .attr("x", function(d) { return (d.source.x + d.target.x)/2 +boxwidth/2-2; });
 
 		  } // end ticked
 
