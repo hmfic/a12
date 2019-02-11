@@ -31,22 +31,25 @@ export class Tree10Component implements OnInit, AfterViewInit {
 
   	var treeData = 
 		  {
-		    "name": "Jim Jameson",
+		    "name": "Myriel",
 		    "children": [
 		      {
-		        "name": "Betsy Ballard",
+		        "name": "MlleBaptistine",
 		        "children": [
 		          {
-		            "name": "Lauren Lattimer",
-		          },
-              {
-		            "name": "Steve Sweep",
+		            "name": "Valijean",
 		          }
 		        ]
 		      },
 		      {
-		        "name": "Lambda getLocName",
-		      }
+		        "name": "Geborand"
+		      },
+          {
+            "name": "Napolean"
+          },
+          {
+            "name": "CountessDeLo"
+          }
 		    ]
 		  };
 

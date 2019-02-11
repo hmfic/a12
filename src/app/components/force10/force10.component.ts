@@ -41,6 +41,7 @@ import { Globals } from "../globals";
 
       var boxwidth=60;
       var boxheight=20;
+      var randomScore=Math.random().toFixed(2).replace(/^[0\.]+/, ".");
       console.log("in nginit; force; width:height",this.width,":",this.height);
 
       var zoom = d3.zoom()
@@ -106,7 +107,8 @@ import { Globals } from "../globals";
 		        {"id": "Napoleon", "name": 2, "type":"tablet"},
 		        {"id": "Mlle.Baptistine", "name": 3, "type":"computer"},
 		        {"id": "CountessdeLo", "name": 4, "type":"computer"},
-		        {"id": "Geborand", "name": 5, "type":"laptop"}
+            {"id": "Valjean", "name": 5, "type":"computer"},
+		        {"id": "Geborand", "name": 6, "type":"laptop"}
 		      ];
 
       var links:any=
@@ -114,15 +116,16 @@ import { Globals } from "../globals";
 		        {"source": "Napoleon", "target": "Myriel","status":"red"},
 		        {"source": "Mlle.Baptistine", "target": "Myriel","status":"red"},
 		        {"source": "CountessdeLo", "target": "Myriel","status":"red"},
-		        {"source": "Geborand", "target": "Myriel","status":"red"}
+		        {"source": "Geborand", "target": "Myriel","status":"red"},
+            {"source": "Mlle.Baptistine", "target": "Valjean","status":"red"}
 		    ];
       //var holdem=0;
 
       var simulation = d3.forceSimulation()
         .force("link", d3.forceLink().distance(200).id(function(d:any) {return d.id; }))
         .force('charge', d3.forceManyBody().strength(-1000))
-        .force('center', d3.forceCenter(this.width / 2, this.height / 2))
-        .force('collision', d3.forceCollide().radius(30).strength(2));
+        .force('center', d3.forceCenter(this.width / 8, this.height / 2))
+        .force('collision', d3.forceCollide().radius(80).strength(1.5));
 
       var link = svg.append('g')
         .attr('class', 'links')
@@ -145,7 +148,7 @@ import { Globals } from "../globals";
         .attr("x", function(d) { return d.source.x; })
         .attr("stroke",function (d) { return d.status})
         .attr("stroke-width",1)
-        .attr("fill","darkgray")
+        .attr("fill","#bbb")
         .style("filter", function(d) {return "url(#drop-shadow)"});
 
       var rectscorecirc = svg.selectAll("line.link")
@@ -164,8 +167,20 @@ import { Globals } from "../globals";
         .style("font-size","10px")
         .text( 
           function (d) {
-            return Math.random().toFixed(2).replace(/^[0\.]+/, ".")
+            return randomScore
           });
+
+      var recttypetext = svg.selectAll("line.link")
+        .data(links)
+        .enter().append("text")
+        .attr("x",0)
+        .attr("y", 0)
+        .style("font-size","10px")
+        .text( 
+          function (d) {
+            return ".xsls"
+          });
+
 
       var nodex = svg.append('g')
             .attr('class', 'nodes');
@@ -180,7 +195,7 @@ import { Globals } from "../globals";
       var circle = node.append("circle")
         .attr("cx",0)
         .attr("cy", 0)
-        .attr('r', 15)
+        .attr('r', 25)
         .attr('fill', function(d) {
           //console.log("in node svg append;d=",d);
           if (d.type == "person") 
@@ -192,7 +207,7 @@ import { Globals } from "../globals";
 
       var text= node.append('text')
         .attr("dx",1)             
-        .attr("dy", 20)
+        .attr("dy", 34)
         .attr('class','label')
         .attr('text-anchor','middle')
         .text( 
@@ -202,18 +217,18 @@ import { Globals } from "../globals";
 
       var icon=node.append('svg:foreignObject')
           .attr('class', 'icons')
-            .attr("x",-10)             
-            .attr("y", -10)
-            .attr('height', '20')
-            .attr('width', '20')
+            .attr("x",-16)             
+            .attr("y", -16)
+            .attr('height', '28')
+            .attr('width', '28')
             .html( function(d) { 
-                  return '<i class="material-icons" style="font-size:1.3rem;cursor: pointer;">' + d.type + '</i>'
+                  return '<i class="material-icons" style="font-size:2rem;cursor: pointer;">' + d.type + '</i>'
               }); 
 
       var transcircle = node.append("circle")
         .attr("cx",0)
         .attr("cy", 0)
-        .attr('r', 15)
+        .attr('r', 25)
         .attr('fill',"transparent")
         .call(d3.drag()
              .on("start", dragstarted)
@@ -273,6 +288,10 @@ import { Globals } from "../globals";
         rectscoretext
           .attr("y", function(d) { return (d.source.y + d.target.y)/2 +boxheight/2-2; })
           .attr("x", function(d) { return (d.source.x + d.target.x)/2 +boxwidth/2-2; });
+
+        recttypetext
+          .attr("y", function(d) { return (d.source.y + d.target.y)/2 +boxheight/2-2; })
+          .attr("x", function(d) { return (d.source.x + d.target.x)/2 +boxwidth/2-36; });
 
 		  } // end ticked
 
