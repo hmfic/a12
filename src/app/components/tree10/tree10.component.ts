@@ -6,7 +6,8 @@ import { Globals } from "../globals";
   selector: 'app-tree10',
   templateUrl: './tree10.component.html',
   styleUrls: ['./tree10.component.scss'],
-  encapsulation: ViewEncapsulation.Native
+  encapsulation: ViewEncapsulation.None
+  //
 })
 export class Tree10Component implements OnInit, AfterViewInit {
 	@ViewChild('tree10Container') chartContainer: ElementRef;
@@ -20,35 +21,34 @@ export class Tree10Component implements OnInit, AfterViewInit {
         private elementRef:ElementRef
         ) { }
 
-  ngAfterViewInit() {
+  ngOnInit() {
       console.log("tree; after view element host height=",this.chartContainer.nativeElement.offsetHeight);
       this.width=this.chartContainer.nativeElement.offsetWidth -50;
       this.height=this.chartContainer.nativeElement.offsetHeight -50;
     }
 
-  ngOnInit() {
-  	console.log("nginit force");
+  ngAfterViewInit() {
 
   	var treeData = 
 		  {
-		    "name": "Myriel",
+		    "name": "Myriel", "type":"person",
 		    "children": [
 		      {
-		        "name": "MlleBaptistine",
+		        "name": "Mlle.Baptistine",  "type":"person",
 		        "children": [
 		          {
-		            "name": "Valijean",
+		            "name": "Valijean", "type":"person"
 		          }
 		        ]
 		      },
 		      {
-		        "name": "Geborand"
+		        "name": "Geborand", "type":"person"
 		      },
           {
-            "name": "Napolean"
+            "name": "Napolean", "type":"person"
           },
           {
-            "name": "CountessDeLo"
+            "name": "CountessDeLo", "type":"person"
           }
 		    ]
 		  };
@@ -123,6 +123,9 @@ export class Tree10Component implements OnInit, AfterViewInit {
           var nodes = treeData.descendants(),
               links = treeData.descendants().slice(1);
 
+          var boxwidth=60;
+          var boxheight=20;
+
           // Normalize for fixed-depth.
           nodes.forEach(function(d){ d.y = d.depth * 150});
 
@@ -133,7 +136,9 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .data(nodes, function(d) {return d.id || (d.id = ++i); });
 
           // Enter any new modes at the parent's previous position.
-          var nodeEnter = node.enter().append('g')
+          var nodeEnter = node
+              .enter()
+              .append('g')
               .attr('class', 'node')
               .attr("transform", function(d) {
                 return "translate(" + source.y0 + "," + source.x0 + ")";
@@ -145,7 +150,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr('class', 'node')
               .attr('r', 1e-6)
               .style("fill", function(d) {
-                  return d._children ? "lightsteelblue" : "#fff";
+                  return d._children ? "black" : "orange";
               });
 
           // Add labels for the nodes
@@ -159,6 +164,17 @@ export class Tree10Component implements OnInit, AfterViewInit {
               })
               .text(function(d) { return d.data.name; });
 
+          nodeEnter.append('svg:foreignObject')
+              .attr('class', 'icons')
+                .attr("x",-16)             
+                .attr("y", -16)
+                .attr('height', '28')
+                .attr('width', '28')
+                .html( function(d) { 
+                      //console.log("in nodenter;d=",d);
+                      return '<i class="material-icons" style="font-size:2rem;cursor: pointer;">' + d.data.type + '</i>'
+                  }); 
+
           // UPDATE
           var nodeUpdate = nodeEnter.merge(node);
 
@@ -171,9 +187,9 @@ export class Tree10Component implements OnInit, AfterViewInit {
 
           // Update the node attributes and style
           nodeUpdate.select('circle.node')
-            .attr('r', 16)
+            .attr('r', 20)
             .style("fill", function(d) {
-                return d._children ? "lightsteelblue" : "#fff";
+                return d._children ? "darkgray" : "orange";
             })
             .attr('cursor', 'pointer');
 
@@ -196,40 +212,65 @@ export class Tree10Component implements OnInit, AfterViewInit {
 
           // ****************** links section ***************************
 
-          // Update the links...
+// Update the links...
           var link = svg.selectAll('path.link')
-              .data(links, function(d) { return d.id; });
-
-          // Enter any new links at the parent's previous position.
-          var linkEnter = link.enter().insert('path', "g")
-              .attr("class", "link")
-              .attr('d', function(d){
-                var o = {x: source.x0, y: source.y0}
-                return diagonal(o, o)
+              .data(links, function (d) {
+                  return d.id;
               });
 
-          // UPDATE
+              // Enter any new links at the parent's previous position.
+          var linkEnter = link.enter().insert('path', 'g')
+              .attr("id", function(d){ return ("link" + d.id)})//unique id
+              .attr("class", "link")
+              .attr('d', function (d) {
+                  var o = {x: source.x0, y: source.y0}
+                  return diagonal(o, o);
+              });
+
+              // UPDATE
           var linkUpdate = linkEnter.merge(link);
 
-          // Transition back to the parent element position
+          var linkLabel = link.enter().insert("text","g")
+              .attr("class", "link2")
+              .attr("id", function(d){ return ("link-label" + d.id)})//unique id
+              .attr("dx",function(d){ return (d.parent.x + d.x)/2 })
+              .attr("dy",function(d){ return (d.parent.y + d.y)/2 })
+              .text(function(d) {
+                  if (d.data.label === "Yes") {
+                      this.setAttribute("x",-30);
+                  } else {
+                      this.setAttribute("x",10);
+                  }
+                  // return d.data.label;
+                  return "yes"
+              });
+
+          linkUpdate.merge(linkLabel);
+
+              // Transition back to the parent element position
           linkUpdate.transition()
               .duration(duration)
-              .attr('d', function(d){ return diagonal(d, d.parent) });
+              .attr('d', function (d) {
+                  svg.select("#link-label" + d.id).transition().duration(duration).attr("dx",function(d){ return (d.parent.x + d.x)/2 })
+                  .attr("dy",function(d){ return (d.parent.y + d.y)/2});
+                  return diagonal(d, d.parent)
+              });
 
-          // Remove any exiting links
+              // Remove any exiting links
           var linkExit = link.exit().transition()
               .duration(duration)
-              .attr('d', function(d) {
-                var o = {x: source.x, y: source.y}
-                return diagonal(o, o)
+              .attr('d', function (d) {
+                  var o = {x: source.x, y: source.y};
+                  svg.selectAll("#link-label" + d.id).remove();
+                  return diagonal(o, o)
               })
               .remove();
 
-          // Store the old positions for transition.
-          nodes.forEach(function(d){
-              d.x0 = d.x;
-              d.y0 = d.y;
-            });
+              // Store the old positions for transition.
+              nodes.forEach(function (d) {
+                  d.x0 = d.x;
+                  d.y0 = d.y;
+              });
 
           // Creates a curved (diagonal) path from parent to the child nodes
           function diagonal(s, d) {

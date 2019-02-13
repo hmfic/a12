@@ -1,4 +1,3 @@
-
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import * as d3 from 'd3';
 import { Globals } from "../globals";
@@ -10,7 +9,6 @@ import { Globals } from "../globals";
   encapsulation: ViewEncapsulation.None
   //encapsulation: ViewEncapsulation.Native
 })
-
   export class Force10Component implements OnInit, AfterViewInit {
     @ViewChild('force10DirectedChartContainer') chartContainer: ElementRef;
     hostElement: any;
@@ -24,25 +22,28 @@ import { Globals } from "../globals";
         private elementRef:ElementRef,
         ) {  }
 
-    ngAfterViewInit() {
-      console.log("force; after view element host height=",this.chartContainer.nativeElement.offsetHeight);
-      //this.width=this.chartContainer.nativeElement.offsetWidth -50;
-      //this.height=this.chartContainer.nativeElement.offsetHeight -10;
+    ngOnInit() {
+      this.width=this.chartContainer.nativeElement.offsetWidth -50;
+      this.height=this.chartContainer.nativeElement.offsetHeight -50;
+      console.log("********** force; after ngviewinit height:width=",this.height,":",this.width);
+    
     }
 
-    ngOnInit() {
-      console.log("nginit force");
+    ngAfterViewInit() {
+      console.log("force; after view element host height=",this.chartContainer.nativeElement.offsetHeight);
       this.hostElement = this.chartContainer.nativeElement;
       //console.log("element host =",this.hostElement);
 
       this.width=this.hostElement.offsetWidth -30;
-      // this.height=this.hostElement.offsetHeight -30;
       this.height=this.chartContainer.nativeElement.offsetHeight;
 
       var boxwidth=60;
       var boxheight=20;
       var randomScore=Math.random().toFixed(2).replace(/^[0\.]+/, ".");
-      console.log("in nginit; force; width:height",this.width,":",this.height);
+
+      var centerXForce = d3.forceX(this.width / 2);
+      var centerYForce = d3.forceY(this.height / 2);
+      console.log("in ngafterinit; force; width:height",this.width,":",this.height);
 
       var zoom = d3.zoom()
          .scaleExtent([.2,10])
@@ -113,11 +114,11 @@ import { Globals } from "../globals";
 
       var links:any=
       		[
-		        {"source": "Napoleon", "target": "Myriel","status":"red"},
-		        {"source": "Mlle.Baptistine", "target": "Myriel","status":"red"},
-		        {"source": "CountessdeLo", "target": "Myriel","status":"red"},
-		        {"source": "Geborand", "target": "Myriel","status":"red"},
-            {"source": "Mlle.Baptistine", "target": "Valjean","status":"red"}
+		        {"source": "Napoleon", "target": "Myriel","status":"red", "date":"1/1/2019"},
+		        {"source": "Mlle.Baptistine", "target": "Myriel","status":"red", "date":"1/1/2019"},
+		        {"source": "CountessdeLo", "target": "Myriel","status":"red", "date":"1/1/2019"},
+		        {"source": "Geborand", "target": "Myriel","status":"red", "date":"1/1/2019"},
+            {"source": "Mlle.Baptistine", "target": "Valjean","status":"red", "date":"1/2/2019"}
 		    ];
       //var holdem=0;
 
@@ -125,7 +126,9 @@ import { Globals } from "../globals";
         .force("link", d3.forceLink().distance(200).id(function(d:any) {return d.id; }))
         .force('charge', d3.forceManyBody().strength(-1000))
         .force('center', d3.forceCenter(this.width / 8, this.height / 2))
-        .force('collision', d3.forceCollide().radius(80).strength(1.5));
+        .force('collision', d3.forceCollide().radius(80).strength(1.5))
+        .force("x", centerXForce)
+        .force("y", centerYForce);
 
       var link = svg.append('g')
         .attr('class', 'links')
@@ -135,7 +138,7 @@ import { Globals } from "../globals";
         .append('line')
         .attr("stroke","gray")
         .attr("opacity",.5)
-        .attr('stroke-width', "1px");
+        .attr('stroke-width', "2px");
 
       var linkrect = svg.selectAll("line.link")
         .data(links)
@@ -257,6 +260,8 @@ import { Globals } from "../globals";
       simulation.nodes(nodes).on('tick', ticked);
       //simulation.force("link").links(links);
       simulation.force<d3.ForceLink<any, any>>('link').links(links);
+
+      // categoricalSplit();
 
 
 	  function ticked(e) {
