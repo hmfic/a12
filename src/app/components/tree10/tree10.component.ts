@@ -63,6 +63,10 @@ export class Tree10Component implements OnInit, AfterViewInit {
          .scaleExtent([.2,10])
          .on("zoom",zoomed);
 
+    const div1 = d3.select("body").append('div1')
+          .attr('class', 'tooltip')
+          .style('opacity', 0);
+
     const div2 = d3.select("body").append('div2')
           .attr('class', 'tooltip')
           .style('opacity', 0);
@@ -75,7 +79,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
         .call(zoom)
         .append('g');
 
-    svg.append("g").append("text")
+    /* svg.append("g").append("text")
         .attr("x", this.width*.5)
         .attr("y", 30)
         .attr("stroke", "black")
@@ -84,7 +88,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
         .attr("opacity", ".1")
         .attr('font-size', "2em" )
         .text(function(d){
-            return 'Sensitive content use case'}); 
+            return 'Sensitive content use case'});  */
 
     var defs = svg.append("defs");
     var filter = defs.append("filter")
@@ -113,6 +117,32 @@ export class Tree10Component implements OnInit, AfterViewInit {
         .attr("in", "offsetBlur")
     feMerge.append("feMergeNode")
         .attr("in", "SourceGraphic");
+
+
+    svg.append("svg:defs").selectAll("marker")
+      .data(["end"])
+        .enter().append("svg:marker")
+        .attr("id",String)
+        .attr("viewBox","0 -5 10 10")
+        .attr("refX",15)
+        .attr("refY",-1.5)
+        .attr("markerWidth",6)
+        .attr("markerHeight",6)
+        .attr("orient","auto")
+        .append("svg:path")
+        .attr("d","M0,-5L10,0L0,5");
+
+    svg.select("defs").append("marker")
+        .attr("id","start")
+        .attr("viewBox","0 -5 10 10")
+        .attr("refX",-5)
+        .attr("refY",0)
+        .attr("markerWidth",6)
+        .attr("markerHeight",6)
+        .attr("orient","auto")
+        .attr("class","arrow")
+        .append("svg:path")
+          .attr("d","M0,0L10,-5L10,5");
 
     var i = 0,
         duration = 750,
@@ -207,6 +237,33 @@ export class Tree10Component implements OnInit, AfterViewInit {
                       return '<i class="material-icons" style="font-size:1.9rem;cursor: pointer;">' + d.data.type + '</i>'
                   }); 
 
+          nodeEnter.append('circle')
+                .attr("class", "linklabel")
+                .attr("id",function(d) {return "link-label" + d.id})
+                .attr("fill","transparent")
+                .attr("stroke",function (d) { return "transparent"})
+                .attr("stroke-width",0)
+                .attr("dx",-50)
+                .attr("r",25)
+                .on('mouseover', (d) => {
+                      //console.log("in nodehover;d=",d);
+                      div1.transition()
+                         .duration(200)
+                         .style('opacity', .9);
+                      div1 .html(
+                        function() {
+                                return d.id + " (" + d.data.name + ")"; 
+                              }
+                            )
+                         .style('left', (d3.event.pageX -15) + 'px')
+                         .style('top', (d3.event.pageY - 35) + 'px');
+                        })
+                .on('mouseout', (d) => {
+                    div1.transition()
+                       .duration(200)
+                       .style('opacity', 0);
+                      });
+
           // UPDATE
           var nodeUpdate = nodeEnter.merge(node);
 
@@ -224,7 +281,6 @@ export class Tree10Component implements OnInit, AfterViewInit {
                 return d._children ? "darkgray" : "orange";
             })
             .attr('cursor', 'pointer');
-
 
           // Remove any exiting nodes
           var nodeExit = node.exit().transition()
@@ -253,10 +309,12 @@ export class Tree10Component implements OnInit, AfterViewInit {
           var linkEnter = link.enter().insert('path', 'g')
               .attr("id", function(d){ return ("link" + d.id)})//unique id
               .attr("class", "link")
-              .attr('d', function (d) {
-                  var o = {x: source.x0, y: source.y0}
-                  return diagonal(o, o);
-              });
+              //.attr('d', function (d) {
+                  //var o = {x: source.x0, y: source.y0}
+                  //return diagonal(o, o);
+              //})
+              .attr("d",diagonal)
+              .attr("marker-start","url(#start)");
 
 // UPDATE
           var linkUpdate = linkEnter.merge(link);
@@ -266,7 +324,6 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr("y",function(d){ return (d.x + d.parent.x)/2 })
               .attr("id",function(d) {return "link-label" + d.id})
               .attr("x",function(d){ return (d.y + d.parent.y)/2 })
-              .attr("text-anchor","middle")
               .attr("dy", 5)
               .attr("height",boxheight)
               .attr("width",boxwidth)
@@ -288,7 +345,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
                   return diagonal(d, d.parent)
               }); 
 
-// now do the circles in the losenges
+// now do the circles in the lozenges
 
           var circles = svg.selectAll('link')
               .data(links, function (d) {
@@ -341,7 +398,51 @@ export class Tree10Component implements OnInit, AfterViewInit {
                 return ".xsls"
               });
 
-
+// always make this last so transparents are on top
+          var transprect = link.enter().insert("rect","g")
+              .attr("class", "linklabel")
+              .attr("y",function(d){ return (d.x + d.parent.x)/2 -11})
+              .attr("id",function(d) {return "link-label" + d.id})
+              .attr("x",function(d){ return (d.y + d.parent.y)/2 -29})
+              //.attr("dy", 0)
+              .attr("height",boxheight+2)
+              .attr("width",boxwidth+2)
+              .attr("rx", 8)
+              .attr("ry", 8)
+              .attr("fill","transparent")
+              .attr("stroke",function (d) { return "transparent"})
+              .attr("stroke-width",0)
+              .on('mouseover', (d) => {
+          // send info to emitter
+                    //this.eventHover.emit(d);
+                    div2.transition()
+                       .duration(200)
+                       .style('opacity', .9);
+                    div2 .html(
+                      function() {
+                              //console.log("in tranparent hover;d=",d);
+                              return "<table><tr><td colspan='2'><span class='tooltip-header'>Data movement between " + d.parent.data.name + " and " + d.data.name + "</span></td></tr>" +
+                              '<tr><td>Score</td><td>.03</td></tr><tr>' +
+                              '<td>Size risk</td><td>nominal</td></tr>'+
+                              '<tr><td>Destination risk</td><td>nominal</td></tr>'+
+                              '<tr><td>Source risk</td><td>nominal</td></tr>'+
+                              '<tr><td>Content risk</td><td style="color:red;">Risky</td></tr>'+
+                              '<tr><td>Time of day/week/month risk</td><td>nominal</td></tr>'+
+                              '<tr><td>Data type risk</td><td>Nominal</td></tr>'+
+                              '<tr><td>Data type</td><td>Excel Spreadsheet</td></tr>'+
+                              '<tr><td>Content protection</td><td>Unencrypted</td></tr>'+
+                              '<tr><td>Data protocol</td><td>HTTP(80)</td></tr>'+
+                              '<tr><td>Connection ID</td><td>' + d.id + '</td></tr></table>'; 
+                            }
+                          )
+                       .style('left', (d3.event.pageX +15) + 'px')
+                       .style('top', (d3.event.pageY - 5) + 'px');
+                      })
+              .on('mouseout', (d) => {
+                  div2.transition()
+                     .duration(200)
+                     .style('opacity', 0);
+                    });
 
               // Remove any exiting links
           var linkExit = link.exit().transition()
@@ -353,6 +454,9 @@ export class Tree10Component implements OnInit, AfterViewInit {
               })
               .remove();
 
+
+
+
               // Store the old positions for transition.
           nodes.forEach(function (d) {
                   d.x0 = d.x;
@@ -361,7 +465,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
 
           // Creates a curved (diagonal) path from parent to the child nodes
           function diagonal(s, d) {
-              var path = `M ${s.y} ${s.x}
+              var path = `M ${s.y-19} ${s.x}
                     C ${(s.y + d.y) / 2} ${s.x},
                       ${(s.y + d.y) / 2} ${d.x},
                       ${d.y} ${d.x}`

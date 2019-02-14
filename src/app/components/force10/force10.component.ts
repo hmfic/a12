@@ -53,6 +53,10 @@ import { Globals } from "../globals";
           .attr('class', 'tooltip')
           .style('opacity', 0);
 
+      const div1 = d3.select("body").append('div1')
+          .attr('class', 'tooltip')
+          .style('opacity', 0);
+
       let svg = d3.select(this.hostElement)
         .append('svg')
         .attr('width',"100%")
@@ -61,7 +65,7 @@ import { Globals } from "../globals";
         .call(zoom)
         .append('g');
 
-      svg.append("g")
+      /* svg.append("g")
         .append("text")
         .attr("x", this.width*.5)
         .attr("y", 30)
@@ -72,7 +76,7 @@ import { Globals } from "../globals";
         .attr('font-size', "2em" )
         //.style("position","absolute")
         .text(function(d){
-            return 'Sensitive Content Use Case'}); 
+            return 'Sensitive Content Use Case'});  */
 
       var defs = svg.append("defs");
       var filter = defs.append("filter")
