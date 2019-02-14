@@ -28,27 +28,26 @@ export class Tree10Component implements OnInit, AfterViewInit {
     }
 
   ngAfterViewInit() {
-
   	var treeData = 
 		  {
 		    "name": "Myriel", "type":"person",
 		    "children": [
 		      {
-		        "name": "Mlle.Baptistine",  "type":"person",
+		        "name": "Mlle.Baptistine",  "type":"computer",
 		        "children": [
 		          {
-		            "name": "Valijean", "type":"person"
+		            "name": "Valijean", "type":"computer"
 		          }
 		        ]
 		      },
 		      {
-		        "name": "Geborand", "type":"person"
+		        "name": "Geborand", "type":"laptop"
 		      },
           {
-            "name": "Napolean", "type":"person"
+            "name": "Napolean", "type":"tablet"
           },
           {
-            "name": "CountessDeLo", "type":"person"
+            "name": "CountessDeLo", "type":"computer"
           }
 		    ]
 		  };
@@ -76,8 +75,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
         .call(zoom)
         .append('g');
 
-    svg.append("g")
-        .append("text")
+    svg.append("g").append("text")
         .attr("x", this.width*.5)
         .attr("y", 30)
         .attr("stroke", "black")
@@ -85,9 +83,36 @@ export class Tree10Component implements OnInit, AfterViewInit {
         .attr('text-anchor','middle')
         .attr("opacity", ".1")
         .attr('font-size', "2em" )
-        //.style("position","absolute")
         .text(function(d){
-            return 'Derivative Data Use Case'}); 
+            return 'Sensitive content use case'}); 
+
+    var defs = svg.append("defs");
+    var filter = defs.append("filter")
+            .attr("id", "drop-shadow")
+            .attr("height", "200%")
+            .attr("width", "200%");
+        // SourceAlpha refers to opacity of graphic that this filter will be applied to
+        // convolve that with a Gaussian with standard deviation 3 and store result
+        // in blur
+    filter.append("feGaussianBlur")
+        .attr("in", "SourceAlpha")
+        .attr("stdDeviation", 2)
+        .attr("result", "blur");
+    // translate output of Gaussian blur to the right and downwards with 2px
+    // store result in offsetBlur
+    filter.append("feOffset")
+        .attr("in", "blur")
+        .attr("dx", 1)
+        .attr("dy", 1)
+        .attr("result", "offsetBlur");
+    // overlay original SourceGraphic over translated blurred opacity by using
+    // feMerge filter. Order of specifying inputs is important!
+    var feMerge = filter.append("feMerge");
+
+    feMerge.append("feMergeNode")
+        .attr("in", "offsetBlur")
+    feMerge.append("feMergeNode")
+        .attr("in", "SourceGraphic");
 
     var i = 0,
         duration = 750,
@@ -95,7 +120,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
 
     // declares a tree layout and assigns the size
     console.log("before treemap; h:w=",this.height,":",this.width);
-    var treemap = d3.tree().size([200, this.width]); 
+    var treemap = d3.tree().size([200, this.width]).nodeSize([80,80]); 
 
     // Assigns parent, children, height, depth
     root = d3.hierarchy(treeData, function(d) { return d.children; });
@@ -127,7 +152,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
           var boxheight=20;
 
           // Normalize for fixed-depth.
-          nodes.forEach(function(d){ d.y = d.depth * 150});
+          nodes.forEach(function(d){ d.y = d.depth * 300});
 
           // ****************** Nodes section ***************************
 
@@ -150,14 +175,21 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr('class', 'node')
               .attr('r', 1e-6)
               .style("fill", function(d) {
-                  return d._children ? "black" : "orange";
-              });
+                  //console.log("in nodeenter circle;d=",d);
+                  //console.log("in nodeenter circle;d.parent=",d.parent);
+                  //console.log("in nodeenter circle;d.parent[0]=",d.parent[0]);
+                  if(d.parent == null) return "black"; else { return "orange"}
+                  //return d.parent ? "black" : "orange";
+                })
+              .style("filter", function(d) {
+                  if(d.parent==null) { return "url(#drop-shadow)"} else {return "none"}
+                  });
 
           // Add labels for the nodes
           nodeEnter.append('text')
               .attr("dy", ".35em")
               .attr("x", function(d) {
-                  return d.children || d._children ? -20 : 20;
+                  return d.children || d._children ? -28 : 28;
               })
               .attr("text-anchor", function(d) {
                   return d.children || d._children ? "end" : "start";
@@ -166,13 +198,13 @@ export class Tree10Component implements OnInit, AfterViewInit {
 
           nodeEnter.append('svg:foreignObject')
               .attr('class', 'icons')
-                .attr("x",-16)             
-                .attr("y", -16)
+                .attr("x",-15)             
+                .attr("y", -15)
                 .attr('height', '28')
                 .attr('width', '28')
                 .html( function(d) { 
                       //console.log("in nodenter;d=",d);
-                      return '<i class="material-icons" style="font-size:2rem;cursor: pointer;">' + d.data.type + '</i>'
+                      return '<i class="material-icons" style="font-size:1.9rem;cursor: pointer;">' + d.data.type + '</i>'
                   }); 
 
           // UPDATE
@@ -187,7 +219,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
 
           // Update the node attributes and style
           nodeUpdate.select('circle.node')
-            .attr('r', 20)
+            .attr('r', 25)
             .style("fill", function(d) {
                 return d._children ? "darkgray" : "orange";
             })
@@ -210,9 +242,8 @@ export class Tree10Component implements OnInit, AfterViewInit {
           nodeExit.select('text')
             .style('fill-opacity', 1e-6);
 
-          // ****************** links section ***************************
-
-// Update the links...
+// ****************** links section ***************************
+// Create the links...
           var link = svg.selectAll('path.link')
               .data(links, function (d) {
                   return d.id;
@@ -227,34 +258,90 @@ export class Tree10Component implements OnInit, AfterViewInit {
                   return diagonal(o, o);
               });
 
-              // UPDATE
+// UPDATE
           var linkUpdate = linkEnter.merge(link);
 
-          var linkLabel = link.enter().insert("text","g")
-              .attr("class", "link2")
-              .attr("id", function(d){ return ("link-label" + d.id)})//unique id
-              .attr("dx",function(d){ return (d.parent.x + d.x)/2 })
-              .attr("dy",function(d){ return (d.parent.y + d.y)/2 })
-              .text(function(d) {
-                  if (d.data.label === "Yes") {
-                      this.setAttribute("x",-30);
-                  } else {
-                      this.setAttribute("x",10);
-                  }
-                  // return d.data.label;
-                  return "yes"
-              });
-
-          linkUpdate.merge(linkLabel);
+          var linkLabel = link.enter().insert("rect","g")
+              .attr("class", "linklabel")
+              .attr("y",function(d){ return (d.x + d.parent.x)/2 })
+              .attr("id",function(d) {return "link-label" + d.id})
+              .attr("x",function(d){ return (d.y + d.parent.y)/2 })
+              .attr("text-anchor","middle")
+              .attr("dy", 5)
+              .attr("height",boxheight)
+              .attr("width",boxwidth)
+              .attr("rx", 8)
+              .attr("ry", 8)
+              .attr("fill","#bbb")
+              .attr("stroke",function (d) { return "red"})
+              .attr("stroke-width",1)
+              .style("filter", function(d) { return "url(#drop-shadow)"} 
+                  );
 
               // Transition back to the parent element position
-          linkUpdate.transition()
+           linkUpdate.transition()
               .duration(duration)
               .attr('d', function (d) {
-                  svg.select("#link-label" + d.id).transition().duration(duration).attr("dx",function(d){ return (d.parent.x + d.x)/2 })
-                  .attr("dy",function(d){ return (d.parent.y + d.y)/2});
+                  svg.select("#link-label" + d.id).transition().duration(duration)
+                  .attr("y",function(d){ return (d.x + d.parent.x)/2 -(boxheight/2)})
+                  .attr("x",function(d){ return (d.y + d.parent.y)/2 - (boxwidth/2)});
                   return diagonal(d, d.parent)
+              }); 
+
+// now do the circles in the losenges
+
+          var circles = svg.selectAll('link')
+              .data(links, function (d) {
+                  console.log("in circles;d=",d);
+                  return d.id;
               });
+
+          var circleEnter = circles.enter().insert('circle', 'g')
+              //.attr("id", function(d){ return ("circ" + d.id)})//unique id
+              .attr("id",function(d) {return "link-label" + d.id})
+              //.attr("class", "clink")
+              .attr("cx",function(d) {return (d.y+d.parent.y)/2 + 20})
+              .attr("cy", function(d) { return (d.x+d.parent.x)/2})
+              .attr('r', 10)
+              .attr('fill', "white");
+
+          var scores = svg.selectAll('link','g')
+              .data(links, function (d) {
+                  console.log("in scores;d=",d);
+                  return d.id;
+              });
+
+          var scoresEnter = scores.enter().append('text')
+              .attr("id",function(d) {return "link-label" + d.id})
+              //.attr("id", function(d){ return ("score" + d.id)})//unique id
+              .attr("x",function(d) {return (d.y+d.parent.y)/2 + 20})
+              .attr("y", function(d) { return (d.x+d.parent.x)/2})
+              .style("font-size","10px")
+              .attr("dx","-8px")
+              .attr("dy","3px")
+              .text(function(d) {
+                return ".03"
+              });
+
+          var types = svg.selectAll('link','g')
+              .data(links, function (d) {
+                  console.log("in scores;d=",d);
+                  return d.id;
+              });
+
+          var typesEnter = types.enter().append('text')
+              .attr("id",function(d) {return "link-label" + d.id})
+              //.attr("id", function(d){ return ("score" + d.id)})//unique id
+              .attr("x",function(d) {return (d.y+d.parent.y)/2 + 20})
+              .attr("y", function(d) { return (d.x+d.parent.x)/2})
+              .style("font-size","10px")
+              .attr("dx","-42px")
+              .attr("dy","3px")
+              .text(function(d) {
+                return ".xsls"
+              });
+
+
 
               // Remove any exiting links
           var linkExit = link.exit().transition()
@@ -267,7 +354,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .remove();
 
               // Store the old positions for transition.
-              nodes.forEach(function (d) {
+          nodes.forEach(function (d) {
                   d.x0 = d.x;
                   d.y0 = d.y;
               });
