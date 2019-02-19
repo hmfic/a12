@@ -1,35 +1,29 @@
-import { Component, OnInit, AfterViewInit, AfterContentInit, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import * as d3 from 'd3';
 import { Globals } from "../globals";
 
 @Component({
-  selector: 'app-tree10',
-  templateUrl: './tree10.component.html',
-  styleUrls: ['./tree10.component.scss'],
+  selector: 'app-tree20',
+  templateUrl: './tree20.component.html',
+  styleUrls: ['./tree20.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit {
-	  @ViewChild('tree10Container') chartContainer: ElementRef;
-	  hostElement: any;
+export class Tree20Component implements OnInit, AfterViewInit {
+	@ViewChild('tree20Container') chartContainer: ElementRef;
+	hostElement: any;
     width:number;
     height:number;
-
+    // this is the emitter for sending to sankey1
     @Output() eventHover = new EventEmitter<Event>();
-  constructor(
-  	    private globals: Globals,
-        private elementRef:ElementRef,
-        //private cdRef:ChangeDetectorRef
+    constructor(
+  		  private globals: Globals,
+        private elementRef:ElementRef
         ) { }
 
-  ngAfterContentInit(){
-  // This shows the elements current size
-    console.log("tree10 after contentinit=",this.chartContainer.nativeElement.offsetWidth);
-  }
-
   ngOnInit() {
-      //console.log("tree10 ngoninit; after view element host height=",this.chartContainer.nativeElement.offsetHeight);
-      //this.width=this.chartContainer.nativeElement.offsetWidth -10;
-      //this.height=this.chartContainer.nativeElement.offsetHeight -10;
+      //console.log("tree20 ngoninit; after view element host height=",this.chartContainer.nativeElement.offsetHeight);
+      //this.width=this.chartContainer.nativeElement.offsetWidth -50;
+      //this.height=this.chartContainer.nativeElement.offsetHeight -50;
     }
 
   ngAfterViewInit() {
@@ -38,49 +32,34 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
 		    "name": "Myriel", "type":"person",
 		    "children": [
 		      {
-		        "name": "Mlle.Baptistine",  "type":"computer", "date":"1/1/2019",
+		        "name": "Mlle.Baptistine",  "type":"computer",
 		        "children": [
 		          {
-		            "name": "Valijean", "type":"computer", "date":"1/3/2019",
+		            "name": "Valijean", "type":"computer"
 		          },
               {
-                "name": "Cravatte", "type":"computer", "date":"1/4/2019",
+                "name": "Cravatte", "type":"computer"
               }
 		        ]
 		      },
 		      {
-		        "name": "Geborand", "type":"laptop", "date":"1/1/2019",
+		        "name": "Geborand", "type":"laptop"
 		      },
           {
-            "name": "Napolean", "type":"tablet", "date":"1/1/2019",
+            "name": "Napolean", "type":"tablet"
           },
           {
-            "name": "CountessDeLo", "type":"computer", "date":"1/1/2019",
+            "name": "CountessDeLo", "type":"computer"
           }
 		    ]
 		  };
-    setTimeout(() => {
-      this.hostElement= this.chartContainer.nativeElement;
-      this.width=this.chartContainer.nativeElement.offsetWidth-30;
-      this.height=this.chartContainer.nativeElement.offsetHeight;
-      console.log("TIMER TIMER TIMER tree10 ; width:height",this.width,":",this.height);
-      },200);
-    //this.hostElement = this.chartContainer.nativeElement;
 
-    // console.log("tree10 hostelement=",this.hostElement);
+  	//this.hostElement = this.chartContainer.nativeElement;
+    //console.log("tree20 hostelement=",this.hostElement);
 
-    //var element = this.hostElement.getElementById('tree10Container');
-    //var positionInfo = element.getBoundingClientRect();
-    //var height = positionInfo.height;
-    //var width = positionInfo.width;
-    //console.log("special special=",height,":",width);
-
-    this.hostElement = this.chartContainer.nativeElement;
-  	
-    this.width=this.chartContainer.nativeElement.offsetWidth-30;
-    this.height=this.chartContainer.nativeElement.offsetHeight;
-    console.log("!!!!!!!!!!!!!!!!! tree10 in ngafterViewinit; width:height",this.width,":",this.height);
-      //console.log("element host =",this.hostElement);
+    //this.width=this.chartContainer.nativeElement.offsetWidth -30;
+    //this.height=this.chartContainer.nativeElement.offsetHeight;
+    //console.log("in nginit; tree; width:height",this.width,":",this.height);
 
     var zoom = d3.zoom()
          .scaleExtent([.2,10])
@@ -98,7 +77,7 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
         .attr('height',"60vh")
         //.attr('style',"margin-bottom:70px;")
         .call(zoom)
-        .append('g'); 
+        .append('g');
 
     var defs = svg.append("defs");
     var filter = defs.append("filter")
@@ -154,74 +133,12 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
         .append("svg:path")
           .attr("d","M0,0L10,-5L10,5");
 
-    //let mydate= new Date();
-
-    let start:any = new Date (2019, 1, 1);
-    let end:any = new Date(2019, 1, 5);
-
-    var x = d3.scaleTime()
-        .domain([start, end - 1])
-        .rangeRound([0, 600]);
-
-    console.log("xoxoxoxoxooxoxoxo before svg2; tree; width:height",this.width,":",this.height);
-
-    let svg2 = d3.select(this.hostElement)
-        .append('svg')
-        .attr('width',"600px")
-        .attr('height',"50px")
-        //.attr('style',"margin-bottom:70px;")
-        .append('g');
-
-    svg2.append("g")
-        .attr("class", "axis axis--grid")
-        .attr("transform", "translate(0," + 45 + ")")
-        .attr("align","center")
-        .call(d3.axisBottom(x)
-            .ticks(d3.timeHour, 12)
-            .tickSize(-50)
-            .tickFormat(function() { return null; }))
-      .selectAll(".tick")
-        .classed("tick--minor", function(d) { return d.getHours(); });
-
-    svg2.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + 44 + ")")
-        .call(d3.axisBottom(x)
-            .ticks(d3.timeDay)
-            .tickPadding(0))
-        .attr("text-anchor", null)
-      .selectAll("text")
-        .attr("y",-13)
-        .attr("x", 6);
-
-    svg2.append("g")
-        .attr("class", "brush")
-        .call(d3.brushX()
-            .extent([[0, 0], [600, 50]])
-            .on("end", brushended));
-
-    function brushended() {
-      console.log("in brushended");
-          if (!d3.event.sourceEvent) return; // Only transition after input.
-          if (!d3.event.selection) return; // Ignore empty selections.
-          var d0 = d3.event.selection.map(x.invert),
-              d1 = d0.map(d3.timeDay.round);
-
-          // If empty when rounded, use floor & ceil instead.
-          if (d1[0] >= d1[1]) {
-            d1[0] = d3.timeDay.floor(d0[0]);
-            d1[1] = d3.timeDay.offset(d1[0]);
-          }
-
-          d3.select(this).transition().call(d3.event.target.move, d1.map(x));
-        }
-
     var i = 0,
         duration = 750,
         root;
 
     // declares a tree layout and assigns the size
-    console.log("tree10 before treemap; h:w=",this.height,":",this.width);
+    console.log("tree20 before treemap; h:w=",this.height,":",this.width);
     var treemap = d3.tree().size([175, this.width]).nodeSize([90,90]); 
 
     // Assigns parent, children, height, depth
@@ -550,7 +467,6 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
                               '<tr><td>Data type</td><td>Excel Spreadsheet</td></tr>'+
                               '<tr><td>Content protection</td><td>Unencrypted</td></tr>'+
                               '<tr><td>Data protocol</td><td>HTTP(80)</td></tr>'+
-                              '<tr><td>Date</td><td>'+d.data.date+'</td></tr>'+
                               '<tr><td>Connection ID</td><td>' + d.id + '</td></tr></table>'; 
                             }
                           )
@@ -581,8 +497,6 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
                   d.x0 = d.x;
                   d.y0 = d.y;
               });
-
-          
 
           // Creates a curved (diagonal) path from parent to the child nodes
           function diagonal(s, d) {

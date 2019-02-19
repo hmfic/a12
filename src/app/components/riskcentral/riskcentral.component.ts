@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { Tree10Component } from '../tree10/tree10.component'; 
-//import { Force10Component } from '../force10/force10.component'; 
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-riskcentral',
@@ -8,6 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./riskcentral.component.scss']
 })
 export class RiskcentralComponent implements OnInit {
+
+	cards = [
+		{
+			"title":"Sensitive Content Use Case - Force",
+		 	"tip":"This is sensitive data moving across processes shown in a force directed graph",
+		 	"id":1
+		 },
+		 {
+			"title":"Size Content Use Case",
+		 	"tip":"This is sensitive data moving across processes shown in a force directed graph",
+		 	"id":2
+		 }
+	];
+
+	drop(event: CdkDragDrop<string[]>) {
+		//console.log("in cdk drop");
+		moveItemInArray(this.cards, event.previousIndex, event.currentIndex);
+
+	}
 
   constructor() { }
 

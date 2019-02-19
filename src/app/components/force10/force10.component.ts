@@ -20,22 +20,28 @@ import { Globals } from "../globals";
   constructor(
         private globals: Globals,
         private elementRef:ElementRef,
+        //private cdRef:ChangeDetectorRef
         ) {  }
 
     ngOnInit() {
-      this.width=this.chartContainer.nativeElement.offsetWidth -50;
-      this.height=this.chartContainer.nativeElement.offsetHeight -50;
-      console.log("********** force; after ngviewinit height:width=",this.height,":",this.width);
+      //this.width=this.chartContainer.nativeElement.offsetWidth -50;
+      //this.height=this.chartContainer.nativeElement.offsetHeight -50;
+      //console.log("********** FORCE; in ngOninit height:width=",this.height,":",this.width);
     
     }
 
     ngAfterViewInit() {
-      console.log("force; after view element host height=",this.chartContainer.nativeElement.offsetHeight);
+      //this.cdRef.detectChanges();
+      
       this.hostElement = this.chartContainer.nativeElement;
       //console.log("element host =",this.hostElement);
 
       this.width=this.hostElement.offsetWidth -30;
-      this.height=this.chartContainer.nativeElement.offsetHeight;
+      //this.width=this.hostElement.offsetWidth -30;
+      this.height=this.hostElement.offsetHeight;
+
+      //this.width=this.chartContainer.nativeElement.offsetWidth;
+      //console.log("**********force; after ngAfterViewInit height=",this.height);
 
       var boxwidth=60;
       var boxheight=20;
@@ -43,7 +49,7 @@ import { Globals } from "../globals";
 
       var centerXForce = d3.forceX(this.width / 2);
       var centerYForce = d3.forceY(this.height / 2);
-      console.log("in ngafterinit; force; width:height",this.width,":",this.height);
+      //console.log("******* FORCE in ngafterinit; force; width:height",this.width,":",this.height);
 
       var zoom = d3.zoom()
          .scaleExtent([.2,10])
@@ -60,23 +66,11 @@ import { Globals } from "../globals";
       let svg = d3.select(this.hostElement)
         .append('svg')
         .attr('width',"100%")
-        .attr('height',"70vh")
+        .attr('height',"60vh")
         //.attr('style',"margin-bottom:70px;")
         .call(zoom)
         .append('g');
 
-      /* svg.append("g")
-        .append("text")
-        .attr("x", this.width*.5)
-        .attr("y", 30)
-        .attr("stroke", "black")
-        .attr("stroke-width", 0)
-        .attr('text-anchor','middle')
-        .attr("opacity", ".06")
-        .attr('font-size', "2em" )
-        //.style("position","absolute")
-        .text(function(d){
-            return 'Sensitive Content Use Case'});  */
 
       var defs = svg.append("defs");
       var filter = defs.append("filter")
@@ -113,7 +107,8 @@ import { Globals } from "../globals";
 		        {"id": "Mlle.Baptistine", "name": 3, "type":"computer"},
 		        {"id": "CountessdeLo", "name": 4, "type":"computer"},
             {"id": "Valjean", "name": 5, "type":"computer"},
-		        {"id": "Geborand", "name": 6, "type":"laptop"}
+		        {"id": "Geborand", "name": 6, "type":"laptop"},
+            {"id": "Cravatte", "name": 7, "type":"computer"},
 		      ];
 
       var links:any=
@@ -122,7 +117,8 @@ import { Globals } from "../globals";
 		        {"source": "Mlle.Baptistine", "target": "Myriel","status":"red", "date":"1/1/2019"},
 		        {"source": "CountessdeLo", "target": "Myriel","status":"red", "date":"1/1/2019"},
 		        {"source": "Geborand", "target": "Myriel","status":"red", "date":"1/1/2019"},
-            {"source": "Mlle.Baptistine", "target": "Valjean","status":"red", "date":"1/2/2019"}
+            {"source": "Mlle.Baptistine", "target": "Valjean","status":"red", "date":"1/2/2019"},
+            {"source": "Mlle.Baptistine", "target": "Cravatte","status":"red", "date":"1/2/2019"}
 		    ];
       //var holdem=0;
 

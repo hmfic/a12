@@ -1,26 +1,16 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" cdkDropList>
-	<mat-card class="mat-elevation-z4" color="primary" cdkDrag>
-		<mat-card-header color="success">
-			<span fxFlex="90" style="margin:8px;">Sensitive content use case</span>
-			<div style="margin:8px;" matTooltip="Info about the action"><i class="material-icons">info_outline</i></div>
-			<div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
-		</mat-card-header>
-		<div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" >
-		  <mat-card class="card-warn accent"  >
-		  		<app-tree10 #tree10Container></app-tree10>
-		  </mat-card>
-		</div>
-	</mat-card>
-	<mat-card class="mat-elevation-z4" color="primary" cdkDrag>
-		<mat-card-header color="success">
-			<span fxFlex="90" style="margin:8px;">Sensitive content use case</span>
-			<div style="margin:8px;" matTooltip="Info about the action"><i class="material-icons">info_outline</i></div>
-			<div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
-		</mat-card-header>
-		<div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" >
-		  <mat-card class="card-warn accent"  >
-		  		<app-force10 #force10DirectedChartContainer></app-force10>
-		  </mat-card>
-		</div>
-	</mat-card>	
+<div fxLayout="row" class="box" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="left" cdkDropList (cdkDropListDropped)="drop($event)">
+		<mat-card  class="mat-elevation-z4" color="primary" cdkDrag *ngFor="let card of cards" >
+			<mat-card-header color="success" >
+				<span fxFlex="90" style="margin:8px;">{{card.title}} </span>
+				<div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
+				<div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
+			</mat-card-header>
+			<div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" >
+			  <mat-card class="card-warn accent" >
+			  		<app-tree10 #tree10Container *ngIf="card.id==1"></app-tree10>
+			  		<app-force10 #force10DirectedChartContainer *ngIf="card.id==2"></app-force10>
+			  		<!-- <app-tree20 #tree20Container *ngIf="card.id==1"></app-tree20> -->
+			  </mat-card>
+			</div>
+		</mat-card>
 </div>

@@ -25,43 +25,47 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { Force10Component } from './components/force10/force10.component';
 import { Tree10Component } from './components/tree10/tree10.component';
-import { RiskcentralComponent } from './components/riskcentral/riskcentral.component'; 
+import { RiskcentralComponent } from './components/riskcentral/riskcentral.component';
+//import { Tree20Component } from './components/tree20/tree20.component'; 
+import { HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
+    AboutmodalComponent,
     AppComponent,
-    SettingsmodalComponent,
+    Force10Component,
     HelpmodalComponent,
     MainComponent,
-    AboutmodalComponent,
+    RiskcentralComponent,
+    SettingsmodalComponent,
     SidebarComponent,
-    Force10Component,
-    Tree10Component,
-    RiskcentralComponent
+    Tree10Component
+    //Tree20Component
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule, 
-    MatCheckboxModule,
-    MatCardModule,
-    MatGridListModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatMenuModule,
-    MatDialogModule,
-    MatTooltipModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    ReactiveFormsModule,
+    BrowserModule,
     DragDropModule,
     FlexLayoutModule,
+    FormsModule,
+    HttpClientModule,
+    LayoutModule,
+    MatButtonModule, 
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatGridListModule,
     MatIconModule,
-    LayoutModule
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    ReactiveFormsModule
   ],
   providers: [
     Globals,

@@ -5,7 +5,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MainComponent} from './components/main/main.component';
 import { Globals } from './components/globals';
 
-import { OverlayContainer} from '@angular/cdk/overlay';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 
 @Component({
@@ -16,9 +18,15 @@ import { OverlayContainer} from '@angular/cdk/overlay';
 export class AppComponent implements DoCheck{
 	constructor(
 	    private globals: Globals,
-      public overlayContainer: OverlayContainer
+      public overlayContainer: OverlayContainer,
+      private domSanitizer: DomSanitizer,
+      private matIconRegistry: MatIconRegistry
       )
-	      { }
+	      { 
+          this.matIconRegistry.addSvgIcon(
+            'us',
+            this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/us.svg")
+            )}
 
 @HostBinding('class') componentCssClass;
 oldName:string;
