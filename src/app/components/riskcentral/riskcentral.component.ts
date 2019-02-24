@@ -10,7 +10,7 @@ export class RiskcentralComponent implements OnInit {
 
 	cards = [
 		{
-			"title":"Sensitive Content Use Case - Force",
+			"title":"Sensitive Content Use Case - Tree",
 		 	"tip":"This is sensitive data moving across processes shown in a force directed graph",
 		 	"id":1
 		 },

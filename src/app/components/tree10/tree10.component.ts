@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit, AfterContentInit, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import * as d3 from 'd3';
 import { Globals } from "../globals";
+import { brush } from 'd3';
 
 @Component({
   selector: 'app-tree10',
@@ -8,7 +9,7 @@ import { Globals } from "../globals";
   styleUrls: ['./tree10.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit {
+export class Tree10Component implements OnInit, AfterViewInit {
 	  @ViewChild('tree10Container') chartContainer: ElementRef;
 	  hostElement: any;
     width:number;
@@ -17,20 +18,10 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
     @Output() eventHover = new EventEmitter<Event>();
   constructor(
   	    private globals: Globals,
-        private elementRef:ElementRef,
-        //private cdRef:ChangeDetectorRef
+        private elementRef:ElementRef
         ) { }
 
-  ngAfterContentInit(){
-  // This shows the elements current size
-    console.log("tree10 after contentinit=",this.chartContainer.nativeElement.offsetWidth);
-  }
-
-  ngOnInit() {
-      //console.log("tree10 ngoninit; after view element host height=",this.chartContainer.nativeElement.offsetHeight);
-      //this.width=this.chartContainer.nativeElement.offsetWidth -10;
-      //this.height=this.chartContainer.nativeElement.offsetHeight -10;
-    }
+  ngOnInit() { }
 
   ngAfterViewInit() {
   	var treeData = 
@@ -59,46 +50,30 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
           }
 		    ]
 		  };
-    setTimeout(() => {
-      this.hostElement= this.chartContainer.nativeElement;
-      this.width=this.chartContainer.nativeElement.offsetWidth-30;
-      this.height=this.chartContainer.nativeElement.offsetHeight;
-      console.log("TIMER TIMER TIMER tree10 ; width:height",this.width,":",this.height);
-      },200);
-    //this.hostElement = this.chartContainer.nativeElement;
-
-    // console.log("tree10 hostelement=",this.hostElement);
-
-    //var element = this.hostElement.getElementById('tree10Container');
-    //var positionInfo = element.getBoundingClientRect();
-    //var height = positionInfo.height;
-    //var width = positionInfo.width;
-    //console.log("special special=",height,":",width);
-
-    this.hostElement = this.chartContainer.nativeElement;
-  	
-    this.width=this.chartContainer.nativeElement.offsetWidth-30;
-    this.height=this.chartContainer.nativeElement.offsetHeight;
-    console.log("!!!!!!!!!!!!!!!!! tree10 in ngafterViewinit; width:height",this.width,":",this.height);
-      //console.log("element host =",this.hostElement);
 
     var zoom = d3.zoom()
-         .scaleExtent([.2,10])
-         .on("zoom",zoomed);
+           .scaleExtent([.2,10])
+           .on("zoom",zoomed);
 
-    d3.select("body").append('tips')
+    this.hostElement= this.chartContainer.nativeElement;
+
+    let svg = d3.select(this.hostElement)
+          .append('svg')
+          .attr('width',"100%")
+          .attr('height',"60vh")
+          .call(zoom)
+          .append('g');
+          //.attr('transform','translate(100,190)');  // need to translate here since using NodeSize sets x and y to 0,0
+
+    function zoomed() {
+          svg.attr("transform", d3.event.transform);
+        };
+
+    d3.select("body").append('tips');
 
     var div1 = d3.select("tips").append('div1')
           .attr('class', 'tooltip')
           .style('opacity', 0);
-
-    let svg = d3.select(this.hostElement)
-        .append('svg')
-        .attr('width',"100%")
-        .attr('height',"60vh")
-        //.attr('style',"margin-bottom:70px;")
-        .call(zoom)
-        .append('g'); 
 
     var defs = svg.append("defs");
     var filter = defs.append("filter")
@@ -128,7 +103,6 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
     feMerge.append("feMergeNode")
         .attr("in", "SourceGraphic");
 
-
     svg.append("svg:defs").selectAll("marker")
       .data(["end"])
         .enter().append("svg:marker")
@@ -154,96 +128,217 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
         .append("svg:path")
           .attr("d","M0,0L10,-5L10,5");
 
-    //let mydate= new Date();
+    // d3.select("g.brush").call(brush);
 
-    let start:any = new Date (2019, 1, 1);
-    let end:any = new Date(2019, 1, 5);
+    
 
-    var x = d3.scaleTime()
-        .domain([start, end - 1])
-        .rangeRound([0, 600]);
+     /* svg.append("circle")
+          .attr("cx",100)
+          .attr("cy",100)
+          .attr("r",10)
+          .attr("fill","red")
+          .on('click',resetBrush); 
+          //.on('click',svg.select(".brush").call(brush.move, null));
 
-    console.log("xoxoxoxoxooxoxoxo before svg2; tree; width:height",this.width,":",this.height);
+      function resetBrush() {
+          console.log("in resetbrush");
+          //if (!d3.event.sourceEvent) return; // Only transition after input.
+          //if (!d3.event.selection) return; // Ignore empty selections.
+          //if (!d3.event.sourceEvent) return;
+          //if(d3.event.sourceEvent.type === "brush") return;
+         // svg.select(".brush")
+         //     .call(brush.move, null);
+         //d3.select(this).call(d3.event.target.move, null);
+          svg.select(".brush").call(brush.move, null);
+          //brush.move(d3.select("g.brush"), null);
+        } */
 
-    let svg2 = d3.select(this.hostElement)
-        .append('svg')
-        .attr('width',"600px")
-        .attr('height',"50px")
-        //.attr('style',"margin-bottom:70px;")
-        .append('g');
+    setTimeout(() => {
+      this.hostElement= this.chartContainer.nativeElement;
+      this.width=this.chartContainer.nativeElement.offsetWidth;
+      this.height=this.chartContainer.nativeElement.offsetHeight;
 
-    svg2.append("g")
-        .attr("class", "axis axis--grid")
-        .attr("transform", "translate(0," + 45 + ")")
-        .attr("align","center")
-        .call(d3.axisBottom(x)
-            .ticks(d3.timeHour, 12)
-            .tickSize(-50)
-            .tickFormat(function() { return null; }))
-      .selectAll(".tick")
-        .classed("tick--minor", function(d) { return d.getHours(); });
+      /* function resetBrush() {
+          console.log("in resetbrush");
+          //if (!d3.event.sourceEvent) return; // Only transition after input.
+          //if (!d3.event.selection) return; // Ignore empty selections.
+          //if (!d3.event.sourceEvent) return;
+          //if(d3.event.sourceEvent.type === "brush") return;
+         // svg.select(".brush")
+         //     .call(brush.move, null);
+         //d3.select(this).call(d3.event.target.move, null);
+          svg.select(".brush").call(brush.move, null);
+          //brush.move(d3.select("g.brush"), null);
+        } */
 
-    svg2.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + 44 + ")")
-        .call(d3.axisBottom(x)
-            .ticks(d3.timeDay)
-            .tickPadding(0))
-        .attr("text-anchor", null)
-      .selectAll("text")
-        .attr("y",-13)
-        .attr("x", 6);
+      // find min and max dates
+      let dates = [];
+      traverse(treeData);
 
-    svg2.append("g")
-        .attr("class", "brush")
-        .call(d3.brushX()
-            .extent([[0, 0], [600, 50]])
-            .on("end", brushended));
-
-    function brushended() {
-      console.log("in brushended");
-          if (!d3.event.sourceEvent) return; // Only transition after input.
-          if (!d3.event.selection) return; // Ignore empty selections.
-          var d0 = d3.event.selection.map(x.invert),
-              d1 = d0.map(d3.timeDay.round);
-
-          // If empty when rounded, use floor & ceil instead.
-          if (d1[0] >= d1[1]) {
-            d1[0] = d3.timeDay.floor(d0[0]);
-            d1[1] = d3.timeDay.offset(d1[0]);
-          }
-
-          d3.select(this).transition().call(d3.event.target.move, d1.map(x));
-        }
-
-    var i = 0,
-        duration = 750,
-        root;
-
-    // declares a tree layout and assigns the size
-    console.log("tree10 before treemap; h:w=",this.height,":",this.width);
-    var treemap = d3.tree().size([175, this.width]).nodeSize([90,90]); 
-
-    // Assigns parent, children, height, depth
-    root = d3.hierarchy(treeData, function(d) { return d.children; });
-    root.x0 = this.height / 2;
-    root.y0 = 0;
-
-    // Collapse after the second level
-    root.children.forEach(collapse);
-
-    update(root);
-
-    function collapse(d) {
-        if(d.children) {
-          d._children = d.children
-          d._children.forEach(collapse)
-          d.children = null
+      function traverse(obj) {
+        if(obj != null && typeof obj == "object") {
+          Object.entries(obj).forEach(([key,value]) => {
+            //console.log("key:value=",key,":",value);
+            if(key == "date") {
+              //let value1=value;
+              //let tmptime = new Date(value);
+              dates.push(new Date(value.toString()).getTime());
+            }
+            traverse(value);
+          })
         }
       }
 
-    function update(source) {
-// Assigns the x and y position for the nodes
+      /* svg.append("circle")
+          .attr("cx",100)
+          .attr("cy",100)
+          .attr("r",10)
+          .attr("fill","red")
+          .on('click',resetBrush);  */
+
+      let epochstart=Math.min.apply(Math,dates);
+      let start=new Date(Math.min.apply(Math,dates));
+      let epochend = Math.max.apply(Math,dates);
+      let end:any=new Date(epochend+86400*1000);
+
+      // console.log("min:max=",start,":",end);
+
+      var x = d3.scaleTime()
+          .domain([start, end - 1])
+          .rangeRound([0, this.width]);
+
+      //console.log("xoxoxoxoxooxoxoxo before svg2; tree; width:height",this.width,":",this.height);
+      let sliderBoxHeight:number=33;
+      let xAxisHeight = sliderBoxHeight-3;
+      let xAxisGridHeight = sliderBoxHeight-5;
+      //let sliderBoxHeightStr: string =''+sliderBoxHeight;
+      let svg2 = d3.select(this.hostElement)
+          .append('svg')
+          .attr('width',this.width)
+          .attr('height',sliderBoxHeight+8)
+          .append('g');
+
+      svg2.append("g")
+            .attr("class", "axis axis--grid")
+            .attr("transform", "translate(0," + xAxisGridHeight + ")")
+            .attr("align","center")
+            .call(d3.axisBottom(x)
+                .ticks(d3.timeHour, 12)
+                .tickSize(-40)
+                .tickFormat(function() { return null; }))
+          .selectAll(".tick")
+            .classed("tick--minor", function(d) { return d.getHours(); });
+
+      svg2.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0," + xAxisHeight + ")")
+            .call(d3.axisBottom(x)
+                .ticks(d3.timeDay)
+                .tickFormat(d3.timeFormat('%b %e'))
+                .tickPadding(0)
+                .tickSize(10))
+            .attr("text-anchor", null)
+          .selectAll("text")
+            .attr("y",2)
+            .attr("x", 6);
+
+      svg2.append("g")
+            .attr("class", "brush")
+            .call(d3.brushX()
+                .extent([[0, 0], [this.width, xAxisGridHeight]])
+                .on("end brush", brushed));
+                //.on("move", brushmove));
+
+      var i = 0,
+          duration = 750,
+          root;
+
+      // declares a tree layout and assigns the size
+      //console.log("tree10 before treemap; h:w=",this.height,":",this.width);
+      var treemap = d3.tree().nodeSize([90,90]); // note nodesize sets x,y to 0,0
+
+      // Assigns parent, children, height, depth
+      root = d3.hierarchy(treeData, function(d) { return d.children; });
+      root.x0 = this.height / 2;
+      root.y0 = 0;
+
+      // Collapse after the second level
+      root.children.forEach(collapse);
+
+      update(root);
+
+      function collapse(d) {
+          if(d.children) {
+            d._children = d.children
+            d._children.forEach(collapse)
+            d.children = null
+          }
+        }
+
+      function brushed() {
+          //console.log("entering brush !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!; !d3.event.sourceEvent=",d3.event.sourceEvent);
+          console.log("entering brush !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!; !d3.event.selection=",d3.event.selection);
+          if (!d3.event.sourceEvent) return; // Only transition after input.
+          // if selecttion is null, then they clicked into the empty space; need to reset the links. etc
+          if (!d3.event.selection) {
+            console.log("got a single null selection event");
+            svg.selectAll("path.link")
+              .style("stroke","#ccc");  // reset the links to basic gray
+            svg.selectAll("circle.node")
+              .style("stroke-width","0px");
+            return;
+          }
+          //if (!d3.event.selection) return; // Ignore empty selections.
+          if (d3.event.type == "end") {
+            svg.selectAll("path.link")
+              .style("stroke","#ccc");  // reset the links to basic gray
+            svg.selectAll("circle.node")
+              .style("stroke-width","0px");  // reset the links to basic gray
+            console.log("********************* in brushed end ******************");
+            var d0 = d3.event.selection.map(x.invert),
+                d1 = d0.map(d3.timeDay.round);
+            // If empty when rounded, use floor & ceil instead.
+            if (d1[0] >= d1[1]) {
+              d1[0] = d3.timeDay.floor(d0[0]);
+              d1[1] = d3.timeDay.offset(d1[0]);
+            }
+            svg.selectAll('circle.node')
+              .style("stroke", function(d) {
+                  if(typeof d.data.date === "undefined")
+                    return;
+                  if(new Date(d.data.date).getTime() == d1[0].getTime()) {
+                    console.log("selecting link=","link"+d.id);
+                    // select the link to select it
+                    svg.select("#link" + d.id)
+                      .style("stroke",function(d) {
+                        console.log("looking for parent=d.parent=",d.parent);
+                        return "black";
+                      });
+                    //console.log("XXXXxxxxxxxxxxxxxxxxxxxxxxxxx still in d.id=",d.id);
+                    //console.log("XXXXxxxxxxxxxxxxxxxxxxxxxxxxx selecting parent;d.parent.id=",d.parent.id);
+                    // now select the parent and highlight it
+                    svg.select("#node"+d.parent.id)
+                      .style("stroke", "black")
+                      .style("stroke-width", "4px");
+                  return "black";
+                  }
+                  // } else return "none";
+              })
+              .style("stroke-width",function(d) {
+                if(typeof d.data.date === "undefined")
+                    return "4px";
+                if(new Date(d.data.date).getTime() == d1[0].getTime()) {
+                    return "4px";
+                  } else return "4px";
+              });
+            
+            //console.log("brush ended; d1=",d1[0]);
+            d3.select(this).transition().call(d3.event.target.move, d1.map(x));
+          }
+        }  // end brushed
+
+      function update(source) {
+ // Assigns the x and y position for the nodes
           var treeData = treemap(root);
 
           // Compute the new tree layout.
@@ -258,7 +353,6 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
 
           // ****************** Nodes section ***************************
 
-          // Update the nodes...
           var node = svg.selectAll('g.node')
               .data(nodes, function(d) {return d.id || (d.id = ++i); });
 
@@ -275,17 +369,15 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
           // Add Circle for the nodes
           nodeEnter.append('circle')
               .attr('class', 'node')
+              .attr("id",function(d) {return "node" + d.id})
               .attr('r', 1e-6)
               .style("fill", function(d) {
-                  //console.log("in nodeenter circle;d=",d);
-                  //console.log("in nodeenter circle;d.parent=",d.parent);
-                  //console.log("in nodeenter circle;d.parent[0]=",d.parent[0]);
                   if(d.parent == null) return "black"; else { return "orange"}
-                  //return d.parent ? "black" : "orange";
                 })
               .style("filter", function(d) {
                   if(d.parent==null) { return "url(#drop-shadow)"} else {return "none"}
-                  });
+                  })
+              .style("stroke-width","0px");
 
           // Add labels for the nodes
           nodeEnter.append('text')
@@ -354,6 +446,15 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
             })
             .attr('cursor', 'pointer');
 
+          // select nodes within the date brush
+          nodeUpdate.select('circle.node')
+            .attr('r', 25)
+            .style("fill", function(d) {
+               // console.log("in circle node;d==",d);
+                return d._children ? "darkgray" : "orange";
+            })
+            .attr('cursor', 'pointer');
+
           // Remove any exiting nodes
           var nodeExit = node.exit().transition()
               .duration(duration)
@@ -370,8 +471,8 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
           nodeExit.select('text')
             .style('fill-opacity', 1e-6);
 
-// ****************** links section ***************************
-// Create the links...
+  // ****************** links section ***************************
+  // Create the links...
           var link = svg.selectAll('path.link')
               .data(links, function (d) {
                   return d.id;
@@ -381,14 +482,14 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
           var linkEnter = link.enter().insert('path', 'g')
               .attr("id", function(d){ return ("link" + d.id)})//unique id
               .attr("class", "link")
-              //.attr('d', function (d) {
-                  //var o = {x: source.x0, y: source.y0}
-                  //return diagonal(o, o);
-              //})
-              .attr("d",diagonal)
+              .attr('d', function (d) {
+                  var o = {x: source.x0, y: source.y0}
+                  return diagonal(o, o);
+              })
+              //.attr("d",diagonal)
               .attr("marker-start","url(#start)");
 
-// UPDATE
+  // UPDATE
           var linkUpdate = linkEnter.merge(link);
 
           var linkLabel = link.enter().insert("rect","g")
@@ -406,8 +507,7 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
               .attr("stroke-width",1)
               .style("filter", function(d) { return "url(#drop-shadow)"} );
 
-              // Transition back to the parent element position
-           linkUpdate.transition()
+          linkUpdate.transition()
               .duration(duration)
               .attr('d', function (d) {
                   svg.select("#link-label" + d.id).transition().duration(duration)
@@ -415,6 +515,7 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
                   .attr("x",function(d){ return (d.y + d.parent.y)/2 - (boxwidth/2)});
                   return diagonal(d, d.parent)
               }); 
+          
 
           var lock = link.enter().insert('svg:foreignObject', 'g')
                 .attr("id",function(d) {return "link-label" + d.id})
@@ -431,6 +532,8 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
                       return '<i class="material-icons" style="font-size:1.1rem;cursor: pointer; color:#888;">lock</i>'
                   });
 
+
+
           var dest = link.enter().insert('svg:foreignObject', 'g')
                 .attr("id",function(d) {return "link-label" + d.id})
                 .attr('class', 'icons')
@@ -446,7 +549,7 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
                       return '<mat-icon svgIcon="us"></mat-icon>'
                   });
 
-// now do the circles in the lozenges
+  // now do the circles in the lozenges
 
           var circleEnter = link.enter().insert('circle', 'g')
               //.attr("id", function(d){ return ("circ" + d.id)})//unique id
@@ -501,7 +604,7 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
                        .style('opacity', .9);
                     div1 .html(
                       function() {
-                              console.log("in div3 hover;d=",d);
+                              //console.log("in div3 hover;d=",d);
                               return "Data was 2 standard deviations above normal size for an Excel spreadsheet."; 
                             }
                           )
@@ -514,9 +617,7 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
                      .style('opacity', 0);
                     });
 
-          
-
-// always make this last so transparents are on top
+  // always make this last so transparents are on top
           var transprect = link.enter().insert("rect","g")
               .attr("class", "linklabel")
               .attr("y",function(d){ return (d.x + d.parent.x)/2 -11})
@@ -573,16 +674,11 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
               })
               .remove();
 
-
-
-
               // Store the old positions for transition.
           nodes.forEach(function (d) {
                   d.x0 = d.x;
                   d.y0 = d.y;
-              });
-
-          
+              });    
 
           // Creates a curved (diagonal) path from parent to the child nodes
           function diagonal(s, d) {
@@ -603,12 +699,11 @@ export class Tree10Component implements OnInit, AfterViewInit, AfterContentInit 
                   d._children = null;
                 }
               update(d);
-            }
-      }
+            } // end click
+        }  // end update function
 
-    function zoomed() {
-        svg.attr("transform", d3.event.transform);
-      };
+      },10);   // end timeout
+    
   }  // end nginit
 
-}
+} // end class
