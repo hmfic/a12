@@ -55,6 +55,9 @@ export class Tree10Component implements OnInit, AfterViewInit {
            .scaleExtent([.2,10])
            .on("zoom",zoomed);
 
+    var boxwidth=60;
+    var boxheight=20;
+
     this.hostElement= this.chartContainer.nativeElement;
 
     let svg = d3.select(this.hostElement)
@@ -76,6 +79,15 @@ export class Tree10Component implements OnInit, AfterViewInit {
           .style('opacity', 0);
 
     var defs = svg.append("defs");
+
+    var clipper = defs.append("clipPath")
+          .attr("id","clipper")
+          .append("rect")
+            .attr("x",0)
+            .attr("y",0)
+            .attr("width",boxwidth/2)
+            .attr("height",boxheight);
+
     var filter = defs.append("filter")
             .attr("id", "drop-shadow")
             .attr("height", "200%")
@@ -128,48 +140,11 @@ export class Tree10Component implements OnInit, AfterViewInit {
         .append("svg:path")
           .attr("d","M0,0L10,-5L10,5");
 
-    // d3.select("g.brush").call(brush);
-
-    
-
-     /* svg.append("circle")
-          .attr("cx",100)
-          .attr("cy",100)
-          .attr("r",10)
-          .attr("fill","red")
-          .on('click',resetBrush); 
-          //.on('click',svg.select(".brush").call(brush.move, null));
-
-      function resetBrush() {
-          console.log("in resetbrush");
-          //if (!d3.event.sourceEvent) return; // Only transition after input.
-          //if (!d3.event.selection) return; // Ignore empty selections.
-          //if (!d3.event.sourceEvent) return;
-          //if(d3.event.sourceEvent.type === "brush") return;
-         // svg.select(".brush")
-         //     .call(brush.move, null);
-         //d3.select(this).call(d3.event.target.move, null);
-          svg.select(".brush").call(brush.move, null);
-          //brush.move(d3.select("g.brush"), null);
-        } */
-
     setTimeout(() => {
       this.hostElement= this.chartContainer.nativeElement;
       this.width=this.chartContainer.nativeElement.offsetWidth;
       this.height=this.chartContainer.nativeElement.offsetHeight;
 
-      /* function resetBrush() {
-          console.log("in resetbrush");
-          //if (!d3.event.sourceEvent) return; // Only transition after input.
-          //if (!d3.event.selection) return; // Ignore empty selections.
-          //if (!d3.event.sourceEvent) return;
-          //if(d3.event.sourceEvent.type === "brush") return;
-         // svg.select(".brush")
-         //     .call(brush.move, null);
-         //d3.select(this).call(d3.event.target.move, null);
-          svg.select(".brush").call(brush.move, null);
-          //brush.move(d3.select("g.brush"), null);
-        } */
 
       // find min and max dates
       let dates = [];
@@ -188,13 +163,6 @@ export class Tree10Component implements OnInit, AfterViewInit {
           })
         }
       }
-
-      /* svg.append("circle")
-          .attr("cx",100)
-          .attr("cy",100)
-          .attr("r",10)
-          .attr("fill","red")
-          .on('click',resetBrush);  */
 
       let epochstart=Math.min.apply(Math,dates);
       let start=new Date(Math.min.apply(Math,dates));
@@ -275,10 +243,12 @@ export class Tree10Component implements OnInit, AfterViewInit {
           }
         }
 
+
       function brushed() {
           //console.log("entering brush !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!; !d3.event.sourceEvent=",d3.event.sourceEvent);
-          console.log("entering brush !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!; !d3.event.selection=",d3.event.selection);
+          //console.log("entering brush !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!; !d3.event.selection=",d3.event.selection);
           if (!d3.event.sourceEvent) return; // Only transition after input.
+          if (d3.event.sourceEvent.type === "brush") return;
           // if selecttion is null, then they clicked into the empty space; need to reset the links. etc
           if (!d3.event.selection) {
             console.log("got a single null selection event");
@@ -289,12 +259,13 @@ export class Tree10Component implements OnInit, AfterViewInit {
             return;
           }
           //if (!d3.event.selection) return; // Ignore empty selections.
+
           if (d3.event.type == "end") {
             svg.selectAll("path.link")
               .style("stroke","#ccc");  // reset the links to basic gray
             svg.selectAll("circle.node")
               .style("stroke-width","0px");  // reset the links to basic gray
-            console.log("********************* in brushed end ******************");
+            //console.log("********************* in brushed end ******************");
             var d0 = d3.event.selection.map(x.invert),
                 d1 = d0.map(d3.timeDay.round);
             // If empty when rounded, use floor & ceil instead.
@@ -307,11 +278,11 @@ export class Tree10Component implements OnInit, AfterViewInit {
                   if(typeof d.data.date === "undefined")
                     return;
                   if(new Date(d.data.date).getTime() == d1[0].getTime()) {
-                    console.log("selecting link=","link"+d.id);
+                    //console.log("selecting link=","link"+d.id);
                     // select the link to select it
                     svg.select("#link" + d.id)
                       .style("stroke",function(d) {
-                        console.log("looking for parent=d.parent=",d.parent);
+                        //console.log("looking for parent=d.parent=",d.parent);
                         return "black";
                       });
                     //console.log("XXXXxxxxxxxxxxxxxxxxxxxxxxxxx still in d.id=",d.id);
@@ -334,7 +305,19 @@ export class Tree10Component implements OnInit, AfterViewInit {
             
             //console.log("brush ended; d1=",d1[0]);
             d3.select(this).transition().call(d3.event.target.move, d1.map(x));
-          }
+          } else {  // arrive here if not brush and not end (this should be start)
+           // console.log("in start");
+            var d0 = d3.event.selection.map(x.invert),
+                d1 = d0.map(d3.timeDay.round);
+
+            // If empty when rounded, use floor instead.
+            if (d1[0] >= d1[1]) {
+              d1[0] = d3.timeDay.floor(d0[0]);
+              d1[1] = d3.timeDay.offset(d1[0]);
+            }
+
+            d3.select(this).call(d3.event.target.move, d1.map(x));
+          }  // end else
         }  // end brushed
 
       function update(source) {
@@ -345,8 +328,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
           var nodes = treeData.descendants(),
               links = treeData.descendants().slice(1);
 
-          var boxwidth=60;
-          var boxheight=20;
+          
 
           // Normalize for fixed-depth.
           nodes.forEach(function(d){ d.y = d.depth * 300});
@@ -492,7 +474,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
   // UPDATE
           var linkUpdate = linkEnter.merge(link);
 
-          var linkLabel = link.enter().insert("rect","g")
+          var LinkRect = link.enter().insert("rect","g")
               .attr("class", "linklabel")
               //.attr("y",function(d){ return (d.x + d.parent.x)/1.5 })
               .attr("id",function(d) {return "link-label" + d.id})
@@ -502,10 +484,12 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr("width",boxwidth)
               .attr("rx", 8)
               .attr("ry", 8)
-              .attr("fill","#bbb")
+              .attr("fill","#ddd")
               .attr("stroke",function (d) { return "red"})
               .attr("stroke-width",1)
               .style("filter", function(d) { return "url(#drop-shadow)"} );
+
+
 
           linkUpdate.transition()
               .duration(duration)
@@ -515,8 +499,23 @@ export class Tree10Component implements OnInit, AfterViewInit {
                   .attr("x",function(d){ return (d.y + d.parent.y)/2 - (boxwidth/2)});
                   return diagonal(d, d.parent)
               }); 
-          
 
+          var transRect = link.enter().insert("rect","g")
+              //.attr("class", "linklabel")
+              .attr("id",function(d) {return "link-label" + d.id})
+              .attr("dy", 5)
+              .attr("height",boxheight)
+              .attr("width",boxwidth)
+              .attr("clip-path","url(#clipper)")
+              .attr("rx", 8)
+              .attr("ry", 8)
+              .attr("fill","#999")
+              .attr("stroke","none")
+              .attr("stroke-width",0)
+              .attr('transform', function(d) {
+                  return "translate(" + ((d.y+d.parent.y)/2-(boxwidth/2)) + "," + ((d.x+d.parent.x)/2 -(boxheight/2)) + ")";
+                  });
+          
           var lock = link.enter().insert('svg:foreignObject', 'g')
                 .attr("id",function(d) {return "link-label" + d.id})
                 .attr('class', 'icons')
@@ -531,8 +530,6 @@ export class Tree10Component implements OnInit, AfterViewInit {
                       //console.log("in nodenter;d=",d);
                       return '<i class="material-icons" style="font-size:1.1rem;cursor: pointer; color:#888;">lock</i>'
                   });
-
-
 
           var dest = link.enter().insert('svg:foreignObject', 'g')
                 .attr("id",function(d) {return "link-label" + d.id})
