@@ -14,6 +14,8 @@ export class Tree10Component implements OnInit, AfterViewInit {
 	  hostElement: any;
     width:number;
     height:number;
+    alarm:string;
+    lock:string;
 
     @Output() eventHover = new EventEmitter<Event>();
   constructor(
@@ -21,32 +23,33 @@ export class Tree10Component implements OnInit, AfterViewInit {
         private elementRef:ElementRef
         ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+      }
 
   ngAfterViewInit() {
   	var treeData = 
 		  {
-		    "name": "Myriel", "type":"person",
+		    "name": "Myriel", "type":"person","derivative":false,
 		    "children": [
 		      {
-		        "name": "Mlle.Baptistine",  "type":"computer", "date":"1/1/2019",
+		        "name": "Mlle.Baptistine",  "type":"computer", "date":"1/1/2019","derivative":true,
 		        "children": [
 		          {
-		            "name": "Valijean", "type":"computer", "date":"1/3/2019",
+		            "name": "Valijean", "type":"computer", "date":"1/3/2019","derivative":true,
 		          },
               {
-                "name": "Cravatte", "type":"computer", "date":"1/4/2019",
+                "name": "Cravatte", "type":"computer", "date":"1/4/2019","derivative":true,
               }
 		        ]
 		      },
 		      {
-		        "name": "Geborand", "type":"laptop", "date":"1/1/2019",
+		        "name": "Geborand", "type":"laptop", "date":"1/1/2019","derivative":false,
 		      },
           {
-            "name": "Napolean", "type":"tablet", "date":"1/1/2019",
+            "name": "Napolean", "type":"tablet", "date":"1/1/2019","derivative":false,
           },
           {
-            "name": "CountessDeLo", "type":"computer", "date":"1/1/2019",
+            "name": "CountessDeLo", "type":"computer", "date":"1/1/2019","derivative":false,
           }
 		    ]
 		  };
@@ -87,6 +90,14 @@ export class Tree10Component implements OnInit, AfterViewInit {
             .attr("y",0)
             .attr("width",boxwidth/2)
             .attr("height",boxheight);
+
+    var clip20 = defs.append("clipPath")
+          .attr("id","clip20")
+          .append("rect")
+            .attr("x",0)
+            .attr("y",0)
+            .attr("width",24)
+            .attr("height",15);
 
     var filter = defs.append("filter")
             .attr("id", "drop-shadow")
@@ -129,7 +140,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
         .attr("d","M0,-5L10,0L0,5");
 
     svg.select("defs").append("marker")
-        .attr("id","start")
+        .attr("id","startGray")
         .attr("viewBox","0 -5 10 10")
         .attr("refX",-5)
         .attr("refY",0)
@@ -137,8 +148,21 @@ export class Tree10Component implements OnInit, AfterViewInit {
         .attr("markerHeight",6)
         .attr("orient","auto")
         .attr("class","arrow")
+
         .append("svg:path")
           .attr("d","M0,0L10,-5L10,5");
+
+    svg.select("defs").append("marker")
+        .attr("id","startBlack")
+        .attr("viewBox","0 -5 10 10")
+        .attr("refX",-5)
+        .attr("refY",0)
+        .attr("markerWidth",6)
+        .attr("markerHeight",6)
+        .attr("orient","auto")
+        .append("svg:path")
+          .attr("d","M0,0L10,-5L10,5");
+
 
     setTimeout(() => {
       this.hostElement= this.chartContainer.nativeElement;
@@ -218,12 +242,14 @@ export class Tree10Component implements OnInit, AfterViewInit {
                 //.on("move", brushmove));
 
       var i = 0,
-          duration = 750,
-          root;
+          duration = 250,
+          root,
+          locksvg='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z',
+          alarmsvg='M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z';
 
       // declares a tree layout and assigns the size
       //console.log("tree10 before treemap; h:w=",this.height,":",this.width);
-      var treemap = d3.tree().nodeSize([90,90]); // note nodesize sets x,y to 0,0
+      var treemap = d3.tree().nodeSize([120,120]); // note nodesize sets x,y to 0,0
 
       // Assigns parent, children, height, depth
       root = d3.hierarchy(treeData, function(d) { return d.children; });
@@ -242,7 +268,6 @@ export class Tree10Component implements OnInit, AfterViewInit {
             d.children = null
           }
         }
-
 
       function brushed() {
           //console.log("entering brush !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!; !d3.event.sourceEvent=",d3.event.sourceEvent);
@@ -284,7 +309,8 @@ export class Tree10Component implements OnInit, AfterViewInit {
                       .style("stroke",function(d) {
                         //console.log("looking for parent=d.parent=",d.parent);
                         return "black";
-                      });
+                        })
+                      .attr("marker-start","url(#startBlack)");
                     //console.log("XXXXxxxxxxxxxxxxxxxxxxxxxxxxx still in d.id=",d.id);
                     //console.log("XXXXxxxxxxxxxxxxxxxxxxxxxxxxx selecting parent;d.parent.id=",d.parent.id);
                     // now select the parent and highlight it
@@ -293,8 +319,15 @@ export class Tree10Component implements OnInit, AfterViewInit {
                       .style("stroke-width", "4px");
                   return "black";
                   }
-                  // } else return "none";
-              })
+                   else {
+                     svg.select("#link" + d.id)
+                      .style("stroke",function(d) {
+                        //console.log("looking for parent=d.parent=",d.parent);
+                        return "#ccc";
+                        })
+                      .attr("marker-start","url(#startGray)");
+                    }
+                })
               .style("stroke-width",function(d) {
                 if(typeof d.data.date === "undefined")
                     return "4px";
@@ -320,6 +353,8 @@ export class Tree10Component implements OnInit, AfterViewInit {
           }  // end else
         }  // end brushed
 
+
+// ************* UPDATE ****************
       function update(source) {
  // Assigns the x and y position for the nodes
           var treeData = treemap(root);
@@ -327,8 +362,6 @@ export class Tree10Component implements OnInit, AfterViewInit {
           // Compute the new tree layout.
           var nodes = treeData.descendants(),
               links = treeData.descendants().slice(1);
-
-          
 
           // Normalize for fixed-depth.
           nodes.forEach(function(d){ d.y = d.depth * 300});
@@ -356,9 +389,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .style("fill", function(d) {
                   if(d.parent == null) return "black"; else { return "orange"}
                 })
-              .style("filter", function(d) {
-                  if(d.parent==null) { return "url(#drop-shadow)"} else {return "none"}
-                  })
+              .style("filter", "url(#drop-shadow)")
               .style("stroke-width","0px");
 
           // Add labels for the nodes
@@ -371,6 +402,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
                   return d.children || d._children ? "end" : "start";
               })
               .text(function(d) { return d.data.name; });
+
 
           nodeEnter.append('svg:foreignObject')
               .attr('class', 'icons')
@@ -406,7 +438,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
                         })
                 .on('mouseout', (d) => {
                     div1.transition()
-                       .duration(500)
+                       .duration(200)
                        .style('opacity', 0);
                       });
 
@@ -469,10 +501,10 @@ export class Tree10Component implements OnInit, AfterViewInit {
                   return diagonal(o, o);
               })
               //.attr("d",diagonal)
-              .attr("marker-start","url(#start)");
+              .attr("marker-start","url(#startGray)");
 
   // UPDATE
-          var linkUpdate = linkEnter.merge(link);
+          
 
           var LinkRect = link.enter().insert("rect","g")
               .attr("class", "linklabel")
@@ -489,18 +521,8 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr("stroke-width",1)
               .style("filter", function(d) { return "url(#drop-shadow)"} );
 
-
-
-          linkUpdate.transition()
-              .duration(duration)
-              .attr('d', function (d) {
-                  svg.select("#link-label" + d.id).transition().duration(duration)
-                  .attr("y",function(d){ return (d.x + d.parent.x)/2 -(boxheight/2)})
-                  .attr("x",function(d){ return (d.y + d.parent.y)/2 - (boxwidth/2)});
-                  return diagonal(d, d.parent)
-              }); 
-
-          var transRect = link.enter().insert("rect","g")
+          var derivativeRect = link.enter().insert("rect","g")
+          //linkEnter.append("rect","g")
               //.attr("class", "linklabel")
               .attr("id",function(d) {return "link-label" + d.id})
               .attr("dy", 5)
@@ -509,27 +531,43 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr("clip-path","url(#clipper)")
               .attr("rx", 8)
               .attr("ry", 8)
-              .attr("fill","#999")
+              .attr("fill",function(d) {if (d.parent.data.derivative == true) return "#999"; else return "none"})
               .attr("stroke","none")
               .attr("stroke-width",0)
               .attr('transform', function(d) {
                   return "translate(" + ((d.y+d.parent.y)/2-(boxwidth/2)) + "," + ((d.x+d.parent.x)/2 -(boxheight/2)) + ")";
                   });
-          
-          var lock = link.enter().insert('svg:foreignObject', 'g')
-                .attr("id",function(d) {return "link-label" + d.id})
-                .attr('class', 'icons')
-                .attr("x",0)             
-                .attr("y", -35)
-                .attr('height', '28')
-                .attr('width', '28')
-                .attr('transform', function(d) {
-                  return "translate(" + (d.y+d.parent.y)/2 + "," + ((d.x+d.parent.x)/2 +17) + ")";
-                  })
-                .html( function(d) { 
-                      //console.log("in nodenter;d=",d);
-                      return '<i class="material-icons" style="font-size:1.1rem;cursor: pointer; color:#888;">lock</i>'
+
+          var clock = link.enter().insert('path','g')
+          //linkEnter.append('path','g')
+              //.attr("id",function(d) {return "link-label" + d.id})
+              .attr("class", "icons")
+              .attr('d', alarmsvg)
+              .attr('height', '20')
+              .attr('width', '20')
+              .attr("fill","red")
+              .attr("stroke","none")
+              .attr('viewBox',"0 0 18 18")
+              .attr("clip-path","url(#clip20)")
+              .attr('transform', function(d) {
+                  return "translate(" + ((d.y+d.parent.y)/2 -25) + "," + ((d.x+d.parent.x)/2 -25) + ")";
                   });
+
+          var lockicon = link.enter().insert('path','g')
+          // link.append('path','g')
+              .attr("id",function(d) {return "link-label" + d.id})
+              .attr('d',locksvg)
+              //.attr('class','icons')
+              .attr('height', '20')
+              .attr('width', '20')
+              .attr("fill","red")
+              .attr("stroke","none")
+              .attr('viewBox',"0 0 18 18")
+              .attr("clip-path","url(#clip20)")
+              .attr('transform', function(d) {
+                  return "translate(" + ((d.y+d.parent.y)/2 +5) + "," + ((d.x+d.parent.x)/2 -25) + ")";
+                  });
+          
 
           var dest = link.enter().insert('svg:foreignObject', 'g')
                 .attr("id",function(d) {return "link-label" + d.id})
@@ -538,12 +576,13 @@ export class Tree10Component implements OnInit, AfterViewInit {
                 .attr("y", -35)
                 .attr('height', '28')
                 .attr('width', '28')
+                .attr("svg-icon","us")
                 .attr('transform', function(d) {
                   return "translate(" + (d.y+d.parent.y)/2 + "," + ((d.x+d.parent.x)/2 +17) + ")";
                   })
                 .html( function(d) { 
                       //console.log("in nodenter;d=",d);
-                      return '<mat-icon svgIcon="us"></mat-icon>'
+                      return '<mat-icon></mat-icon>'
                   });
 
   // now do the circles in the lozenges
@@ -567,7 +606,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr("dx","-8px")
               .attr("dy","3px")
               .text(function(d) {
-                return ".03"
+                return ".39"
               });
 
           var typesEnter = link.enter().insert('text', 'g')
@@ -591,7 +630,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
                 .attr('fill', 'red')
                 .attr('stroke', '#000')
                 .attr('stroke-width', 0)
-                .style("filter", function(d) { return "url(#drop-shadow)"} )
+                //.style("filter", function(d) { return "url(#drop-shadow)"} )
                 .attr('transform', function(d) {
                   return "translate(" + (d.y+d.parent.y)/2 + "," + ((d.x+d.parent.x)/2 +17) + ")";
                 })
@@ -610,7 +649,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
                       })
               .on('mouseout', (d) => {
                   div1.transition()
-                     .duration(500)
+                     .duration(200)
                      .style('opacity', 0);
                     });
 
@@ -657,9 +696,20 @@ export class Tree10Component implements OnInit, AfterViewInit {
                       })
               .on('mouseout', (d) => {
                   div1.transition()
-                     .duration(500)
+                     .duration(200)
                      .style('opacity', 0);
                     });
+
+          var linkUpdate = linkEnter.merge(link);
+
+          linkUpdate.transition()
+              .duration(duration)
+              .attr('d', function (d) {
+                  svg.select("#link-label" + d.id).transition().duration(duration)
+                      .attr("y",function(d){ return (d.x + d.parent.x)/2 -(boxheight/2)})
+                      .attr("x",function(d){ return (d.y + d.parent.y)/2 - (boxwidth/2)});
+                  return diagonal(d, d.parent)
+              });
 
               // Remove any exiting links
           var linkExit = link.exit().transition()
