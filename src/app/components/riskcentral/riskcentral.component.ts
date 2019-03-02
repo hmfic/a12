@@ -24,7 +24,6 @@ export class RiskcentralComponent implements OnInit {
 	drop(event: CdkDragDrop<string[]>) {
 		//console.log("in cdk drop");
 		moveItemInArray(this.cards, event.previousIndex, event.currentIndex);
-
 	}
 
   constructor() { }

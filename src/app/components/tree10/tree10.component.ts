@@ -244,7 +244,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
       var i = 0,
           duration = 250,
           root,
-          locksvg='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z',
+          locksvg='m3,9v11h14V9M4,9V6c0-3.3 2.7-6 6-6c3.3,0 6,2.7 6,6v3H14V6c0-2.2-1.8-4-4-4-2.2,0-4,1.8-4,4v3',
           alarmsvg='M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z';
 
       // declares a tree layout and assigns the size
@@ -387,7 +387,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr("id",function(d) {return "node" + d.id})
               .attr('r', 1e-6)
               .style("fill", function(d) {
-                  if(d.parent == null) return "black"; else { return "orange"}
+                  if(d.parent == null) return "black"; else { return "lightgray"}
                 })
               .style("filter", "url(#drop-shadow)")
               .style("stroke-width","0px");
@@ -456,7 +456,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
           nodeUpdate.select('circle.node')
             .attr('r', 25)
             .style("fill", function(d) {
-                return d._children ? "darkgray" : "orange";
+                return d._children ? "darkgray" : "lightgray";
             })
             .attr('cursor', 'pointer');
 
@@ -465,7 +465,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
             .attr('r', 25)
             .style("fill", function(d) {
                // console.log("in circle node;d==",d);
-                return d._children ? "darkgray" : "orange";
+                return d._children ? "darkgray" : "lightgray";
             })
             .attr('cursor', 'pointer');
 
@@ -547,7 +547,8 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr('width', '20')
               .attr("fill","red")
               .attr("stroke","none")
-              .attr('viewBox',"0 0 18 18")
+              //.attr("stroke-width",".5px")
+              .attr('viewBox',"0 0 24 24")
               .attr("clip-path","url(#clip20)")
               .attr('transform', function(d) {
                   return "translate(" + ((d.y+d.parent.y)/2 -25) + "," + ((d.x+d.parent.x)/2 -25) + ")";
