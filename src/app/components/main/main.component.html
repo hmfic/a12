@@ -16,8 +16,18 @@
 						    {{subcard.name}}
 						    
 						</div>
-						<div gdArea="side" style="text-align:right">
-						    	<app-gaugecircle id="container{{card.id}}{{i}}" container="container{{card.id}}{{i}}"></app-gaugecircle>
+						<div gdArea="side" style="text-align:right; grid-row: 1 / 3;">
+
+						    	<mwl-gauge
+							        [max]="100"
+							        [dialStartAngle]="-90"
+							        [dialEndAngle]="-90.001"
+							        [label]="percentageValue"
+							        [value]="subcard.value"
+							        [animated]="true"
+							        [animationDuration]="1"
+							        class="three">
+							      </mwl-gauge>
 							</div>
 						<div gdArea="footer">
 						    {{subcard.date}}

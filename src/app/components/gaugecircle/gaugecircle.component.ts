@@ -5,7 +5,7 @@ import * as d3 from 'd3';
   selector: 'app-gaugecircle',
   templateUrl: './gaugecircle.component.html',
   styleUrls: ['./gaugecircle.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Native
 })
 export class GaugecircleComponent implements OnInit, AfterViewInit {
 
