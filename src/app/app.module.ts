@@ -28,6 +28,7 @@ import { Tree10Component } from './components/tree10/tree10.component';
 import { RiskcentralComponent } from './components/riskcentral/riskcentral.component';
 //import { Tree20Component } from './components/tree20/tree20.component'; 
 import { HttpClientModule} from "@angular/common/http";
+import { GaugecircleComponent } from './components/gaugecircle/gaugecircle.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HttpClientModule} from "@angular/common/http";
     RiskcentralComponent,
     SettingsmodalComponent,
     SidebarComponent,
-    Tree10Component
+    Tree10Component,
+    GaugecircleComponent
     //Tree20Component
   ],
   imports: [
