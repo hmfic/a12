@@ -21,16 +21,16 @@
 						    
 						</div>
 						<div gdArea="side" style="text-align:right;">
-					    	<mwl-gauge
-						        [max]="100"
-						        [dialStartAngle]="-90"
-						        [dialEndAngle]="-90.001"
-						        [label]="percentageValue"
-						        [value]="subcard.value"
-						        [animated]="true"
-						        [animationDuration]="1"
-						        class="three">
-						    </mwl-gauge>
+					    	
+						    <ngx-gauge 	[type]="gaugeType" 
+						    			[size]="100"
+							           	[value]="subcard.value" 
+							           	[label]="gaugeLabel"  
+							           	[thick]="8"
+							           	[duration]="1000"
+							           	[thresholds]="thresholdConfig"
+							           	[append]="gaugeAppendText">
+							</ngx-gauge>
 						</div>
 						<div gdArea="footer">
 						    {{subcard.date}}
@@ -47,9 +47,7 @@
 			  </mat-card>
 			</div> 
 		</mat-card>
-		<!--
-			grid-template-areas: "header header" "side content" "footer footer";
-		-->
+
 
 	</div>
 	<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="left" cdkDropList>

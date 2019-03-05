@@ -1,66 +1,32 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Globals } from "../globals";
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { GaugeModule } from 'angular-gauge';
+import { NgxGaugeModule } from 'ngx-gauge';
+
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-
-  styles: [
-    `
-    .gauges-container {
-      display: flex;
-    }
-    mwl-gauge {
-      flex: 1;
-      display: block;
-      /* padding: 10px; */
-      /* margin: 7px; */
-      border-radius: 3px;
-    }
-    mwl-gauge > .gauge > .dial {
-      stroke: #334455;
-      stroke-width: 10;
-      fill: rgba(0,0,0,0);
-    }
-    mwl-gauge > .gauge > .value {
-      stroke: rgb(47, 227, 255);
-      stroke-width: 10;
-      fill: rgba(0,0,0,0);
-    }
-    mwl-gauge > .gauge > .value-text {
-     	fill: #666;
-    	font-family: sans-serif;
-    	font-size: 1.2em;
-    } 
-
-    mwl-gauge.three {
-    }
-    mwl-gauge.three > .gauge > .dial {
-      stroke: #333;
-      stroke-width: 6;
-    }
-    mwl-gauge.three.three > .gauge > .value {
-      stroke: orange;
-      stroke-width: 12;
-    }
-    mwl-gauge.three > .gauge > .value-text {
-      fill: #555;
-    }
-  `
-  ],
-
-
-
-
-  //styleUrls: ['./main.component.scss'],
+  styleUrls: ['./main.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class MainComponent implements OnInit {
 
 	constructor() {}
+
+	gaugeType = "full";
+    gaugeValue = 28.3;
+    gaugeLabel = "Risk";
+    gaugeAppendText = "of 100";
+
+    thresholdConfig = {
+    	'0':  {color: 'green'},
+        '70': {color: 'yellow'},
+        '80': {color: 'orange'},
+        '95': {color: 'red'}
+    };
 	
 	maincards = [
 			{
