@@ -24,7 +24,6 @@ import { Force10Component } from './components/force10/force10.component';
 import { Tree10Component } from './components/tree10/tree10.component';
 import { RiskcentralComponent } from './components/riskcentral/riskcentral.component';
 import { HttpClientModule} from "@angular/common/http";
-import { GaugecircleComponent } from './components/gaugecircle/gaugecircle.component';
 import { GaugeModule } from 'angular-gauge';
 
 @NgModule({
@@ -37,8 +36,7 @@ import { GaugeModule } from 'angular-gauge';
     RiskcentralComponent,
     SettingsmodalComponent,
     SidebarComponent,
-    Tree10Component,
-    GaugecircleComponent
+    Tree10Component
   ],
   imports: [
     AppRoutingModule,

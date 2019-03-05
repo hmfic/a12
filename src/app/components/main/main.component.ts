@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Globals } from "../globals";
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { GaugecircleComponent } from '../gaugecircle/gaugecircle.component';
 import { GaugeModule } from 'angular-gauge';
 
 
@@ -74,7 +73,7 @@ export class MainComponent implements OnInit {
 				    {"name":"New risky behavior detected","icon":"warning","level":"Warning","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80},
 				    {"name":"Persistent risk above threshold","icon":"error","level":"Critical risk level","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80},
 				    {"name":"Anomalous zone transfer","icon":"warning","level":"Warning","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80},
-				    {"name":"Geographical zone movement","icon":"info","level":"Informational","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80}
+				    {"name":"Geographical zone movement from a very long desription to another","icon":"info","level":"Informational","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80}
 				    ]
 			 },
 			 {
