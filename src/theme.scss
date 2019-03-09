@@ -81,7 +81,6 @@ $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
   @include angular-material-theme($light-theme)
 }
 
-
 // coyotecreek theme
 .coyotecreek-theme {
   $coyotecreek-primary: mat-palette($mat-cc, 700);

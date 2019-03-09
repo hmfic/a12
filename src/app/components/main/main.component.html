@@ -1,15 +1,18 @@
-<div style="margin:5px;">
+<div style="margin:10px;">
 	<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" cdkDropList (cdkDropListDropped)="maindrop($event)">
 		<mat-card class="mat-elevation-z4" color="primary" cdkDrag *ngFor="let card of maincards" fxFlex="0 1 calc({{card.flex}} - 10px)">
-			<mat-card-header color="success" >
-				<mat-card-title fxFlex="95" style="margin:8px 8px 8px 0px;">{{card.title}}</mat-card-title>
-				<div style="margin:8px 4px 8px 8px;" matTooltip="Info about the action"><i class="material-icons">info_outline</i></div>
-				<div style="margin:8px 0px 8px 8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
-			</mat-card-header>
+			<mat-card-title>
+				<span fxFlex="99" style="margin:8px 8px 8px 16px;">{{card.title}}</span>
+				<span class="fill-remaining-space"></span>
+				<span style="margin:8px 4px 8px 8px;" matTooltip="Info about the action">
+					<i class="material-icons">info_outline</i>
+				</span>
+				<span style="margin:8px 0px 8px 8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></span>
+			</mat-card-title> 
 			
 			<div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1%" fxLayoutAlign="center" >
-			  <mat-card class="card-warn accent"   *ngFor="let subcard of card.subcards; index as i" >
-			  		<div gdAreas="header header2 | content side | footer footer2" gdGap="6px" gdColumns="300px 100px" style="width:100%;">
+			  <mat-card class="card-warn" *ngFor="let subcard of card.subcards; index as i" >
+			  		<div gdAreas="header header2 | content side | footer footer2" gdGap="6px" gdColumns="auto 120px" style="width:100%;">
 						<div gdArea="header">
 						    <i class="material-icons">{{subcard.icon}}</i>&nbsp; &nbsp;{{subcard.level}}
 						</div>
@@ -17,17 +20,18 @@
 						    Risk Level
 						</div>
 						<div gdArea="content">
-						    {{subcard.name}}
-						    
+						    {{subcard.name}}<p>
+							<span class="subtext">{{subcard.subtext}}</span>
+							</p>				    
 						</div>
 						<div gdArea="side" style="text-align:right;">
 					    	
 						    <ngx-gauge 	[type]="gaugeType" 
-						    			[size]="100"
+						    			[size]="120"
 							           	[value]="subcard.value" 
 							           	[label]="gaugeLabel"  
 							           	[thick]="8"
-							           	[duration]="1000"
+							           	[duration]="1500"
 							           	[thresholds]="thresholdConfig"
 							           	[append]="gaugeAppendText">
 							</ngx-gauge>

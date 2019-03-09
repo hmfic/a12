@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 //import { Force10Component } from './components/force10/force10.component';
 import { RiskcentralComponent } from './components/riskcentral/riskcentral.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
 	{
@@ -16,6 +17,10 @@ const routes: Routes = [
 	{
 		path:'risk',
 		component: RiskcentralComponent
+	},
+	{
+		path:'dashboard',
+		component: DashboardComponent
 	}
 ];
 

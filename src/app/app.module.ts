@@ -25,6 +25,7 @@ import { Tree10Component } from './components/tree10/tree10.component';
 import { RiskcentralComponent } from './components/riskcentral/riskcentral.component';
 import { HttpClientModule} from "@angular/common/http";
 import { NgxGaugeModule } from 'ngx-gauge';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NgxGaugeModule } from 'ngx-gauge';
     RiskcentralComponent,
     SettingsmodalComponent,
     SidebarComponent,
-    Tree10Component
+    Tree10Component,
+    DashboardComponent
   ],
   imports: [
     AppRoutingModule,

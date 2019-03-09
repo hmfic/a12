@@ -35,11 +35,19 @@ export class MainComponent implements OnInit {
 			 	"id":1,
 			 	"flex":"33.3%", //  int range = (max - min) + 1;   return (int)(Math.random() * range) + min;
 			 	"subcards":[
-				    {"name":"Risk rising threshold","icon":"warning","level":"Warning","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80},
-				    {"name":"New risky behavior detected","icon":"warning","level":"Warning","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80},
-				    {"name":"Persistent risk above threshold","icon":"error","level":"Critical risk level","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80},
-				    {"name":"Anomalous zone transfer","icon":"warning","level":"Warning","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80},
-				    {"name":"Geographical zone movement from a very long desription to another","icon":"info","level":"Informational","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80}
+				    {"name":"Risk rising threshold","icon":"warning","level":"Warning",
+				    		"date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
+				    		"subtext":"this is more stuff at the bottom which is really really long and really really boring"},
+				    {"name":"New risky behavior detected","icon":"warning","level":"Warning",
+				    		"date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
+				    		"subtext":"this is more stuff at the bottom which is really really long and really really boring"},
+				    {"name":"Persistent risk above threshold","icon":"error","level":"Critical risk level",
+				    		"date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
+				    		"subtext":"this is more stuff at the bottom which is really really long and really really boring"},
+				    {"name":"Anomalous zone transfer","icon":"warning","level":"Warning","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
+				    		"subtext":"this is more stuff at the bottom which is really really long and really really boring"},
+				    {"name":"Geographical zone movement from a very long desription to another","icon":"info","level":"Informational","date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
+				    		"subtext":"this is more stuff at the bottom which is really really long and really really boring"}
 				    ]
 			 },
 			 {

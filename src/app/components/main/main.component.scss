@@ -1,5 +1,6 @@
 .cdk-drag-placeholder {
-  opacity: 0;
+  opacity: 0.4;
+  outline-style: dashed;
 }
 
 .cdk-drag-preview {
@@ -10,12 +11,15 @@
 }
 
 .mat-card {
-//  background: white;
   text-decoration: none;
   margin-bottom:2em;
   border-radius: .5rem;
   width:49%;
   padding:0 !important;
+}
+
+.mat-card-alt {
+  background: #eee;
 }
 
 .mat-card4 {
@@ -28,9 +32,9 @@
 }
 
 .card-warn {
-  width: 94%;
-  margin: 2% !important;
-  padding:8px !important;
+  width: 92%;
+  margin: 4px !important;
+  padding:12px !important;
 }
 
 .mat-card-header {
@@ -40,11 +44,24 @@
   border-radius: .5rem .5rem 0rem 0rem;
 }
 
+.mat-card-title-group {
+  border-radius: .5rem .5rem 0rem 0rem;
+  padding: 10px;
+}
+
+.mat-card-title {
+  font-size: 1.2rem;
+}
+
 .mat-card-content{
   padding:5px !important;
 }
 
-//.mat-card-header-text {
-//	margin:8px !important;
-//}
+.fill-remaining-space {
+   flex: 1 1 auto;
+}
 
+.subtext {
+  margin-top: 15px;
+  font-size: .8rem;
+}

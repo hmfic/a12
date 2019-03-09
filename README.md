@@ -232,3 +232,9 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### D3 Gauge
 ```npm install --save ngx-gauge ```
+
+### Too new version of typescript, had to go back
+```npm i typescript@3.1.6 --save-dev --save-exact```
+
+### Need flex layout
+```npm install @angular/flex-layout```
