@@ -25,6 +25,7 @@ import { Tree10Component } from './components/tree10/tree10.component';
 import { RiskcentralComponent } from './components/riskcentral/riskcentral.component';
 import { HttpClientModule} from "@angular/common/http";
 import { NgxGaugeModule } from 'ngx-gauge';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
@@ -64,7 +65,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    NgxGaugeModule
+    NgxGaugeModule,
+    NgxChartsModule
   ],
   providers: [
     Globals,

@@ -236,5 +236,8 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 ### Too new version of typescript, had to go back
 ```npm i typescript@3.1.6 --save-dev --save-exact```
 
-### Need flex layout
+### Need flex layout (see above)
 ```npm install @angular/flex-layout```
+
+#### ngx charts
+```npm i @swimlane/ngx-charts --save```
