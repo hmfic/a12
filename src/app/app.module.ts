@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // new stuff
 import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, MatCheckboxModule, 
          MatToolbarModule, MatListModule, MatMenuModule, MatDialogModule, MatFormFieldModule, 
-         MatSelectModule, MatInputModule } from '@angular/material';
+         MatSelectModule, MatInputModule, MatSnackBar } from '@angular/material';
 import { Globals } from './components/globals';
 import { SettingsmodalComponent } from './components/settingsmodal/settingsmodal.component';
 import { HelpmodalComponent } from './components/helpmodal/helpmodal.component';
@@ -25,8 +25,9 @@ import { Tree10Component } from './components/tree10/tree10.component';
 import { RiskcentralComponent } from './components/riskcentral/riskcentral.component';
 import { HttpClientModule} from "@angular/common/http";
 import { NgxGaugeModule } from 'ngx-gauge';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
+import { CategoryHistoComponent } from './components/category-histo/category-histo.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     SettingsmodalComponent,
     SidebarComponent,
     Tree10Component,
-    DashboardComponent
+    DashboardComponent,
+    TimelineComponent,
+    CategoryHistoComponent
   ],
   imports: [
     AppRoutingModule,
@@ -66,7 +69,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatTooltipModule,
     ReactiveFormsModule,
     NgxGaugeModule,
-    NgxChartsModule
   ],
   providers: [
     Globals,
