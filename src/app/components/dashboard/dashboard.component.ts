@@ -10,7 +10,7 @@ import { CategoryHistoComponent } from '../../components/category-histo/category
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  //encapsulation: ViewEncapsulation.None
 })
 
 export class DashboardComponent implements OnInit{

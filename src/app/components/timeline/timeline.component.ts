@@ -57,7 +57,7 @@ export class TimelineComponent implements OnInit {
 		var lineOpacityHover = "0.65";
 		var otherLinesOpacityHover = "0.1";
 		var lineStroke = "4px";
-		var lineStrokeHover = "6px";
+		var lineStrokeHover = "8px";
 
 		var circleOpacity = '0.85';
 		var circleOpacityOnLineHover = "0.75"
@@ -109,13 +109,15 @@ export class TimelineComponent implements OnInit {
 		  .append('g')
 		  .attr('class', 'line-group')  
 		  .on("mouseover", function(d, i) {
+		  		var mouse_x = d3.mouse(this)[0];
+		  		var mouse_y = d3.mouse(this)[1];
 		      svg.append("text")
 		        .attr("class", "title-text")
 		        .style("fill", color(i))        
 		        .text(d.name)
 		        .attr("text-anchor", "middle")
-		        .attr("x", (width-margin)/2)
-		        .attr("y", 25);
+		        .attr("x", mouse_x-10)
+		        .attr("y", mouse_y-30);
 		    })
 		  .on("mouseout", function(d) {
 		      svg.select(".title-text").remove();
@@ -160,6 +162,8 @@ export class TimelineComponent implements OnInit {
 		        .append("text")
 		        .attr("class", "text")
 		        .text(`${d.score}`)
+		        //.attr('x', (d3.event.pageX -15) + 'px')
+                //.attr('y', (d3.event.pageY - 25) + 'px');
 		        .attr("x", d => xScale(d.date) + 5)
 		        .attr("y", d => yScale(d.score) - 10);
 		    })

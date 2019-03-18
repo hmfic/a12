@@ -1,0 +1,23 @@
+.mat-card2 {
+  border-radius: .5rem;
+  text-decoration: none;
+  margin-bottom:2em;
+  display: flex;
+  padding:16px;
+  width: 100%;
+  height: 100%;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-grid-tile .mat-figure {
+   justify-content: flex-start !important ;
+   align-items: flex-start !important;
+}
+
+.smaller{
+	color: #666;
+	font-size: small;
+}

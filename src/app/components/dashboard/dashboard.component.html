@@ -2,52 +2,6 @@
   <mat-grid-list cols="8" rowHeight="4:3" gutterSize="10px">
     <mat-grid-tile *ngFor="let card of cards; let i = index;" [colspan]="card.cols" [rowspan]="card.rows">
       <cdk-drop-list [cdkDropListConnectedTo]="drops" [cdkDropListData]="i">
-          <!-- ***************** GAUGE1 CARD ****************** -->
-          <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='gauge1'" style="height: 100vh;">
-              <mat-card-header style="margin-left:-20px;margin-right:-1px;">
-                  <span fxFlex="99" style="margin-top:8px;">{{card.title}} </span>
-                  <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
-                  <div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
-              </mat-card-header>
-              <mat-card-content >
-                <div *ngFor="let subcard of card.subcards; index as i" style="margin-bottom: 25px; padding-bottom: 10px;border-bottom: 3px solid lightgray;">
-                  <div gdAreas="header header2 | content side | footer footer2" gdGap="6px" gdColumns="auto 100px"  >
-                    <div gdArea="header">
-                        <i class="material-icons">{{subcard.icon}}</i>&nbsp; &nbsp;{{subcard.level}}
-                    </div>
-                    <div gdArea="header2" style="text-align:center;">
-                        &nbsp;
-                    </div>
-                    <div gdArea="content">
-                        {{subcard.name}}<p>
-                      <span class="subtext">{{subcard.subtext}}</span>
-                      </p>            
-                    </div>
-                    <div gdArea="side">
-                        <ngx-gauge [type]="gaugeType" 
-                              [size]="100"
-                              [value]="subcard.value" 
-                              [label]="gaugeLabel"  
-                              [thick]="8"
-                              [duration]="1000"
-                              [thresholds]="thresholdConfig"
-                              [append]="gaugeAppendText">
-                      </ngx-gauge>
-                    </div>
-                    <div gdArea="footer">
-                        {{subcard.date}}
-                    </div>
-                    <div gdArea="footer2" style="text-align:center;">
-                        <button 
-                            mat-flat-button color="primary">
-                              <mat-icon aria-label="Side nav toggle icon">multiline_chart</mat-icon> VIEW
-                         </button>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="card.subcards?.length > 0" style="text-align:center">END</div>
-              </mat-card-content>
-          </mat-card>
           <!-- ***************** BAR1 CARD ****************** -->
           <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='bar1'" style="height: 100vh;" >
             <mat-card-header style="margin-left:-20px;margin-right:-1px;">

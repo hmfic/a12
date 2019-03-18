@@ -1,0 +1,94 @@
+<h2 mat-dialog-title>CONFIGURE ALERT: {{matdata.name}}</h2>
+<div class="alert-container">
+  <mat-form-field appearance="fill" color="primary">
+  	<mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="matdata.name">
+  </mat-form-field>
+  <mat-form-field appearance="fill" color="primary">
+  	<mat-label>Detailed description of the alert</mat-label>
+    <input matInput [(ngModel)]="matdata.descr">
+  </mat-form-field>
+  <mat-form-field style="width: 95%;" appearance="fill" color="primary">
+  		<mat-label>Message sent to the destination</mat-label>
+	    <input matInput  [(ngModel)]="matdata.msg">
+	</mat-form-field> 
+  <mat-card>
+	  <h4>Destinations, Messages and Parameters</h4>
+	  <mat-form-field style="width: 25%;" color="primary">
+	  	<mat-label>Choose the way you want to get alerts</mat-label>
+	    <mat-select [(ngModel)]="matdata.type">
+	      <mat-option value="email">Email</mat-option>
+	      <mat-option value="remedy">Remedy</mat-option>
+	      <mat-option value="sn">ServiceNow</mat-option>
+	      <mat-option value="ifttt">IFTTT</mat-option>
+	      <mat-option value="splunk">Splunk</mat-option>
+	      <mat-option value="syslog">Syslog</mat-option>
+	      <mat-option value="desktop">Desktop push</mat-option>
+	      <mat-option value="webhook">Webhook</mat-option>
+	    </mat-select>
+	  </mat-form-field>
+		<mat-card class="mat-cardsm" *ngIf="matdata.type == 'syslog'">
+			<mat-form-field style="width: 50%;" color="primary">
+				<mat-label>Syslog destination IP address</mat-label>
+			    <input matInput placeholder="255.255.255.255">
+			</mat-form-field>
+			<br/>
+			<mat-form-field color="primary">
+				<mat-label>Syslog message severity</mat-label>
+			    <mat-select [(ngModel)]="matdata.sev">
+			    	<mat-option value="0">Emergency (0)</mat-option>
+			    	<mat-option value="1">Alert (1)</mat-option>
+			    	<mat-option value="2">Critical (2)</mat-option>
+			    	<mat-option value="3">Error (3)</mat-option>
+			    	<mat-option value="4">Warning (4)</mat-option>
+			    	<mat-option value="5">Notice (5)</mat-option>
+			     	<mat-option value="6">Informational (6)</mat-option>
+			     	<mat-option value="7">Debug (7)</mat-option>
+			    </mat-select>
+			</mat-form-field>
+		</mat-card>
+		<mat-card class="mat-cardsm" *ngIf="matdata.type == 'remedy'">
+			remedy here	  
+		</mat-card>
+		<mat-card class="mat-cardsm" *ngIf="matdata.type == 'sn'">
+			servicenow here	  
+		</mat-card>
+		<mat-card class="mat-cardsm" *ngIf="matdata.type == 'ifttt'">
+			ifttt here	  
+		</mat-card>
+		<mat-card class="mat-cardsm" *ngIf="matdata.type == 'splunk'">
+			splunk here	  
+		</mat-card>
+		<mat-card class="mat-cardsm" *ngIf="matdata.type == 'webhook'">
+			<mat-form-field class="field-override" style="width: 50%;" appearance="fill" color="primary">
+			    <input matInput placeholder="https://webhookaddress.com/rev1/api">
+			    <mat-label>URL of the webhook</mat-label>
+			</mat-form-field>
+			<br/>
+			<mat-form-field appearance="fill" color="primary">
+			    <input matInput placeholder="94b26e58a3a8">
+			    <mat-label>Client ID needed to authenticate</mat-label>
+			</mat-form-field>
+			<br/>
+			<mat-form-field appearance="fill" color="primary">
+			    <mat-select [(ngModel)]="matdata.auth">
+			    	<mat-option value="oauth">OAUTH</mat-option>
+			    	<mat-option value="ssl">SSL</mat-option>
+			    	<mat-option value="basic">basic</mat-option>
+			    </mat-select>
+			    <mat-label>Authentication method</mat-label>
+			</mat-form-field>
+			<br/>
+			<mat-form-field  class="field-override" appearance="fill" color="primary">
+			    <input matInput placeholder="c4f7defe91df9b23">
+			    <mat-label>Secret string needed to authenticate</mat-label>
+			</mat-form-field>
+		</mat-card>
+		<mat-card class="mat-cardsm" *ngIf="matdata.type == 'email'">
+			<mat-form-field class="field-override" appearance="fill" color="primary">
+			    <input matInput placeholder="myname@mycompany.com">
+			    <mat-label>Email address to send the message to.</mat-label>
+			</mat-form-field> 
+		</mat-card>
+	</mat-card>
+</div>

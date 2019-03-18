@@ -9,7 +9,7 @@
     </mat-toolbar>
     <mat-nav-list>
           <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
-          <a routerLink="main" class="sidenav-links"  >
+          <a routerLink="dashboard" class="sidenav-links"  >
             <div  style="display: flex;align-items: center;">
               <i class="material-icons">home</i>&nbsp; Home
             </div>
@@ -23,9 +23,9 @@
           </a>
          </mat-list-item>
          <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
-          <a routerLink="dashboard" class="sidenav-links"  >
+          <a routerLink="main" class="sidenav-links"  >
             <div  style="display: flex;align-items: center;">
-              <i class="material-icons">alarm</i>&nbsp; Dashboard
+              <i class="material-icons">alarm</i>&nbsp; Top Risk Category
             </div>
           </a>
          </mat-list-item>
@@ -65,6 +65,7 @@
 	    </button>
 	    <mat-menu  #usermenu="matMenu">
 	        <button mat-menu-item (click)="openDialog()">SETTINGS</button>
+          <button mat-menu-item (click)="openAlertsDialog()">ALERTS</button>
 	        <button mat-menu-item (click)="openAboutDialog()">ABOUT</button>
 	        <button mat-menu-item>LOGOUT </button>
 	    </mat-menu>

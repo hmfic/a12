@@ -6,7 +6,7 @@ import { Globals } from "../globals";
   selector: 'app-force10',
   templateUrl: './force10.component.html',
   styleUrls: ['./force10.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  //encapsulation: ViewEncapsulation.None
   //encapsulation: ViewEncapsulation.Native
 })
   export class Force10Component implements OnInit, AfterViewInit {

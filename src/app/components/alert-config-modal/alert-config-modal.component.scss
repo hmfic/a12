@@ -1,0 +1,17 @@
+.alert-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.alert-container > * {
+  width: 100%;
+}
+.mat-cardsm {
+	margin-right: 50px !important;
+	width: 95% !important;
+}
+
+.field-override {
+	display: inline !important;
+	width: 25% !important;
+}

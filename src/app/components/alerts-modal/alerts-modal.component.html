@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<div *ngFor="let data of dataSource">
+	<mat-grid-list cols="20" rowHeight="1:1">
+	  <mat-grid-tile colspan="1" style="justify-content: flex-start !important ;">
+	  		<i class="material-icons">radio_button_checked</i>
+	  	</mat-grid-tile>
+	  <mat-grid-tile colspan="17">
+	  	<div>
+	  		{{data.name}}<br>
+	  		<div class="smaller">{{data.descr}}</div>
+	  	</div>
+	  </mat-grid-tile>
+	  <mat-grid-tile colspan="2">
+	  		<button mat-button #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu">
+	  			<i class="material-icons">more_horiz</i>
+	  		</button>
+	  		<mat-menu #menu="matMenu">
+		  		<button mat-menu-item (click)="openMenu()">Edit</button>
+		  		<button mat-menu-item>Delete</button>
+		  		<button mat-menu-item>Disable</button>
+		  		<button mat-menu-item>Enable</button>
+			</mat-menu>
+	  </mat-grid-tile>
+	</mat-grid-list>
+</div>

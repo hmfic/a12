@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // new stuff
 import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, MatCheckboxModule, 
          MatToolbarModule, MatListModule, MatMenuModule, MatDialogModule, MatFormFieldModule, 
-         MatSelectModule, MatInputModule, MatSnackBar } from '@angular/material';
+         MatSelectModule, MatInputModule, MatSnackBar, MatTableModule } from '@angular/material';
 import { Globals } from './components/globals';
 import { SettingsmodalComponent } from './components/settingsmodal/settingsmodal.component';
 import { HelpmodalComponent } from './components/helpmodal/helpmodal.component';
@@ -28,6 +28,8 @@ import { NgxGaugeModule } from 'ngx-gauge';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { CategoryHistoComponent } from './components/category-histo/category-histo.component';
+import { AlertsModalComponent } from './components/alerts-modal/alerts-modal.component';
+import { AlertConfigModalComponent } from './components/alert-config-modal/alert-config-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { CategoryHistoComponent } from './components/category-histo/category-his
     Tree10Component,
     DashboardComponent,
     TimelineComponent,
-    CategoryHistoComponent
+    CategoryHistoComponent,
+    AlertsModalComponent,
+    AlertConfigModalComponent
   ],
   imports: [
     AppRoutingModule,
@@ -69,6 +73,7 @@ import { CategoryHistoComponent } from './components/category-histo/category-his
     MatTooltipModule,
     ReactiveFormsModule,
     NgxGaugeModule,
+    MatTableModule
   ],
   providers: [
     Globals,
@@ -76,7 +81,7 @@ import { CategoryHistoComponent } from './components/category-histo/category-his
     ],
   //providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ SettingsmodalComponent, HelpmodalComponent, AboutmodalComponent]
+  entryComponents: [ SettingsmodalComponent, HelpmodalComponent, AboutmodalComponent, AlertsModalComponent, AlertConfigModalComponent]
 })
 
 

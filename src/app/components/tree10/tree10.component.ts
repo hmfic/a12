@@ -7,7 +7,7 @@ import { brush } from 'd3';
   selector: 'app-tree10',
   templateUrl: './tree10.component.html',
   styleUrls: ['./tree10.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  //encapsulation: ViewEncapsulation.Emulated
 })
 export class Tree10Component implements OnInit, AfterViewInit {
 	  @ViewChild('tree10Container') chartContainer: ElementRef;
@@ -496,6 +496,9 @@ export class Tree10Component implements OnInit, AfterViewInit {
           var linkEnter = link.enter().insert('path', 'g')
               .attr("id", function(d){ return ("link" + d.id)})//unique id
               .attr("class", "link")
+              .style("fill","none")
+              .style("stroke-width","2px")
+              .style("stroke","black")
               .attr('d', function (d) {
                   var o = {x: source.x0, y: source.y0}
                   return diagonal(o, o);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -6,12 +6,14 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { Globals } from '../globals';
 import { SettingsmodalComponent } from "../settingsmodal/settingsmodal.component";
 import { HelpmodalComponent } from "../helpmodal/helpmodal.component";
-import { AboutmodalComponent } from "../aboutmodal/aboutmodal.component"
+import { AboutmodalComponent } from "../aboutmodal/aboutmodal.component";
+import { AlertsModalComponent } from "../alerts-modal/alerts-modal.component"
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['../sidebar/sidebar.component.scss']
+  styleUrls: ['../sidebar/sidebar.component.scss'],
+  //encapsulation: ViewEncapsulation.Emulated
 })
 export class SidebarComponent {
 
@@ -27,6 +29,7 @@ export class SidebarComponent {
       private globals: Globals,
       private dialog: MatDialog
       ) {}
+
 
   getInitials(string){
 
@@ -46,7 +49,7 @@ export class SidebarComponent {
         dialogConfig.autoFocus = true;
         dialogConfig.data = {
               id: 1,
-              title: 'SETTINGS'
+              title: 'MY SETTINGS'
           };
         // dialogConfig.direction = "rtl";
         this.dialog.open(SettingsmodalComponent, dialogConfig);
@@ -58,10 +61,26 @@ export class SidebarComponent {
         dialogConfig.autoFocus = true;
         dialogConfig.data = {
               id: 1,
-              title: 'ABOUT'
+              title: 'ABOUT THIS'
           };
         // dialogConfig.direction = "rtl";
         this.dialog.open(AboutmodalComponent, dialogConfig);
+    } 
+
+    openAlertsDialog():void {
+        const dialogConfig = new MatDialogConfig();
+//        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        //dialogConfig.panelClass = "full-width";
+        dialogConfig.width= '800px';
+        dialogConfig.minWidth='80vw';
+        dialogConfig.maxWidth="100vw !important"
+       // dialogConfig.height="700px";
+        dialogConfig.data = {
+              id: 1,
+              title: 'CONFIGURE ALERTS'
+          };
+        this.dialog.open(AlertsModalComponent,dialogConfig);
     } 
 
 

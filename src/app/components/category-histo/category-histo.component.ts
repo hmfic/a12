@@ -52,7 +52,7 @@ export class CategoryHistoComponent implements OnInit {
   	setTimeout(() => {
   		  this.hostElement = this.chartContainer.nativeElement;
         this.width=this.hostElement.offsetWidth;
-        console.log("in categoryhisto; height=",this.hostElement.offsetHeight)
+        //console.log("in categoryhisto; height=",this.hostElement.offsetHeight)
         this.height=350;
 
         this.height = this.height - this.margin.top - this.margin.bottom-20;
@@ -154,27 +154,18 @@ export class CategoryHistoComponent implements OnInit {
                     h${-(x.bandwidth())}Z
                   `)
                   .on('mouseover', (d) => {
-                      //console.log("in nodehover;d3.event.pageX=",d3.event.pageX);
-                      //console.log("in nodehover;d3.event.pageY=",d3.event.pageY);
                       div1.transition()
                          .duration(200)
                          .style('opacity', .9);
                       div1 .html(
                         function() {
-                        	  //console.log("in categoryhisto hover; d=",d);
-                            //console.log("in categoryhisto hover; y=",y(d.value));
                                 return d.value; 
-                              }
-                            )
+                              } )
                          .style('left', (d3.event.pageX -15) + 'px')
                          .style('top', (d3.event.pageY - 25) + 'px');
                         })
                     .on('mousemove',(d) => {
-                        div1 .html(
-                        function() {
-                                return d.value; 
-                              }
-                            )
+                        div1 
                          .style('left', (d3.event.pageX -15) + 'px')
                          .style('top', (d3.event.pageY - 25) + 'px');
                     })
