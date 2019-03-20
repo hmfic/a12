@@ -46,7 +46,7 @@ export class SidebarComponent {
   openDialog():void {
         const dialogConfig = new MatDialogConfig();
 //        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
               id: 1,
               title: 'MY SETTINGS'
@@ -58,7 +58,7 @@ export class SidebarComponent {
     openAboutDialog():void {
         const dialogConfig = new MatDialogConfig();
 //        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
               id: 1,
               title: 'ABOUT THIS'
@@ -70,7 +70,7 @@ export class SidebarComponent {
     openAlertsDialog():void {
         const dialogConfig = new MatDialogConfig();
 //        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
+        dialogConfig.autoFocus = false;
         //dialogConfig.panelClass = "full-width";
         dialogConfig.width= '800px';
         dialogConfig.minWidth='80vw';
@@ -88,7 +88,7 @@ export class SidebarComponent {
         //console.log("in openhelpmodal");
         const dialogConfig = new MatDialogConfig();
 //        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
               id: 1,
               title: 'HELP'

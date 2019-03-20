@@ -1,9 +1,9 @@
-<div class="grid-container" style="height: 100vh; overflow: hidden;">
-  <mat-grid-list cols="8" rowHeight="4:3" gutterSize="10px">
+<div class="grid-container" style="height: auto; overflow: hidden;">
+  <mat-grid-list cols="8" rowHeight="4:3.5" gutterSize="10px">
     <mat-grid-tile *ngFor="let card of cards; let i = index;" [colspan]="card.cols" [rowspan]="card.rows">
       <cdk-drop-list [cdkDropListConnectedTo]="drops" [cdkDropListData]="i">
           <!-- ***************** BAR1 CARD ****************** -->
-          <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='bar1'" style="height: 100vh;" >
+          <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='bar1'" style="height: 90%;" >
             <mat-card-header style="margin-left:-20px;margin-right:-1px;">
                 <span fxFlex="95" style="margin-top:8px;">{{card.title}} </span>
                 <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
@@ -14,7 +14,7 @@
             </mat-card-content>
           </mat-card>
            <!-- ***************** NUMBER1 CARD ****************** -->
-          <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='number1'" style="height: 100vh;" >
+          <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='number1'" style="height: 90%;" >
             <mat-card-header style="margin-left:-20px;margin-right:-1px;">
                 <span fxFlex="99" style="margin-top:8px;">{{card.title}} </span>
                 <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
@@ -42,7 +42,7 @@
             </mat-card-content>
           </mat-card>
           <!-- ***************** TIME1 CARD ****************** -->
-            <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='time1'" style="height: 100vh;">
+            <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='time1'" style="height: 90%;">
               <mat-card-header style="margin-left:-20px;margin-right:-1px;">
                   <span fxFlex="99" style="margin-top:8px;">{{card.title}} </span>
                   <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
@@ -50,6 +50,29 @@
               </mat-card-header>
               <mat-card-content>
                   <app-timeline style="height: 100vh;"></app-timeline>
+              </mat-card-content>
+            </mat-card>
+            <!-- ***************** GAUGE1 CARD ****************** -->
+            <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='gauge1'" style="height: 90%;">
+              <mat-card-header style="margin-left:-20px;margin-right:-1px;">
+                  <span fxFlex="99" style="margin-top:8px;">{{card.title}} </span>
+                  <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
+                  <div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
+              </mat-card-header>
+              <br/>
+              <mat-card-content style="text-align: center;">
+                  <ngx-gauge  [type]="gaugeType" 
+                      [size]="200"
+                      [value]=".86" 
+                      [label]="gaugeLabel"  
+                      [thick]="12"
+                      [cap]="gaugecap"
+                      [duration]="1500"
+                      [min]="min"
+                      [max]="max"
+                      [thresholds]="thresholdConfig"
+                      [append]="gaugeAppendText">
+              </ngx-gauge>
               </mat-card-content>
             </mat-card>
       </cdk-drop-list>

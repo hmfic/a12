@@ -30,6 +30,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { CategoryHistoComponent } from './components/category-histo/category-histo.component';
 import { AlertsModalComponent } from './components/alerts-modal/alerts-modal.component';
 import { AlertConfigModalComponent } from './components/alert-config-modal/alert-config-modal.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AlertConfigModalComponent } from './components/alert-config-modal/alert
     TimelineComponent,
     CategoryHistoComponent,
     AlertsModalComponent,
-    AlertConfigModalComponent
+    AlertConfigModalComponent,
+    MapComponent
   ],
   imports: [
     AppRoutingModule,

@@ -15,15 +15,18 @@ import { CategoryHistoComponent } from '../../components/category-histo/category
 
 export class DashboardComponent implements OnInit{
   gaugeType = "full";
-  gaugeValue = 28.3;
+  //gaugeValue = 28.3;
   gaugeLabel = "Risk";
-  gaugeAppendText = "of 100";
+  gaugeAppendText = "of 1";
+  min="0";
+  max="1";
+  gaugecap="round";
 
    thresholdConfig = {
       '0':  {color: 'green'},
-      '70': {color: 'yellow'},
-      '80': {color: 'orange'},
-      '95': {color: 'red'}
+      '.70': {color: 'yellow'},
+      '.80': {color: 'orange'},
+      '.95': {color: 'red'}
     };
 
   constructor() { }
@@ -53,55 +56,14 @@ export class DashboardComponent implements OnInit{
     })
   };
 
+
+
   cards = [
-     { title: 'Important Numbers', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes shown in 1","type":"number1"},
-     { title: 'Risk over Time', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes shown in 1","type":"time1"},
-     { title: 'Variance Risks', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes shown in 1","type":"bar1"},
-     { title: 'Top content risks', cols: 2, rows: 6,"tip":"This is sensitive data moving across processes shown in 5","type":"gauge1",
-        "subcards":[
-              {"name":"Risk rising threshold","icon":"warning","level":"Warning",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"},
-              {"name":"Risk rising threshold","icon":"warning","level":"Warning",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"},
-              {"name":"Risk rising threshold","icon":"warning","level":"Warning",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"},
-              {"name":"Geographical zone movement from a very long desription to another","icon":"info","level":"Informational",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"}
-              ]},
-    { title: 'Top time-of-day risks', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes shown in 2","type":"gauge1",
-        "subcards":[
-              {"name":"Risk rising threshold","icon":"warning","level":"Warning",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"},
-              {"name":"Geographical zone movement from a very long desription to another","icon":"info","level":"Informational",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"}
-              ]},
-    { title: 'Top file type risks', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes shown in 3","type":"gauge1",
-        "subcards":[
-              {"name":"Risk rising threshold","icon":"warning","level":"Warning",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"},
-              {"name":"New risky behavior detected","icon":"warning","level":"Warning",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"},
-              {"name":"Geographical zone movement from a very long desription to another","icon":"info","level":"Informational",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"}
-              ]},
-      { title: 'Top browser type risks', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes shown in 3","type":"gauge1",
-        "subcards":[
-              {"name":"Risk rising threshold","icon":"warning","level":"Warning",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"},
-              {"name":"Geographical zone movement from a very long desription to another","icon":"info","level":"Informational",
-                  "date":"1/1/2019","value":Math.floor(Math.random()*(100-80+1)) + 80,
-                  "subtext":"this is more stuff at the bottom which is really really long and really really boring"}
-              ]},
+     { title: 'Important Numbers', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"number1"},
+     { title: 'Risk over Time', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"time1"},
+     { title: 'Risk by Variance Category', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"bar1"},
+     { title: 'Overall risk posture', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"gauge1"}    
+     
    ];
    
 

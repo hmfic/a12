@@ -1,6 +1,9 @@
 .alert-container {
   display: flex;
   flex-direction: column;
+  height: 100vh !important;
+  //margin-bottom: 75px;
+  //padding-bottom: -75px;
 }
 
 .alert-container > * {
