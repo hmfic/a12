@@ -216,7 +216,7 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 ### D3 Sankey
 ```npm install --save d3-sankey```
 
-```npm install --save @types/d3-sankey```
+```npm install --save @types/d3-sankey``` not sure why we need this.
 
 ### Drag and drop
 ```npm new dragdrop```
@@ -238,6 +238,3 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### Need flex layout (see above)
 ```npm install @angular/flex-layout```
-
-#### ngx charts
-```npm i @swimlane/ngx-charts --save```
