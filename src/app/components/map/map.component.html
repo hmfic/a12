@@ -1,3 +1,103 @@
-<p>
-  map works!
-</p>
+<agm-map #gm [latitude]="+globals.myinfo?.lat" [longitude]="globals.myinfo?.lon" [zoom]="2">
+	  <agm-marker (mouseOver)="onMouseOver(infoWindow1,gm)" (mouseOut)="onMouseOut(infoWindow1,gm)"[latitude]="+globals.myinfo?.lat" [longitude]="globals.myinfo?.lon" iconUrl="/assets/person-pin.svg">
+	  	<agm-info-window #infoWindow1>
+		      <b class="infow">{{globals.myinfo?.query}}</b>
+		      <div class="infow">{{globals.myinfo?.isp}}</div>
+		      <div class="infow">{{globals.myinfo?.city}}, {{globals.myinfo?.regionName}} &nbsp; {{globals.myinfo?.countryCode}}</div>
+		      <div class="infow">[{{globals.myinfo?.lat}}, {{globals.myinfo?.lon}}]</div>          
+		</agm-info-window>
+	</agm-marker>
+	<agm-marker (mouseOver)="onMouseOver(infoWindow2,gm)" (mouseOut)="onMouseOut(infoWindow2,gm)"[latitude]="+sensor?.lat" [longitude]="sensor?.lon" *ngFor="let sensor of sensors" iconUrl="{{sensor?.url}}">
+	  	<agm-info-window #infoWindow2>
+		      <b class="infow">{{sensor?.name}}</b>
+		      <div class="infow">{{sensor?.descr}}</div>
+		      <div class="infow">[{{sensor?.lat}}, {{sensor?.lon}}]</div>          
+		</agm-info-window>
+	</agm-marker>
+	<agm-marker (mouseOver)="onMouseOver(infoWindow3,gm)" (mouseOut)="onMouseOut(infoWindow3,gm)"[latitude]="dest?.lat" [longitude]="dest?.lon" *ngFor="let dest of destinations" iconUrl="{{dest?.url}}">
+	  	<agm-info-window #infoWindow3>
+		      <b class="infow">{{dest?.name}}</b>
+		      <div class="infow">[{{dest?.lat}}, {{dest?.lon}}]</div>          
+		</agm-info-window>
+	</agm-marker>
+	<!-- <agm-polyline [strokeColor]="'gray'" [strokeWeight]=2 [geodesic]=true *ngFor="let sensor of sensors">
+	    <agm-polyline-point  
+	        [latitude]="+globals.myinfo?.lat"
+	        [longitude]="+globals.myinfo?.lon">
+	    </agm-polyline-point>
+	    <agm-polyline-point  
+	        [latitude]="+sensor?.lat"
+	        [longitude]="+sensor?.lon">
+	    </agm-polyline-point>
+	</agm-polyline> -->
+	<agm-polyline [strokeColor]="'#000'" [strokeWeight]=2 [geodesic]=true >
+	    <agm-polyline-point  
+	        [latitude]="+globals.myinfo?.lat"
+	        [longitude]="+globals.myinfo?.lon">
+	    </agm-polyline-point>
+	    <agm-polyline-point  
+	        [latitude]="+sensors[0]?.lat"
+	        [longitude]="+sensors[0]?.lon">
+	    </agm-polyline-point>
+	</agm-polyline>
+	<agm-polyline [strokeColor]="'#999'" [strokeWeight]=2 [geodesic]=true >
+	    <agm-polyline-point  
+	        [latitude]="+sensors[0]?.lat"
+	        [longitude]="+sensors[0]?.lon">
+	    </agm-polyline-point>
+	    <agm-polyline-point  
+	        [latitude]="+sensors[2]?.lat"
+	        [longitude]="+sensors[2]?.lon">
+	    </agm-polyline-point>
+	</agm-polyline>
+	<agm-polyline [strokeColor]="'#999'" [strokeWeight]=2 [geodesic]=true >
+	    <agm-polyline-point  
+	        [latitude]="+sensors[2]?.lat"
+	        [longitude]="+sensors[2]?.lon">
+	    </agm-polyline-point>
+	    <agm-polyline-point  
+	        [latitude]="+destinations[2]?.lat"
+	        [longitude]="+destinations[2]?.lon">
+	    </agm-polyline-point>
+	</agm-polyline>
+	<agm-polyline [strokeColor]="'#999'" [strokeWeight]=2 [geodesic]=true >
+	    <agm-polyline-point  
+	        [latitude]="+sensors[0]?.lat"
+	        [longitude]="+sensors[0]?.lon">
+	    </agm-polyline-point>
+	    <agm-polyline-point  
+	        [latitude]="+destinations[1]?.lat"
+	        [longitude]="+destinations[1]?.lon">
+	    </agm-polyline-point>
+	</agm-polyline>
+	<agm-polyline [strokeColor]="'#999'" [strokeWeight]=2 [geodesic]=true >
+	    <agm-polyline-point  
+	        [latitude]="+sensors[0]?.lat"
+	        [longitude]="+sensors[0]?.lon">
+	    </agm-polyline-point>
+	    <agm-polyline-point  
+	        [latitude]="+destinations[0]?.lat"
+	        [longitude]="+destinations[0]?.lon">
+	    </agm-polyline-point>
+	</agm-polyline>
+	<agm-polyline [strokeColor]="'#999'" [strokeWeight]=2 [geodesic]=true >
+	    <agm-polyline-point  
+	        [latitude]="+sensors[1]?.lat"
+	        [longitude]="+sensors[1]?.lon">
+	    </agm-polyline-point>
+	    <agm-polyline-point  
+	        [latitude]="+destinations[3]?.lat"
+	        [longitude]="+destinations[3]?.lon">
+	    </agm-polyline-point>
+	</agm-polyline>
+	<agm-polyline [strokeColor]="'#999'" [strokeWeight]=2 [geodesic]=true >
+	    <agm-polyline-point  
+	        [latitude]="+sensors[0]?.lat"
+	        [longitude]="+sensors[0]?.lon">
+	    </agm-polyline-point>
+	    <agm-polyline-point  
+	        [latitude]="+sensors[1]?.lat"
+	        [longitude]="+sensors[1]?.lon">
+	    </agm-polyline-point>
+	</agm-polyline>
+</agm-map>

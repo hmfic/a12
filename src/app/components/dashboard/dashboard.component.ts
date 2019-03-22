@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Globals } from "../globals";
 import { TimelineComponent } from '../../components/timeline/timeline.component';
 import { CategoryHistoComponent } from '../../components/category-histo/category-histo.component';
+import { MapComponent } from "../../components/map/map.component"
 
 @Component({
   selector: 'app-dashboard',
@@ -62,7 +63,8 @@ export class DashboardComponent implements OnInit{
      { title: 'Important Numbers', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"number1"},
      { title: 'Risk over Time', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"time1"},
      { title: 'Risk by Variance Category', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"bar1"},
-     { title: 'Overall risk posture', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"gauge1"}    
+     { title: 'Overall risk posture', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"gauge1"},
+     { title: 'Path Geolocation', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"map1"}    
      
    ];
    

@@ -9,7 +9,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
-
+import { LocdataService } from './services/locdata.service'
 
 @Component({
   selector: 'app-root',
@@ -21,6 +21,7 @@ export class AppComponent implements DoCheck{
 	    private globals: Globals,
       public overlayContainer: OverlayContainer,
       private domSanitizer: DomSanitizer,
+      private data: LocdataService,
       private matIconRegistry: MatIconRegistry
       )
 	      { 
@@ -36,6 +37,11 @@ oldTheme:string;
 ngOnInit(): void {
    this.oldName = this.globals.name;
    this.oldTheme = this.globals.theme;
+
+   this.data.getLoc().subscribe (data => {
+        console.log("myinfo set; data=",data);
+        this.globals.myinfo=data;
+      })
   } 
 
 ngDoCheck() {

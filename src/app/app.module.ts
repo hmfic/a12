@@ -31,6 +31,7 @@ import { CategoryHistoComponent } from './components/category-histo/category-his
 import { AlertsModalComponent } from './components/alerts-modal/alerts-modal.component';
 import { AlertConfigModalComponent } from './components/alert-config-modal/alert-config-modal.component';
 import { MapComponent } from './components/map/map.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -75,11 +76,13 @@ import { MapComponent } from './components/map/map.component';
     MatTooltipModule,
     ReactiveFormsModule,
     NgxGaugeModule,
-    MatTableModule
+    MatTableModule, 
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBmmelmeHOr3KQovKCisOQfstNRR-TuVEs'
+    })
   ],
   providers: [
-    Globals,
-    //SidebarService
+    Globals
     ],
   //providers: [],
   bootstrap: [AppComponent],

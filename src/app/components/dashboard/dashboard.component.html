@@ -1,5 +1,5 @@
 <div class="grid-container" style="height: auto; overflow: hidden;">
-  <mat-grid-list cols="8" rowHeight="4:3.5" gutterSize="10px">
+  <mat-grid-list cols="8" rowHeight="4:3.2" gutterSize="10px">
     <mat-grid-tile *ngFor="let card of cards; let i = index;" [colspan]="card.cols" [rowspan]="card.rows">
       <cdk-drop-list [cdkDropListConnectedTo]="drops" [cdkDropListData]="i">
           <!-- ***************** BAR1 CARD ****************** -->
@@ -73,6 +73,17 @@
                       [thresholds]="thresholdConfig"
                       [append]="gaugeAppendText">
               </ngx-gauge>
+              </mat-card-content>
+            </mat-card>
+            <!-- ***************** MAP CARD ****************** -->
+            <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='map1'" style="height: 90%;">
+              <mat-card-header style="margin-left:-20px;margin-right:-1px;">
+                  <span fxFlex="99" style="margin-top:8px;">{{card.title}} </span>
+                  <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
+                  <div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
+              </mat-card-header>
+              <mat-card-content>
+                  <app-map></app-map>
               </mat-card-content>
             </mat-card>
       </cdk-drop-list>
