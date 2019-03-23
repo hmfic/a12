@@ -22,27 +22,13 @@ export class CategoryHistoComponent implements OnInit {
   constructor() { }
 
   riskData = [
-    {
-      name: 'File type', value: .74
-    },
-    {
-      name: 'Time of Day', value: .45
-    },
-    {
-      name: 'Browser', value: .44
-    },
-    {
-      name: 'Content', value: .4
-    },
-    {
-      name: 'Unusual size', value: .34
-    },
-    {
-      name: 'Source', value: .23
-    },
-    {
-      name: 'Destination', value: .14
-    },
+    { name: 'File type', value: .74 },
+    { name: 'Time of Day', value: .45 },
+    { name: 'Browser', value: .44 },
+    { name: 'Content', value: .4 },
+    { name: 'Unusual size', value: .34 },
+    { name: 'Source', value: .23 },
+    { name: 'Destination', value: .14 },
   ];
 
   ngOnInit() {
@@ -57,8 +43,6 @@ export class CategoryHistoComponent implements OnInit {
 
         this.height = this.height - this.margin.top - this.margin.bottom-20;
 
-          //const svg = d3
-          //  .select('.d3-chart')
         let svg = d3.select(this.hostElement)
               .append('svg')
             .attr('width', this.width)
@@ -68,7 +52,6 @@ export class CategoryHistoComponent implements OnInit {
             .append('rect')
             .attr('class', 'chartArea')
             .attr('width', this.width)
-            //.attr("height", "100vh")
             .attr('height', this.height - this.margin.left)
             .attr('fill', '#fff')
             .attr('stroke-width', '0')

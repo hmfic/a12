@@ -33,6 +33,7 @@ import { AlertConfigModalComponent } from './components/alert-config-modal/alert
 import { MapComponent } from './components/map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { SankeyComponent } from './components/sankey/sankey.component';
+import { ChordComponent } from './components/chord/chord.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SankeyComponent } from './components/sankey/sankey.component';
     AlertsModalComponent,
     AlertConfigModalComponent,
     MapComponent,
-    SankeyComponent
+    SankeyComponent,
+    ChordComponent
   ],
   imports: [
     AppRoutingModule,

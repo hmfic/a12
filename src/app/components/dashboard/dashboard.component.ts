@@ -57,41 +57,38 @@ export class DashboardComponent implements OnInit{
     })
   };
 
-
-
   cards = [
      { title: 'Important Numbers', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"number1"},
      { title: 'Risk over Time', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"time1"},
      { title: 'Risk by Variance Category', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"bar1"},
      { title: 'Overall risk posture', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"gauge1"},
      { title: 'Path Geolocation', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"map1"},
-     { title: 'Data flow sizes', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"sankey1"}     
-     
+     { title: 'Single Cross Zone Risk', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"sankey1"},
+     { title: 'Cross Zone Risk', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"chord1"} 
    ];
-   
 
 number1 = [
-  {
-    "name": "15 minute Risk",
-    "value": .45
-  },
-  {
-    "name": "1 hour Risk",
-    "value": .45
-  },
-  {
-    "name": "24 hour Risk",
-    "value": .37
-  },
-  {
-    "name": "1 week Risk",
-    "value": .39
-   },
-   {
-    "name": "1 month Risk",
-    "value": .43
-   }
-]
+    {
+      "name": "15 minute Risk",
+      "value": .45
+    },
+    {
+      "name": "1 hour Risk",
+      "value": .45
+    },
+    {
+      "name": "24 hour Risk",
+      "value": .37
+    },
+    {
+      "name": "1 week Risk",
+      "value": .39
+     },
+     {
+      "name": "1 month Risk",
+      "value": .43
+     }
+  ]
 
 }
 

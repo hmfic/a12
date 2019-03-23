@@ -238,3 +238,6 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### Need flex layout (see above)
 ```npm install @angular/flex-layout```
+
+### Choord diagrams
+```npm install d3-chord --save```
