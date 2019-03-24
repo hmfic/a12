@@ -88,7 +88,7 @@ export class TimelineComponent implements OnInit {
 
 		var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-		console.log("color=",color(0));
+		//console.log("color=",color(0));
 
 		/* Add SVG */
 		let svg = d3.select(this.hostElement).append("svg")

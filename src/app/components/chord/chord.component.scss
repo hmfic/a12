@@ -8,6 +8,21 @@ stroke-width: .25px;
 //fill-opacity: .5;
 }
  
-//#circle:hover path.fade {
-//display: none;
-//}
+#circle:hover path.fade {
+display: none;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  //height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: #444;
+  border: 0px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index:2000;
+  color:#eee;
+}

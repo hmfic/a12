@@ -9,7 +9,7 @@ export class LocdataService {
   constructor(private http: HttpClient) { }
 
   getLoc() {
-  	console.log("in getLoc");
+  	//console.log("in getLoc");
     return this.http.get('http://ip-api.com/json')
   }
 }

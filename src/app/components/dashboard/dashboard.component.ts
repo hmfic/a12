@@ -64,7 +64,10 @@ export class DashboardComponent implements OnInit{
      { title: 'Overall risk posture', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"gauge1"},
      { title: 'Path Geolocation', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"map1"},
      { title: 'Single Cross Zone Risk', cols: 2, rows: 3,"tip":"This is sensitive data moving across processes","type":"sankey1"},
-     { title: 'Cross Zone Risk', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"chord1"} 
+     { title: 'Top Cross Zone Risks', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"chord1"},
+     { title: 'Vanns Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget1"},
+     { title: 'Pauls Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget2"},
+     { title: 'Michaels Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget3"} 
    ];
 
 number1 = [

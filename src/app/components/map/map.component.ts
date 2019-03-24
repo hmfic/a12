@@ -18,21 +18,21 @@ export class MapComponent implements OnInit {
 			"descr":"Secure cage Cisco 2550, rack 16",
 			"lat":"37.380186",
 			"lon":"-121.997724",
-			"url":"/assets/icon38.png"
+			"url":"/assets/alpha-s-circle.png"
 		},
 		{
 			"name":"Equinix Dallas",
 			"descr":"Opendaylight instance",
 			"lat":"32.801539",
 			"lon":"-96.819523",
-			"url":"/assets/icon38.png"
+			"url":"/assets/alpha-s-circle.png"
 		},
 		{
 			"name":"London",
 			"descr":"Docker instance for PROD",
 			"lat":"51.533826",
 			"lon":"-.257974",
-			"url":"/assets/icon38.png"
+			"url":"/assets/alpha-s-circle.png"
 		}];
 
 	destinations = [
@@ -69,11 +69,11 @@ export class MapComponent implements OnInit {
   }
 
   onMouseOver(infoWindow, gm) {
-  	console.log("map.component.ts; in mouseover; gm=",gm);
+  	//console.log("map.component.ts; in mouseover; gm=",gm);
         if (gm.lastOpen != null) {
             gm.lastOpen.close();
         }
-        console.log("opening window");
+        //console.log("opening window");
         gm.lastOpen = infoWindow;
         infoWindow.open();
     } 

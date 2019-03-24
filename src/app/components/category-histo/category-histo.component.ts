@@ -142,7 +142,8 @@ export class CategoryHistoComponent implements OnInit {
                          .style('opacity', .9);
                       div1 .html(
                         function() {
-                                return d.value; 
+                            //console.log("in mouseover;d=",d);
+                            return d.name + " risk: "+  d.value; 
                               } )
                          .style('left', (d3.event.pageX -15) + 'px')
                          .style('top', (d3.event.pageY - 25) + 'px');

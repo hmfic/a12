@@ -39,7 +39,7 @@ ngOnInit(): void {
    this.oldTheme = this.globals.theme;
 
    this.data.getLoc().subscribe (data => {
-        console.log("myinfo set; data=",data);
+        //console.log("myinfo set; data=",data);
         this.globals.myinfo=data;
       })
   } 

@@ -5,7 +5,8 @@ import { Globals } from "../globals";
 @Component({
   selector: 'app-chord',
   templateUrl: './chord.component.html',
-  styleUrls: ['./chord.component.scss']
+  styleUrls: ['./chord.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 	export class ChordComponent implements OnInit {
 
@@ -17,9 +18,9 @@ import { Globals } from "../globals";
 
 	data = [
 		  [  0,   .4,   .2,  .16 ],
-		  [ .55,   0,  .72,  .44 ],
-		  [ .81, .45,    0,   .8 ],
-		  [ .35,  .5,  .24,    0 ]
+		  [ .15,   0,  .22,  .44 ],
+		  [ .28, .35,    0,  .28 ],
+		  [ .75,  .2,  .05,    0 ]
 		]
 
   constructor() { }
@@ -33,29 +34,37 @@ import { Globals } from "../globals";
   		var names = [
 			{"name":"DMZ"},
 			{"name":"Mfg Zone"},
-			{"name":"Fin Zone"},
+			{"name":"Finance Zone"},
 			{"name":"Other zone"}
 			];
 
+		function formatnum(num) { return d3.format(".4f")(num)};
+
   		this.hostElement = this.chartContainer.nativeElement;
         this.width=this.hostElement.offsetWidth;
-        this.height=350;
+        this.height=370;
 
-        this.height = this.height - this.margin.top - this.margin.bottom-20;
+        this.height = this.height - this.margin.top - this.margin.bottom-10;
         this.width = this.width - this.margin.right -20;
 
         var outerRadius = Math.min(this.width, this.height) * 0.5 - 30;
         var innerRadius = outerRadius - 15;
 
+        d3.select("body").append('tips2');
+
+	    var div1 = d3.select("tips2").append('div1')
+	          .attr('class', 'tooltip')
+	          .style('opacity', 0);
+
         let svg = d3.select(this.hostElement)
             .append('svg')
             	.attr("viewBox", [-this.width / 2, -this.height / 2, this.width, this.height])
-            	.attr('width', this.width + this.margin.left + this.margin.right)
+            	.attr('width', this.width + this.margin.right)
             	.attr('height', this.height)
 
     	var chord = d3.chord()
 		    .padAngle(0.05)
-		    .sortSubgroups(d3.descending);
+		    .sortChords(d3.descending);
 
 		const chords = chord(this.data);
 
@@ -75,15 +84,13 @@ import { Globals } from "../globals";
     	const group = svg.append("g")
 		    .selectAll("g")
 		    .data(chords.groups)
-		    .join("g")
-		    ;
+		    .join("g");
 
 		group.append("path")
 			.attr("id", function(d, i) { return "group" + i; })
 	    	.attr("fill", d => color(d.index))
-	    	.attr("stroke", d => d3.rgb(color(d.index)).darker())
+	    	.attr("stroke", d => d3.rgb(color(d.index)))
 	    	.attr("d", arc)
-	    	;
 
 	    // Add a text label.
 		var groupText = group.append("text")
@@ -96,40 +103,82 @@ import { Globals } from "../globals";
 			.attr("xlink:href", function(d, i) { return "#group" + i; })
 			.text(function(d, i) { return names[i].name; });
 
+	// transparent hover
+		group.append("path")
+	    	.attr("fill", "transparent")
+	    	.attr("stroke", "transparent")
+	    	.attr("d", arc)
+	    	.on('mouseover', (d,i) => {
+                  div1.transition()
+                     .duration(200)
+                     .style('opacity', .9);
+                  div1 .html(
+                    function() {
+                            return names[i].name + " risk score: " + formatnum(d.value); 
+                          } )
+                     .style('left', (d3.event.pageX +12) + 'px')
+                     .style('top', (d3.event.pageY - 20) + 'px');
+                    })
+            .on('mousemove',(d) => {
+                    div1 
+                     .style('left', (d3.event.pageX +12) + 'px')
+                     .style('top', (d3.event.pageY - 20) + 'px');
+                })
+            .on('mouseout', (d) => {
+                  //console.log("in nodehover;d=",d);
+                  div1.transition()
+                     .duration(200)
+                     .style('opacity', 0)
+                });
+
 		svg.append("g")
 		      .attr("fill-opacity", 0.9)
 		    .selectAll("path")
 		    .data(chords)
 		    .join("path")
 		      .attr("class","chord")
+		      .attr("id", function(d, i) { return "group" + i; })
 		      .attr("d", ribbon)
 		      .attr("fill", d => color(d.target.index))
-		      .attr("stroke", d => d3.rgb(color(d.target.index)).darker())
-		      .on("mouseover", function(d) {
-		    	// console.log("in mouseover;d=",d);
-		    	svg.selectAll("path.chord")
-			      .transition()
-			      .style("fill-opacity", .05);
-		    	d3.select(this)
-			      .transition()
-			          .attr("fill-opacity", 1);
-		    })
+		      .style("stroke", d => d3.rgb(color(d.target.index)).darker())
+		      .on("mouseover", function(d,i) {
+			    	console.log("in chord mouseover;d=",d);
+			    	svg.selectAll("path.chord")
+				      .transition()
+				      .style("fill-opacity", .05);
+			    	d3.select(this)
+				      .transition()
+				          .attr("fill-opacity", 1);
+					div1.transition()
+	                     .duration(200)
+	                     .style('opacity', .9);
+	                div1 .html(
+	                    function() {
+	                            return "Risk score from " + d.source.value + " to " + d.target.value; 
+	                          } )
+	                     .style('left', (d3.event.pageX +12) + 'px')
+	                     .style('top', (d3.event.pageY - 20) + 'px');
+	                    //})
+		    	})
+		    .on('mousemove',(d) => {
+                    div1 
+                     .style('left', (d3.event.pageX +12) + 'px')
+                     .style('top', (d3.event.pageY - 20) + 'px');
+                })
 		    .on("mouseout", function(d) {
-		    	console.log("in mouseover");
+		    	//console.log("in mouseover");
 		    	svg.selectAll("path.chord")
 			      .transition()
 			      .style("fill-opacity", .9);
+			    div1.transition()
+                     .duration(200)
+                     .style('opacity', 0)
 		    	//d3.select(this)
 			    //  .transition()
 			    //      .attr("fill-opacity", .5);
-		    });
+		    	});
 
-		function mouseover(d, i) {
-			chord.classed("fade", function(p) {
-			return p.source.index != i
-			&& p.target.index != i;
-			});
-			}
+
 
   	},10); // end setTimeout
   }

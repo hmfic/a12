@@ -34,6 +34,9 @@ import { MapComponent } from './components/map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { SankeyComponent } from './components/sankey/sankey.component';
 import { ChordComponent } from './components/chord/chord.component';
+import { Widget1Component } from './components/widget1/widget1.component';
+import { Widget2Component } from './components/widget2/widget2.component';
+import { Widget3Component } from './components/widget3/widget3.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { ChordComponent } from './components/chord/chord.component';
     AlertConfigModalComponent,
     MapComponent,
     SankeyComponent,
-    ChordComponent
+    ChordComponent,
+    Widget1Component,
+    Widget2Component,
+    Widget3Component
   ],
   imports: [
     AppRoutingModule,
