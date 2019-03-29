@@ -241,3 +241,12 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### Choord diagrams
 ```npm install d3-chord --save```
+
+### TOPOJSON
+```npm install topojson```
+
+### d3-queue -- NOT in d3V5 anymore, use js promises
+```npm install d3-queue```
+
+### NPM version for a package
+```npm view d3 version```

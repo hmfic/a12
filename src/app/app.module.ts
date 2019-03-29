@@ -37,6 +37,7 @@ import { ChordComponent } from './components/chord/chord.component';
 import { Widget1Component } from './components/widget1/widget1.component';
 import { Widget2Component } from './components/widget2/widget2.component';
 import { Widget3Component } from './components/widget3/widget3.component';
+import { HeatmapComponent } from './components/heatmap/heatmap.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { Widget3Component } from './components/widget3/widget3.component';
     ChordComponent,
     Widget1Component,
     Widget2Component,
-    Widget3Component
+    Widget3Component,
+    HeatmapComponent
   ],
   imports: [
     AppRoutingModule,

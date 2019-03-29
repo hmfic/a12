@@ -1,0 +1,41 @@
+.countries {
+  fill: #fff;
+  stroke: #6cb0e0;
+  stroke-width: 0.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.map {
+  fill:black;
+  //opacity:.4;
+  stroke:black;
+  stroke-width:.25px;
+}
+
+.country-label {
+  fill: #555;
+  fill-opacity: .7;
+  font-size: .5rem;
+  font-weight: 300;
+  text-anchor: middle;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  //height: 28px;
+  padding-left: 16px;
+  padding-top:0px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+  font: 12px sans-serif;
+  background: #444;
+  border: 0px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index:2000;
+  color:#eee;
+}

@@ -141,7 +141,30 @@
                   <app-widget3></app-widget3>
               </mat-card-content>
             </mat-card>
+            <!-- ***************** HEATMAP1 CARD ****************** -->
+            <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='heatmap1'" style="height: 90%;">
+              <mat-card-header style="margin-left:-20px;margin-right:-1px;">
+                  <span fxFlex="99" style="margin-top:8px;">{{card.title}}</span>
+                  <mat-form-field [ngClass]="'changeRisk'" appearance="outline">
+                      <mat-select (selectionChange)="onChange($event)" [(value)]="selectedRisk">
+                        <mat-option *ngFor="let v of riskDisplay" [value]="v.id">{{v.name}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
+                  <div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
+              </mat-card-header>
+              <mat-card-content>
+                  <app-heatmap [selectedRisk]="1" *ngIf="selectedRisk == 1"></app-heatmap>
+                  <app-heatmap [selectedRisk]="2" *ngIf="selectedRisk != 1"></app-heatmap>
+              </mat-card-content>
+            </mat-card>
       </cdk-drop-list>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
+
+<!-- 
+<select [(ngModel)]="selectedValue">
+  <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
+</select>
+-->

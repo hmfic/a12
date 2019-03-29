@@ -11,7 +11,7 @@ import { MapComponent } from "../../components/map/map.component"
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  //encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 
 export class DashboardComponent implements OnInit{
@@ -30,9 +30,22 @@ export class DashboardComponent implements OnInit{
       '.95': {color: 'red'}
     };
 
+    selectedRisk=1;
+
+    riskDisplay = [
+      {'id':1,'name':'Industry risk'},
+      {'id':2,'name':'My risk'}
+      ]
+
   constructor() { }
 
   ngOnInit(){ }
+
+  public onChange(event): void {
+    console.log("this.event=",event);
+    this.selectedRisk = event.value;
+    
+  }
 
   entered($event: CdkDragEnter) {
     //console.log($event.item.data, $event.container.data);
@@ -67,7 +80,8 @@ export class DashboardComponent implements OnInit{
      { title: 'Top Cross Zone Risks', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"chord1"},
      { title: 'Vanns Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget1"},
      { title: 'Pauls Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget2"},
-     { title: 'Michaels Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget3"} 
+     { title: 'Michaels Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget3"},
+     { title: 'Country Risk Heatmap', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"heatmap1"} 
    ];
 
 number1 = [
