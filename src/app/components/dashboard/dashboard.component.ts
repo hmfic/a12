@@ -81,7 +81,8 @@ export class DashboardComponent implements OnInit{
      { title: 'Vanns Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget1"},
      { title: 'Pauls Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget2"},
      { title: 'Michaels Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget3"},
-     { title: 'Country Risk Heatmap', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"heatmap1"} 
+     { title: 'Country Risk Heatmap', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"heatmap1"},
+     { title: 'Top Risky File Type Events', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"table1"} 
    ];
 
 number1 = [

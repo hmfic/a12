@@ -79,12 +79,12 @@ export class TimelineComponent implements OnInit {
 		/* Scale */
 		var xScale = d3.scaleTime()
 		  .domain(d3.extent(chartData[0].values, d => d.date))
-		  .range([0, width-margin-10]);
+		  .range([0, width-margin-20]);
 
 		var yScale = d3.scaleLinear()
 		  //.domain([0, d3.max(chartData[0].values, d => d.score)])
 		  .domain([0, 1])
-		  .range([height-margin-10, 0]);
+		  .range([height-margin-20, 0]);
 
 		var color = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -92,10 +92,10 @@ export class TimelineComponent implements OnInit {
 
 		/* Add SVG */
 		let svg = d3.select(this.hostElement).append("svg")
-		  .attr("width", (width)+"px")
-		  .attr("height", "100vh")
+		  .attr("width", (width-margin-20)+"px")
+		  .attr("height", height)
 		  .append('g')
-		  .attr("transform", `translate(25, 5)`);
+		  .attr("transform", `translate(15, 5)`);
 
 		/* svg.append("text")
 			.attr("opacity","0")
@@ -287,7 +287,7 @@ export class TimelineComponent implements OnInit {
 
 		svg.append("g")
 		  .attr("class", "x axis")
-		  .attr("transform", `translate(0, ${height-margin-10})`)
+		  .attr("transform", `translate(0, ${height-margin-20})`)
 		  .call(xAxis);
 
 		svg.append('g')

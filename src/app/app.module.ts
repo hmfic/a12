@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // new stuff
 import { MatButtonModule, MatCardModule, MatSidenavModule, MatGridListModule, MatCheckboxModule, 
          MatToolbarModule, MatListModule, MatMenuModule, MatDialogModule, MatFormFieldModule, 
-         MatSelectModule, MatInputModule, MatSnackBar, MatTableModule } from '@angular/material';
+         MatSelectModule, MatInputModule, MatSnackBar, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { Globals } from './components/globals';
 import { SettingsmodalComponent } from './components/settingsmodal/settingsmodal.component';
 import { HelpmodalComponent } from './components/helpmodal/helpmodal.component';
@@ -38,6 +38,8 @@ import { Widget1Component } from './components/widget1/widget1.component';
 import { Widget2Component } from './components/widget2/widget2.component';
 import { Widget3Component } from './components/widget3/widget3.component';
 import { HeatmapComponent } from './components/heatmap/heatmap.component';
+import { TableComponent } from './components/table/table.component';
+import { TrimModule } from "./shared/trim.module"
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { HeatmapComponent } from './components/heatmap/heatmap.component';
     Widget1Component,
     Widget2Component,
     Widget3Component,
-    HeatmapComponent
+    HeatmapComponent,
+    TableComponent,
+    TrimModule
   ],
   imports: [
     AppRoutingModule,
@@ -91,7 +95,7 @@ import { HeatmapComponent } from './components/heatmap/heatmap.component';
     MatTableModule, 
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBmmelmeHOr3KQovKCisOQfstNRR-TuVEs'
-    })
+    }), MatPaginatorModule, MatSortModule
   ],
   providers: [
     Globals

@@ -250,3 +250,6 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### NPM version for a package
 ```npm view d3 version```
+
+### add a table component schematic
+```ng g @angular/material:table components/table```
