@@ -1,18 +1,20 @@
 <div class="mat-elevation-z8">
   <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
     <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>EventId</th>
+    <ng-container matColumnDef="sev">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Risk types</th>
       <td mat-cell *matCellDef="let row">
         <!-- {{row.id}} -->
-        <div matTooltip="{{row.tip1}}" ><i class="material-icons" >info_outline</i></div>
+        <div>
+          <mat-icon matTooltip="{{violationTip(sev)}}" style="color:steelblue;" *ngFor="let sev of row.sev">{{violationIcon(sev)}}</mat-icon>
+        </div>
       </td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="summary">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Event</th>
-      <td mat-cell *matCellDef="let row">{{row.name | trim:[30, '...'] }}</td>
+      <td mat-cell matTooltip="{{row.descr}}" *matCellDef="let row">{{row.summary | trim:[30, '...'] }}</td>
     </ng-container>
 
     <!-- score Column -->
@@ -27,6 +29,22 @@
       <td mat-cell *matCellDef="let row">{{row.time}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="info">
+      <th mat-header-cell *matHeaderCellDef>More</th>
+      <td mat-cell *matCellDef="let row">
+
+        <button type="button" mat-icon-button>
+          <mat-icon aria-label="Side nav toggle icon" [matMenuTriggerFor]="menu">more_horiz</mat-icon>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Details</button>
+            <button mat-menu-item>Acknowledge read</button>
+            <button mat-menu-item>Delete</button>
+        </mat-menu>
+      </button>
+
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
@@ -34,7 +52,7 @@
   <mat-paginator #paginator
       [length]="dataSource.data.length"
       [pageIndex]="0"
-      [pageSize]="50"
-      [pageSizeOptions]="[10,25, 50, 100, 250]">
+      [pageSize]="10"
+      [pageSizeOptions]="[10, 25, 50, 100, 250]">
   </mat-paginator>
 </div>

@@ -253,3 +253,10 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 
 ### add a table component schematic
 ```ng g @angular/material:table components/table```
+
+### to check out from a new device
+```cd to directory```
+
+```git pull https://gitbub.com/hmfic/a12.git```
+
+```npm update```
