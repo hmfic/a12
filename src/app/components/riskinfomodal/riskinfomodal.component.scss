@@ -1,0 +1,28 @@
+.mat-table2 {
+  display: block;
+  color:#444;
+  //font-family: Tahoma, Verdana;
+}
+
+.mat-row2,
+.mat-header-row2 {
+  display: flex;
+  border-top-style: solid;
+  border-top-color: lightgray;
+  border-top-width: thin;
+  //align-items: top;
+  min-height: 48px;
+  padding: 0 24px;
+}
+
+.mat-row2:hover {
+	background:#eee;
+}
+
+.mat-cell2,
+.mat-header-cell2 {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+  padding: 8px;
+}

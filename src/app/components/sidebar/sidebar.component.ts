@@ -16,13 +16,10 @@ import { AlertsModalComponent } from "../alerts-modal/alerts-modal.component"
   //encapsulation: ViewEncapsulation.Emulated
 })
 export class SidebarComponent {
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
-
-  // @ViewChild('sidebar') public sidebar: MatSidenav;
 
   constructor(
       private breakpointObserver: BreakpointObserver,

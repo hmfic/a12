@@ -260,3 +260,6 @@ don't forget encapsulation in d3 modules to avoid rewriting the styles
 ```git pull https://gitbub.com/hmfic/a12.git```
 
 ```npm update```
+
+### Need date/time formatting
+```npm install --save moment ngx-moment```

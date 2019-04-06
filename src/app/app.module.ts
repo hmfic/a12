@@ -39,7 +39,9 @@ import { Widget2Component } from './components/widget2/widget2.component';
 import { Widget3Component } from './components/widget3/widget3.component';
 import { HeatmapComponent } from './components/heatmap/heatmap.component';
 import { TableComponent } from './components/table/table.component';
-import { TrimModule } from "./shared/trim.module"
+import { TrimModule } from "./shared/trim.module";
+import { RiskinfomodalComponent } from './components/riskinfomodal/riskinfomodal.component';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { TrimModule } from "./shared/trim.module"
     Widget3Component,
     HeatmapComponent,
     TableComponent,
-    TrimModule
+    TrimModule,
+    RiskinfomodalComponent
   ],
   imports: [
     AppRoutingModule,
@@ -95,14 +98,20 @@ import { TrimModule } from "./shared/trim.module"
     MatTableModule, 
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBmmelmeHOr3KQovKCisOQfstNRR-TuVEs'
-    }), MatPaginatorModule, MatSortModule
+    }), 
+    MatPaginatorModule, MatSortModule,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 59
+      }
+    })
   ],
   providers: [
     Globals
     ],
   //providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ SettingsmodalComponent, HelpmodalComponent, AboutmodalComponent, AlertsModalComponent, AlertConfigModalComponent]
+  entryComponents: [ SettingsmodalComponent, HelpmodalComponent, AboutmodalComponent, AlertsModalComponent, AlertConfigModalComponent, RiskinfomodalComponent]
 })
 
 

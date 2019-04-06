@@ -15,4 +15,5 @@ export class Globals {
   force10:any;
   nodes:any;
   links:any;
+  vIcon:any;
 }

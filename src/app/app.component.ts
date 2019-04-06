@@ -42,6 +42,15 @@ ngOnInit(): void {
         //console.log("myinfo set; data=",data);
         this.globals.myinfo=data;
       })
+    this.globals.vIcon=[];
+    this.globals.vIcon["transport"]={'icon':'swap_horiz','tip':'Abnormal transport or port'};
+    this.globals.vIcon["content"]={'icon':'description','tip':'Content violation'};
+    this.globals.vIcon["integrity"]={'icon':'broken_image','tip':'Compromised or broken file'};
+    this.globals.vIcon["time"]={'icon':'access_time','tip':'Time of day violation'};
+    this.globals.vIcon["encryption"]={'icon':'lock','tip':'Unencrypted file violation'};
+    this.globals.vIcon["size"]={'icon':'photo_size_select_small','tip':'Unusual file size'};
+    this.globals.vIcon["filetype"]={'icon':'insert_drive_file','tip':'File type violation'};
+    this.globals.vIcon["zone"]={'icon':'vertical_align_center','tip':'Cross-zone movement violation'};
   } 
 
 ngDoCheck() {

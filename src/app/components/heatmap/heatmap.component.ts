@@ -32,7 +32,7 @@ export class HeatmapComponent implements OnInit {
 
   		let scores=[];
     	if(this.selectedDisplay == 1) {
-    		console.log('setting to #1');
+    		//console.log('setting to #1');
 	    	scores['156']=.41;
 	    	scores['840']=.101;
 	    	scores['792']=.047;
@@ -44,7 +44,7 @@ export class HeatmapComponent implements OnInit {
 	    	scores['380']=.016;
 	    	scores['348']=.014;
     	} else {
-    		console.log('setting to #2');
+    		//console.log('setting to #2');
     		scores['156']=.61;
 	    	scores['840']=.5;
 	    	scores['792']=.5;
@@ -115,7 +115,7 @@ export class HeatmapComponent implements OnInit {
     		} // end zoomed
 
 	    function ready(topology, names,scores) {
-	    	console.log("in ready");
+	    	//console.log("in ready");
 
 	    	let countries = topo.feature(topology, topology.objects.countries).features;
 			let nameshash=[];

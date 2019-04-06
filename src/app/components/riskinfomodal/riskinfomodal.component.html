@@ -1,0 +1,51 @@
+<mat-card-header fxLayout="row">
+	<mat-card-title style="align-items: center;display:flex;">
+		<mat-icon style="color: steelblue;">info</mat-icon> &nbsp; &nbsp;Details
+	</mat-card-title>
+	<div fxFlex></div>
+	<button  mat-button (click)="close()" style="background-color: transparent;">
+		<i class="material-icons">close</i>
+	</button>
+</mat-card-header>
+<div style="margin-left:1rem; font-size: small;">{{data.summary}}</div>
+<br/>
+<div class="mat-table2">
+
+  <div class="mat-row2">
+    <div class="mat-cell2" style="max-width: 30% !important;">Description</div>
+    <div class="mat-cell2">{{data.descr}}</div>
+  </div>
+  <div class="mat-row2">
+    <div class="mat-cell2" style="max-width: 30% !important;">Type(s) of violations</div>
+    <div class="mat-cell2">
+    	<div *ngFor="let sev of data.sev"><mat-icon style="color: steelblue;">{{globals.vIcon[sev].icon}}</mat-icon> {{globals.vIcon[sev].tip}} &nbsp; &nbsp;</div>
+    </div>
+  </div>
+  <div class="mat-row2">
+    <div class="mat-cell2" style="max-width: 30% !important;">Score</div>
+    <div class="mat-cell2">{{data.score}}</div>
+  </div>
+  <div class="mat-row2">
+    <div class="mat-cell2" style="max-width: 30% !important;">Time ago</div>
+    <div class="mat-cell2">{{data.time | amTimeAgo}}</div>
+  </div>
+  <div class="mat-row2">
+    <div class="mat-cell2" style="max-width: 30% !important;">Time</div>
+    <div class="mat-cell2">{{data.time}}</div>
+  </div>
+  <div class="mat-row2">
+    <div class="mat-cell2" style="max-width: 30% !important;">Source</div>
+    <div class="mat-cell2">{{data.source}}</div>
+  </div>
+  <div class="mat-row2">
+    <div class="mat-cell2" style="max-width: 30% !important;">Destination</div>
+    <div class="mat-cell2">{{data.dest}}</div>
+  </div>
+  <div class="mat-row2">
+    <div class="mat-cell2" style="max-width: 30% !important;">Sensor reporter(s)</div>
+    <div class="mat-cell2">
+    	<div *ngFor="let sensor of data.sensors">
+    		<mat-icon style="color:steelblue;">device_hub</mat-icon> &nbsp; {{sensor}}
+    	</div>
+  </div>
+</div>
