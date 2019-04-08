@@ -53,6 +53,8 @@ npm -v
 
 ### get the extension for sublime…
 
+```cd ~/"Library/Application Support/Sublime Text 3/Packages"```
+
 ```git clone --depth 1 https://github.com/Microsoft/TypeScript-Sublime-Plugin.git TypeScript```
 
 ### install angular

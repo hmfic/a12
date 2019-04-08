@@ -42,6 +42,7 @@ import { TableComponent } from './components/table/table.component';
 import { TrimModule } from "./shared/trim.module";
 import { RiskinfomodalComponent } from './components/riskinfomodal/riskinfomodal.component';
 import { MomentModule } from 'ngx-moment';
+import { RadarComponent } from './components/radar/radar.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { MomentModule } from 'ngx-moment';
     HeatmapComponent,
     TableComponent,
     TrimModule,
-    RiskinfomodalComponent
+    RiskinfomodalComponent,
+    RadarComponent
   ],
   imports: [
     AppRoutingModule,

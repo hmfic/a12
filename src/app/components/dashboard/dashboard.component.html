@@ -169,6 +169,17 @@
                   <app-table></app-table>
               </mat-card-content>
             </mat-card>
+            <!-- ***************** RADAR1 CARD ****************** -->
+            <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='radar1'" style="height: 90%;">
+              <mat-card-header style="margin-left:-20px;margin-right:-1px;">
+                  <span fxFlex="99" style="margin-top:8px;">{{card.title}} </span>
+                  <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
+                  <div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
+              </mat-card-header>
+              <mat-card-content>
+                  <app-radar></app-radar>
+              </mat-card-content>
+            </mat-card>
       </cdk-drop-list>
     </mat-grid-tile>
   </mat-grid-list>
