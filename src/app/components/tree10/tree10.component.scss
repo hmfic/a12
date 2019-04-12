@@ -31,3 +31,20 @@
 .axis--grid .tick--minor line {
   stroke-opacity: .5;
 }
+
+.tooltip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  padding-left: 16px;
+  padding-top:8px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+  font: 11px sans-serif;
+  background: #444;
+  border: 0px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index:2000;
+  color:#eee;
+}

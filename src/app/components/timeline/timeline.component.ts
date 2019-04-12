@@ -92,7 +92,7 @@ export class TimelineComponent implements OnInit {
 
 		/* Add SVG */
 		let svg = d3.select(this.hostElement).append("svg")
-		  .attr("width", (width-margin-20)+"px")
+		  .attr("width", (width-margin)+"px")
 		  .attr("height", height)
 		  .append('g')
 		  .attr("transform", `translate(15, 5)`);
@@ -103,9 +103,10 @@ export class TimelineComponent implements OnInit {
 			.attr("class","title-text")
 			.text("bubba!"); */
 
-		d3.select("body").append('tips3');
+		// d3.select("body").append('tips3');
 
-	     var div3 = d3.select("tips3").append('div1')
+	     //var div3 = d3.select("tips3").append('div1')
+	    var div=d3.select("body").append('div')
 	          .attr('class', 'tooltip')
 	          .style('opacity', 0);
 
@@ -182,10 +183,10 @@ export class TimelineComponent implements OnInit {
 			  .on("mouseover", function(d, i) {
 			  		var mouse_x = d3.mouse(this)[0];
 			  		var mouse_y = d3.mouse(this)[1];
-                    div3.transition()
+                    div.transition()
                          .duration(200)
                          .style('opacity', .9);
-                    div3 .html(
+                    div .html(
                         function() {
                                 return d.name; 
                               } )
@@ -194,14 +195,14 @@ export class TimelineComponent implements OnInit {
                         })
 
 				.on('mousemove',(d) => {
-                    div3 
+                    div 
                      .style('left', (d3.event.pageX +10) + 'px')
                      .style('top', (d3.event.pageY - 25) + 'px');
                  })
                        
 		  .on("mouseout", function(d) {
 		      //svg.select(".title-text").remove();
-		      div3.transition()
+		      div.transition()
                  .duration(200)
                  .style('opacity', 0)
 		    })
@@ -247,22 +248,39 @@ export class TimelineComponent implements OnInit {
 		  .data(d => d.values).enter()
 		  .append("g")
 		  .attr("class", "circle")  
-		  .on("mouseover", function(d) {
-		      d3.select(this)     
-		        .style("cursor", "pointer")
-		        .append("text")
-		        .attr("class", "text")
-		        .text(`${d.score}`)
-		        .attr("x", d => xScale(d.date) + 5)
-		        .attr("y", d => yScale(d.score) - 10);
-		    })
+		  //.on("mouseover", function(d) {
+		  //    d3.select(this)     
+		  //      .style("cursor", "pointer")
+		  //      .append("text")
+		  //      .attr("class", "text")
+		  //      .text(`${d.score}`)
+		  //      .attr("x", d => xScale(d.date) + 5)
+		  //      .attr("y", d => yScale(d.score) - 10);
+		  //  })
+		  .on("mouseover", function(d, i) {
+                div.transition()
+                     .duration(200)
+                     .style('opacity', .9);
+                div .html(
+                    function() {
+                            return d.score + " risk score"; 
+                          } )
+                     .style('left', (d3.event.pageX +10) + 'px')
+                     .style('top', (d3.event.pageY - 25) + 'px');
+                    })
 		  .on("mouseout", function(d) {
-		      d3.select(this)
-		        .style("cursor", "none")  
-		        .transition()
-		        .duration(duration)
-		        .selectAll(".text").remove();
+		      //svg.select(".title-text").remove();
+		      div.transition()
+                 .duration(200)
+                 .style('opacity', 0)
 		    })
+		  //.on("mouseout", function(d) {
+		  //    d3.select(this)
+		  //      .style("cursor", "none")  
+		  //      .transition()
+		  //      .duration(duration)
+		  //      .selectAll(".text").remove();
+		  //  })
 		  .append("circle")
 			  .attr("cx", d => xScale(d.date))
 			  .attr("cy", d => yScale(d.score))

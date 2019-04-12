@@ -57,9 +57,9 @@ export class CategoryHistoComponent implements OnInit {
             .attr('stroke-width', '0')
             .attr('stroke', '#b6aeae');
 
-        d3.select("body").append('tips2');
+        //d3.select("body").append('tips2');
 
-	      var div1 = d3.select("tips2").append('div1')
+	      var div1 = d3.select("body").append('div')
 	          .attr('class', 'tooltip')
 	          .style('opacity', 0);
 

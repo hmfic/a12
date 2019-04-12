@@ -45,23 +45,24 @@
   padding:5px !important;
 }
 
-div2.tooltip {   
-    position: fixed; 
-    pointer-events: none;
-    z-index:1500;   
-    text-align: center; 
-    //width: 200px;    
-   // height: 28px;   
-    padding: 4px; 
-    color:white;
-    font: 10px sans-serif;    
-    background: #222; 
-    border: 0px;    
-    border-radius: 8px; 
-    text-align:left;
-    }
+.tooltip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  padding-left: 16px;
+  padding-top:8px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+  font: 11px sans-serif;
+  background: #444;
+  border: 0px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index:2000;
+  color:#eee;
+}
 
-div1.tooltip {   
+/* .tooltip {   
     position: fixed; 
     pointer-events: none;
     z-index:1500;   
@@ -75,4 +76,4 @@ div1.tooltip {
     border: 0px;    
     border-radius: 8px; 
     text-align:left;
-    }
+    } */

@@ -28,3 +28,18 @@
   z-index:2000;
   fill:#eee;
 }
+
+.tooltip {   
+  position: absolute;           
+  text-align: left;           
+  //width: 200px;                  
+  //height: 40px;                 
+  padding: 4px;             
+  font: 11px sans-serif;        
+  background: #222;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none; 
+  z-index:2000 !important;  
+  color:white;     
+}

@@ -97,7 +97,7 @@
                   <app-sankey></app-sankey>
               </mat-card-content>
             </mat-card>
-            <!-- ***************** SANKEY CARD ****************** -->
+            <!-- ***************** CHORD CARD ****************** -->
             <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='chord1'" style="height: 90%;">
               <mat-card-header style="margin-left:-20px;margin-right:-1px;">
                   <span fxFlex="99" style="margin-top:8px;">{{card.title}} </span>
@@ -145,7 +145,7 @@
             <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='heatmap1'" style="height: 90%;">
               <mat-card-header style="margin-left:-20px;margin-right:-1px;">
                   <span fxFlex="99" style="margin-top:8px;">{{card.title}}</span>
-                  <mat-form-field [ngClass]="'changeRisk'" appearance="outline">
+                  <mat-form-field [ngClass]="'changeRisk'" appearance="outline" class="smaller">
                       <mat-select (selectionChange)="onChange($event)" [(value)]="selectedRisk">
                         <mat-option *ngFor="let v of riskDisplay" [value]="v.id">{{v.name}}</mat-option>
                       </mat-select>
@@ -172,12 +172,35 @@
             <!-- ***************** RADAR1 CARD ****************** -->
             <mat-card class="mat-elevation-z8 scrollable-content" cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" *ngIf="card.type=='radar1'" style="height: 90%;">
               <mat-card-header style="margin-left:-20px;margin-right:-1px;">
-                  <span fxFlex="99" style="margin-top:8px;">{{card.title}} </span>
+                  <span fxFlex="99" style="margin-top:8px;">{{card.title}}</span>
+                  <mat-form-field [ngClass]="'changeData'" appearance="outline" class="smaller">
+                      <mat-select (selectionChange)="onRadarDataChange($event)" [(value)]="selectedRadarData">
+                        <mat-option *ngFor="let v of dataDisplay" [value]="v.id">{{v.name}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <mat-form-field [ngClass]="'changeCurve'" appearance="outline" class="smaller">
+                      <mat-select (selectionChange)="onCurveChange($event)" [(value)]="selectedCurve">
+                        <mat-option *ngFor="let v of curveDisplay" [value]="v.id">{{v.name}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <!--<mat-radio-group (change)="onRadarDataChange($event)" name="selectedRadarData" layout="row" >
+                      <mat-radio-button value="1" [checked]="selectedRadarData ==1">24 hours</mat-radio-button>
+                      <mat-radio-button value="2" [checked]="selectedRadarData ==2">1 week</mat-radio-button>
+                  </mat-radio-group> 
+                  <mat-radio-group (change)="onCurveChange($event)" name="selectedCurve" layout="row">
+                      <mat-radio-button value="1" [checked]="selectedCurve ==1">Blob</mat-radio-button>
+                      <mat-radio-button value="2" [checked]="selectedCurve ==2">Spider</mat-radio-button>
+                  </mat-radio-group> -->
                   <div style="margin:8px;" matTooltip="{{card.tip}}"><i class="material-icons">info_outline</i></div>
                   <div style="margin:8px;cursor: move;" cdkDragHandle><i class="material-icons blue">drag_indicator</i></div>
               </mat-card-header>
               <mat-card-content>
-                  <app-radar></app-radar>
+                  <app-radar [selectedCurve]="1" [selectedRadarData]="1" *ngIf="selectedCurve == 1 && selectedRadarData == 1"></app-radar>
+                  <app-radar [selectedCurve]="1" [selectedRadarData]="2" *ngIf="selectedCurve == 1 && selectedRadarData == 2"></app-radar>
+                  <app-radar [selectedCurve]="1" [selectedRadarData]="3" *ngIf="selectedCurve == 1 && selectedRadarData == 3"></app-radar>
+                  <app-radar [selectedCurve]="2" [selectedRadarData]="1" *ngIf="selectedCurve == 2 && selectedRadarData == 1"></app-radar>
+                  <app-radar [selectedCurve]="2" [selectedRadarData]="2" *ngIf="selectedCurve == 2 && selectedRadarData == 2"></app-radar>
+                  <app-radar [selectedCurve]="2" [selectedRadarData]="3" *ngIf="selectedCurve == 2 && selectedRadarData == 3"></app-radar>
               </mat-card-content>
             </mat-card>
       </cdk-drop-list>

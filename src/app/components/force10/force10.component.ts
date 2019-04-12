@@ -6,7 +6,7 @@ import { Globals } from "../globals";
   selector: 'app-force10',
   templateUrl: './force10.component.html',
   styleUrls: ['./force10.component.scss'],
-  //encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
   //encapsulation: ViewEncapsulation.Native
 })
   export class Force10Component implements OnInit, AfterViewInit {
@@ -55,13 +55,13 @@ import { Globals } from "../globals";
          .scaleExtent([.2,10])
          .on("zoom",zoomed);
 
-      const div2 = d3.select("body").append('div2')
+      const div = d3.select("body").append('div')
           .attr('class', 'tooltip')
           .style('opacity', 0);
 
-      const div1 = d3.select("body").append('div1')
-          .attr('class', 'tooltip')
-          .style('opacity', 0);
+      //const div1 = d3.select("body").append('div1')
+      //    .attr('class', 'tooltip')
+      //    .style('opacity', 0);
 
       let svg = d3.select(this.hostElement)
         .append('svg')
@@ -240,10 +240,10 @@ import { Globals } from "../globals";
         .on('mouseover', (d) => {
           // send info to emitter
               this.eventHover.emit(d);
-              div2.transition()
+              div.transition()
                  .duration(200)
                  .style('opacity', .9);
-              div2 .html(
+              div .html(
                 function() {
                         return d.id + "(" + d.name + ")"; 
                       }
@@ -252,7 +252,7 @@ import { Globals } from "../globals";
                  .style('top', (d3.event.pageY - 28) + 'px');
                 })
           .on('mouseout', (d) => {
-              div2.transition()
+              div.transition()
                  .duration(200)
                  .style('opacity', 0);
                 });

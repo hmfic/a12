@@ -56,7 +56,7 @@ export class SankeyComponent implements OnInit {
         	.range(["#bf9d76","#e99450","#d89f59","#f2dfa7","#a5d7c6","#7794b1","#afafaf"]);
 
         var div = d3.select("body").append("div")
-	        .attr("class", "tooltipsankey") 
+	        .attr("class", "tooltip") 
 	        .style("opacity", 0);
 
         var sankey = d3Sankey.sankey()

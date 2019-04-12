@@ -74,11 +74,19 @@
   color: gray;
 }
 
-.changeRisk {
-  width:150px;
+.changeCurve {
+  width:80px;
+}
+
+.changeData {
+  width:120px;
 }
 
 .mat-form-field-infix {
   padding-top: 0px !important;
   padding-bottom: .5rem !important;
+}
+
+.smaller {
+  font-size:small;
 }

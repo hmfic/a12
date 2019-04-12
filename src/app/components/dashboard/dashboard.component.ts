@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Globals } from "../globals";
 import { TimelineComponent } from '../../components/timeline/timeline.component';
 import { CategoryHistoComponent } from '../../components/category-histo/category-histo.component';
+//import { MatRadioModule } from '@angular/material/radio';
 import { MapComponent } from "../../components/map/map.component"
 
 @Component({
@@ -32,9 +33,24 @@ export class DashboardComponent implements OnInit{
 
     selectedRisk=1;
 
+    selectedRadarData=1;
+
+    selectedCurve=1;
+
     riskDisplay = [
       {'id':1,'name':'Industry risk'},
       {'id':2,'name':'My risk'}
+      ];
+
+    dataDisplay = [
+      {'id':1,'name':'1 Hour Risk'},
+      {'id':2,'name':'1 day Risk'},
+      {'id':3,'name':'1 Week Risk'}
+      ]
+
+    curveDisplay = [
+      {'id':1,'name':'Blob'},
+      {'id':2,'name':'Spider'}
       ]
 
   constructor() { }
@@ -42,9 +58,18 @@ export class DashboardComponent implements OnInit{
   ngOnInit(){ }
 
   public onChange(event): void {
-    console.log("this.event=",event);
+    //console.log("this.event=",event);
     this.selectedRisk = event.value;
-    
+  }
+
+  public onCurveChange(event): void {
+    //console.log("this.event=",event);
+    this.selectedCurve = event.value;
+  }
+
+  public onRadarDataChange(event): void {
+    console.log("radardatachange=",event);
+    this.selectedRadarData = event.value;
   }
 
   entered($event: CdkDragEnter) {
@@ -83,7 +108,7 @@ export class DashboardComponent implements OnInit{
      { title: 'Michaels Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget3"},
      { title: 'Country Risk Heatmap', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"heatmap1"},
      { title: 'Top Risky File Type Events', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"table1"},
-     { title: 'Top Risky File Type Events', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"radar1"} 
+     { title: 'Top Risk Change Radar ', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"radar1"} 
    ];
 
 number1 = [

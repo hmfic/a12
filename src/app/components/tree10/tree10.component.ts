@@ -7,7 +7,7 @@ import { brush } from 'd3';
   selector: 'app-tree10',
   templateUrl: './tree10.component.html',
   styleUrls: ['./tree10.component.scss'],
-  //encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class Tree10Component implements OnInit, AfterViewInit {
 	  @ViewChild('tree10Container') chartContainer: ElementRef;
@@ -75,9 +75,9 @@ export class Tree10Component implements OnInit, AfterViewInit {
           svg.attr("transform", d3.event.transform);
         };
 
-    d3.select("body").append('tips');
+    //d3.select("body").append('tips');
 
-    var div1 = d3.select("tips").append('div1')
+    var div = d3.select("body").append('div')
           .attr('class', 'tooltip')
           .style('opacity', 0);
 
@@ -425,10 +425,10 @@ export class Tree10Component implements OnInit, AfterViewInit {
                 .attr("r",25)
                 .on('mouseover', (d) => {
                       //console.log("in nodehover;d=",d);
-                      div1.transition()
+                      div.transition()
                          .duration(200)
                          .style('opacity', .9);
-                      div1 .html(
+                      div .html(
                         function() {
                                 return d.id + " (" + d.data.name + ")"; 
                               }
@@ -437,7 +437,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
                          .style('top', (d3.event.pageY - 35) + 'px');
                         })
                 .on('mouseout', (d) => {
-                    div1.transition()
+                    div.transition()
                        .duration(200)
                        .style('opacity', 0);
                       });
@@ -505,9 +505,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
               })
               //.attr("d",diagonal)
               .attr("marker-start","url(#startGray)");
-
-  // UPDATE
-          
+  // UPDATE 
 
           var LinkRect = link.enter().insert("rect","g")
               .attr("class", "linklabel")
@@ -555,7 +553,25 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr("clip-path","url(#clip20)")
               .attr('transform', function(d) {
                   return "translate(" + ((d.y+d.parent.y)/2 -25) + "," + ((d.x+d.parent.x)/2 -25) + ")";
-                  });
+                  })
+              .on('mouseover', (d) => {
+                    div.transition()
+                       .duration(200)
+                       .style('opacity', .9);
+                    div .html(
+                      function() {
+                              //console.log("in div3 hover;d=",d);
+                              return "Time of day risk"; 
+                            }
+                          )
+                       .style('left', (d3.event.pageX +15) + 'px')
+                       .style('top', (d3.event.pageY - 5) + 'px');
+                      })
+              .on('mouseout', (d) => {
+                  div.transition()
+                     .duration(200)
+                     .style('opacity', 0);
+                    });
 
           var lockicon = link.enter().insert('path','g')
           // link.append('path','g')
@@ -570,7 +586,25 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .attr("clip-path","url(#clip20)")
               .attr('transform', function(d) {
                   return "translate(" + ((d.y+d.parent.y)/2 +5) + "," + ((d.x+d.parent.x)/2 -25) + ")";
-                  });
+                  })
+              .on('mouseover', (d) => {
+                    div.transition()
+                       .duration(200)
+                       .style('opacity', .9);
+                    div .html(
+                      function() {
+                              //console.log("in div3 hover;d=",d);
+                              return "Encryption risk"; 
+                            }
+                          )
+                       .style('left', (d3.event.pageX +15) + 'px')
+                       .style('top', (d3.event.pageY - 5) + 'px');
+                      })
+              .on('mouseout', (d) => {
+                  div.transition()
+                     .duration(200)
+                     .style('opacity', 0);
+                    });
           
 
           var dest = link.enter().insert('svg:foreignObject', 'g')
@@ -639,10 +673,10 @@ export class Tree10Component implements OnInit, AfterViewInit {
                   return "translate(" + (d.y+d.parent.y)/2 + "," + ((d.x+d.parent.x)/2 +17) + ")";
                 })
                 .on('mouseover', (d) => {
-                    div1.transition()
+                    div.transition()
                        .duration(200)
                        .style('opacity', .9);
-                    div1 .html(
+                    div .html(
                       function() {
                               //console.log("in div3 hover;d=",d);
                               return "Data was 2 standard deviations above normal size for an Excel spreadsheet."; 
@@ -652,7 +686,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
                        .style('top', (d3.event.pageY - 5) + 'px');
                       })
               .on('mouseout', (d) => {
-                  div1.transition()
+                  div.transition()
                      .duration(200)
                      .style('opacity', 0);
                     });
@@ -674,10 +708,10 @@ export class Tree10Component implements OnInit, AfterViewInit {
               .on('mouseover', (d) => {
           // send info to emitter
                     //this.eventHover.emit(d);
-                    div1.transition()
+                    div.transition()
                        .duration(200)
                        .style('opacity', .9);
-                    div1 .html(
+                    div .html(
                       function() {
                               //console.log("in tranparent hover;d=",d);
                               return "<table><tr><td colspan='2'><span class='tooltip-header'>Data movement between " + d.parent.data.name + " and " + d.data.name + "</span></td></tr>" +
@@ -699,7 +733,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
                        .style('top', (d3.event.pageY - 5) + 'px');
                       })
               .on('mouseout', (d) => {
-                  div1.transition()
+                  div.transition()
                      .duration(200)
                      .style('opacity', 0);
                     });

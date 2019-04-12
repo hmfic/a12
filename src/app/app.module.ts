@@ -43,6 +43,7 @@ import { TrimModule } from "./shared/trim.module";
 import { RiskinfomodalComponent } from './components/riskinfomodal/riskinfomodal.component';
 import { MomentModule } from 'ngx-moment';
 import { RadarComponent } from './components/radar/radar.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { RadarComponent } from './components/radar/radar.component';
       relativeTimeThresholdOptions: {
         'm': 59
       }
-    })
+    }),
+    MatRadioModule
   ],
   providers: [
     Globals
