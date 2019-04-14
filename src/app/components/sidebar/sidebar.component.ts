@@ -29,7 +29,6 @@ export class SidebarComponent {
 
 
   getInitials(string){
-
       var names = string.split(' '),
         initials = names[0].substring(0, 1).toUpperCase();
     

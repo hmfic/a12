@@ -66,6 +66,7 @@ export class MapComponent implements OnInit {
   		) { }
 
   ngOnInit() {
+  	//console.log("in map;globals=",this.globals);
   }
 
   onMouseOver(infoWindow, gm) {

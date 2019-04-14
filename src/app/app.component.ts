@@ -35,6 +35,8 @@ oldName:string;
 oldTheme:string;
 
 ngOnInit(): void {
+  //this.globals:any=[];
+  //console.log("in app.component.ts; this.globals=",this.globals);
    this.oldName = this.globals.name;
    this.oldTheme = this.globals.theme;
 

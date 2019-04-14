@@ -44,6 +44,7 @@ import { RiskinfomodalComponent } from './components/riskinfomodal/riskinfomodal
 import { MomentModule } from 'ngx-moment';
 import { RadarComponent } from './components/radar/radar.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { Map2Component } from './components/map2/map2.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { MatRadioModule } from '@angular/material/radio';
     TableComponent,
     TrimModule,
     RiskinfomodalComponent,
-    RadarComponent
+    RadarComponent,
+    Map2Component
   ],
   imports: [
     AppRoutingModule,

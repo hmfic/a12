@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Globals } from "../globals";
 import { TimelineComponent } from '../../components/timeline/timeline.component';
 import { CategoryHistoComponent } from '../../components/category-histo/category-histo.component';
-//import { MatRadioModule } from '@angular/material/radio';
 import { MapComponent } from "../../components/map/map.component"
 
 @Component({
@@ -108,7 +107,8 @@ export class DashboardComponent implements OnInit{
      { title: 'Michaels Widget', cols: 1, rows: 3,"tip":"This is sensitive data moving across processes","type":"widget3"},
      { title: 'Country Risk Heatmap', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"heatmap1"},
      { title: 'Top Risky File Type Events', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"table1"},
-     { title: 'Top Risk Change Radar ', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"radar1"} 
+     { title: 'Top Risk Change Radar ', cols: 3, rows: 3,"tip":"This is sensitive data moving across processes","type":"radar1"},
+     { title: 'map2', cols: 4, rows: 3,"tip":"This is sensitive data moving across processes","type":"map2"} 
    ];
 
 number1 = [
