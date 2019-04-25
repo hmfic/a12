@@ -9,15 +9,15 @@
                0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-.mat-card {
+//.mat-card {
 //  background: white;
-  text-decoration: none;
-  margin-bottom:2em;
-  margin-left:1rem;
-  border-radius: .5rem;
-  width:47%;
-  padding:0 !important;
-}
+//  text-decoration: none;
+//  margin-bottom:2em;
+//  margin-left:1rem;
+//  border-radius: .5rem;
+//  width:47%;
+//  padding:0 !important;
+//}
 
 .mat-card4 {
 //  background: white;
@@ -34,16 +34,16 @@
   padding:8px !important;
 }
 
-.mat-card-header {
+//.mat-card-header {
 // background-color: lightgray;
   //margin-bottom: 1% !important;
-  padding:0 !important;
-  border-radius: .5rem .5rem 0rem 0rem;
-}
+//  padding:0 !important;
+//  border-radius: .5rem .5rem 0rem 0rem;
+//}
 
-.mat-card-content{
-  padding:5px !important;
-}
+//.mat-card-content{
+//  padding:5px !important;
+//}
 
 .tooltip {
   position: absolute;
@@ -61,19 +61,3 @@
   z-index:2000;
   color:#eee;
 }
-
-/* .tooltip {   
-    position: fixed; 
-    pointer-events: none;
-    z-index:1500;   
-    text-align: center; 
-    //width: 200px;    
-   // height: 28px;   
-    padding: 4px; 
-    color:white;
-    font: 10px sans-serif;    
-    background: #222; 
-    border: 0px;    
-    border-radius: 8px; 
-    text-align:left;
-    } */

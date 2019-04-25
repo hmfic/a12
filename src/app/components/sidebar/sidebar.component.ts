@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
+import { MatDialog, MatDialogConfig, MatDialogRef, MatSidenav } from "@angular/material";
 import { Globals } from '../globals';
 import { SettingsmodalComponent } from "../settingsmodal/settingsmodal.component";
 import { HelpmodalComponent } from "../helpmodal/helpmodal.component";
@@ -13,9 +13,23 @@ import { AlertsModalComponent } from "../alerts-modal/alerts-modal.component"
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['../sidebar/sidebar.component.scss'],
-  //encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+  @ViewChild('drawer') sidenav: MatSidenav;
+
+  reason=true;
+
+  toggle() {
+    this.reason = !this.reason;
+    // console.log("in toggle; reason=",this.reason);
+    if (!this.reason) {this.sidenav.close()} else {this.sidenav.open()};
+  }
+
+  ngOnInit() {
+
+  }  // end NGonInit
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -26,7 +40,6 @@ export class SidebarComponent {
       private globals: Globals,
       private dialog: MatDialog
       ) {}
-
 
   getInitials(string){
       var names = string.split(' '),

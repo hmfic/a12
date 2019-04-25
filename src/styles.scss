@@ -22,5 +22,13 @@ a {
 	font-size: 1.1rem;
 }
 
+.mat-card-header {
+  padding:0 !important;
+  border-radius: .5rem .5rem 0rem 0rem;
+}
+
+.mat-card-content{
+  padding:5px !important;
+}
 
 @import "./theme.scss";

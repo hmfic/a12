@@ -39,7 +39,7 @@ export class Map2Component implements OnInit {
         this.height = this.height - this.margin.top - this.margin.bottom-20;
         this.width = this.width - this.margin.right -20;
 
-        var dotsize = 4;
+        var dotsize = 5;
 
         const zoom = d3.zoom()
         	.scaleExtent([1,8])
@@ -48,10 +48,13 @@ export class Map2Component implements OnInit {
         function zoomed() {
 	    	//console.log("in zoom");
     		g.selectAll('circle')
-    			.attr('transform', d3.event.transform);
+    			.attr('transform', d3.event.transform)
+    			.attr("r", function () {
+    				//console.log("event=",d3.event.transform.k);
+    				return 1/d3.event.transform.k*dotsize
+    			});
     		g.selectAll('path')
     			.attr('transform', d3.event.transform);
-
     		 } // end zoomed
 
         let svg = d3.select(this.hostElement)

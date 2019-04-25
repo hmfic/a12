@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, ViewChild, Pipe, PipeTransform , ViewEncapsulation} from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { TableDataSource } from './table-datasource';
 import { TrimModule } from "../../shared/trim.module";
@@ -9,7 +9,8 @@ import { Globals } from '../globals';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;

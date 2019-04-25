@@ -3,11 +3,17 @@
 }
 
 .sidenav {
-  width: 300px;
+  width: 170px;
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
+//.sidenav .mat-toolbar {
+//  background: inherit;
+//}
+
+.sidenav-links {
+	font-size: 12px;
+	color:primary;
+	padding:0px;
 }
 
 .mat-toolbar.mat-primary {
@@ -22,7 +28,7 @@
 }
 
 .drawer-contents{
-	margin:5rem;
+	margin:4rem;
 }
 
 .fill-remaining-space {
@@ -32,6 +38,14 @@
 .bigger {
 	font-size:larger;
 	font-weight:100;
+}
+
+.small {
+	font-size:10px;
+	font-weight:lighter;
+	margin-left:.75rem;
+	margin-bottom: 0rem;
+	line-height: 16px;
 }
 
 .paw {
@@ -68,6 +82,6 @@
 }
 
 .mat-dialog-container{
-	width: 100vw !important;
-	height: 100vh !important;
+	width: 60vw !important;
+	height: 90vh !important;
 }

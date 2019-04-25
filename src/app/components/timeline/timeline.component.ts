@@ -1,6 +1,5 @@
 import { Component, ViewChild, OnInit , ElementRef, ViewEncapsulation, AfterViewInit } from '@angular/core';
 
-
 import * as d3 from 'd3';
 
 @Component({

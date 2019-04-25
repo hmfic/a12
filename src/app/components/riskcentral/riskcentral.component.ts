@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewEncapsulation} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-riskcentral',
   templateUrl: './riskcentral.component.html',
-  styleUrls: ['./riskcentral.component.scss']
+  styleUrls: ['./riskcentral.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RiskcentralComponent implements OnInit {
 

@@ -56,7 +56,6 @@ ngOnInit(): void {
   } 
 
 ngDoCheck() {
-    
       if (this.oldTheme != this.globals.theme) {
         console.log("in ngdocheck; global new theme=",this.globals.theme);
         const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
@@ -78,7 +77,7 @@ ngDoCheck() {
         // update theme cookie if needed
         //if (this.cookieService.get('theme') != this.globals.theme) 
         //  this.cookieService.set( 'theme', this.globals.theme, this.expiredDate );
-     }
+       } // end if
 
      if (typeof this.globals.users != "undefined") {
        if (this.globals.users.length > 0) {

@@ -70,7 +70,7 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 
 // Light theme
-$light-primary: mat-palette($mat-grey, 500, 800, 800);
+$light-primary: mat-palette($mat-gray, 400, 800, 800);
 $light-accent: mat-palette($mat-gray, 700);
 $light-warn: mat-palette($mat-deep-orange, 200);
 $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);

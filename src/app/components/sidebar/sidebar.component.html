@@ -1,47 +1,60 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="over">
-    <mat-toolbar>
-        <div text-align="left" >Navigation</div>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" opened="reason" mode="side">
+    <mat-toolbar style='border-right:3px; align-items: start; padding-top:10px;margin-top:35px;'>
+        <div text-align="left" style='font-size: smaller;'>
+            Dashboards
+            <div class="small"> Profile: {{globals.name}}</div>
+        </div>
         <span class="fill-remaining-space"></span>
-        <i class="material-icons" (click)="drawer.toggle()" style="cursor:pointer;">close</i>
+        <button mat-icon-button >
+          <mat-icon (click)="toggle()" style="cursor:pointer;" >close</mat-icon>
+        </button>
     </mat-toolbar>
+    <!--
+      <button  mat-button (click)="close()" style="background-color: transparent;">
+      <mat-icon>close</mat-icon>
+  </button>
+    -->
     <mat-nav-list>
-          <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
+          <mat-list-item routerLinkActive="active"> 
           <a routerLink="dashboard" class="sidenav-links"  >
             <div  style="display: flex;align-items: center;">
               <i class="material-icons">home</i>&nbsp; Scorecard
             </div>
           </a>
          </mat-list-item>
-         <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
+         <mat-list-item routerLinkActive="active"> 
           <a routerLink="risk" class="sidenav-links"  >
             <div  style="display: flex;align-items: center;">
               <i class="material-icons">alarm</i>&nbsp; Risk Use Cases
             </div>
           </a>
          </mat-list-item>
-         <mat-list-item (click)="drawer.toggle()" routerLinkActive="active"> 
+         <mat-list-item  routerLinkActive="active"> 
           <a routerLink="main" class="sidenav-links"  >
             <div  style="display: flex;align-items: center;">
               <i class="material-icons">alarm</i>&nbsp; Top Risk Category
             </div>
           </a>
          </mat-list-item>
+         <mat-list-item *ngFor="let dashboard of globals.dashboards">
+          <a routerLink="{{dashboard.route}}" class="sidenav-links"  >
+            <div  style="display: flex;align-items: center;" matTooltip="{{dashboard.description}}">
+              <i class="material-icons">{{dashboard.icon}}</i>&nbsp; {{dashboard.name}}
+            </div>
+          </a>
+         </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content >
-    <mat-toolbar color="primary" style="margin-bottom: 10px;">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        style="margin-right: 2rem;">
-       <!--  *ngIf="isHandset$ | async "> -->
-        	<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-     	</button>
+    <mat-toolbar color="primary" style="margin-bottom: 10px;padding-left:25px;">
+        <button *ngIf="!reason" 
+          mat-icon-button
+          (click)="toggle()"
+          style="margin-right: .5rem;">
+         <!--  *ngIf="isHandset$ | async "> -->
+          	<mat-icon style="font-size: 36px;" aria-label="Side nav toggle icon" >chevron_right</mat-icon>
+       	</button>
      	<div class="bigger"> 
       		Coyote Creek
      	</div>
