@@ -25,7 +25,7 @@ export class Globals {
           dateCreated: '1/2/2019',
           totalColumns:8,
           maxRows: 9,
-          icon: 'alarm',
+          icon: 'bar_chart',
           route: 'eu',
           cards: [
             {
@@ -65,7 +65,7 @@ export class Globals {
           dateCreated: '1/2/2019',
           totalColumns:8,
           maxRows: 9,
-          icon: 'alarm',
+          icon: 'trending_up',
           route: 'norcal',
           cards: [
             {

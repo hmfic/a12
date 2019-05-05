@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" opened="reason" mode="side">
-    <mat-toolbar style='border-right:3px; align-items: start; padding-top:10px;margin-top:35px;'>
+    <mat-toolbar style='border-right:3px; align-items: start; padding-top:10px;margin-top:0px;'>
         <div text-align="left" style='font-size: smaller;'>
             Dashboards
             <div class="small"> Profile: {{globals.name}}</div>
@@ -19,21 +19,21 @@
           <mat-list-item routerLinkActive="active"> 
           <a routerLink="dashboard" class="sidenav-links"  >
             <div  style="display: flex;align-items: center;">
-              <i class="material-icons">home</i>&nbsp; Scorecard
+              <i class="material-icons">security</i>&nbsp; Scorecard
             </div>
           </a>
          </mat-list-item>
          <mat-list-item routerLinkActive="active"> 
           <a routerLink="risk" class="sidenav-links"  >
             <div  style="display: flex;align-items: center;">
-              <i class="material-icons">alarm</i>&nbsp; Risk Use Cases
+              <i class="material-icons">multiline_chart</i>&nbsp; Risk Use Cases
             </div>
           </a>
          </mat-list-item>
          <mat-list-item  routerLinkActive="active"> 
           <a routerLink="main" class="sidenav-links"  >
             <div  style="display: flex;align-items: center;">
-              <i class="material-icons">alarm</i>&nbsp; Top Risk Category
+              <i class="material-icons">data_usage</i>&nbsp; Top Risk Category
             </div>
           </a>
          </mat-list-item>

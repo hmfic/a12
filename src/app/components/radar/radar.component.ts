@@ -308,7 +308,7 @@ export class RadarComponent implements OnInit {
 						.style("fill-opacity", 0.1);
 					//Bring back the hovered over blob
 					d3.select(this)
-						.transition().duration(200)
+						.transition().duration(300)
 						.style("fill-opacity", 0.8);
 					div.transition()
 		            	.duration(200)
@@ -341,8 +341,7 @@ export class RadarComponent implements OnInit {
 				.attr("d", function(d,i) { return radarLine(d.axes); })
 				.style("stroke-width", cfg.strokeWidth + "px")
 				.style("stroke", (d,i) => cfg.color(i))
-				.style("fill", "none")
-				//.style("filter" , "url(#glow)");
+				.style("fill", "none");
 
 			//Append the circles
 			blobWrapper.selectAll(".radarCircle")
@@ -365,8 +364,7 @@ export class RadarComponent implements OnInit {
 			const blobCircleWrapper = g.selectAll(".radarCircleWrapper")
 				.data(data)
 				.enter().append("g")
-				.attr("class", "radarCircleWrapper")
-				;
+				.attr("class", "radarCircleWrapper");
 
 			//Append a set of invisible circles on top for the mouseover pop-up
 			blobCircleWrapper.selectAll(".radarInvisibleCircle")

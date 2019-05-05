@@ -47,14 +47,19 @@ export class Map2Component implements OnInit {
 
         function zoomed() {
 	    	//console.log("in zoom");
+    		
+    		g.attr('transform', d3.event.transform);
     		g.selectAll('circle')
-    			.attr('transform', d3.event.transform)
     			.attr("r", function () {
     				//console.log("event=",d3.event.transform.k);
-    				return 1/d3.event.transform.k*dotsize
+    				return 1.7/d3.event.transform.k*dotsize
     			});
-    		g.selectAll('path')
-    			.attr('transform', d3.event.transform);
+
+    		g.selectAll(".sensordot")
+    			.attr("d",  symbolGenerator(
+    				function () {
+    				return 1/d3.event.transform.k*100
+    				}) )	
     		 } // end zoomed
 
         let svg = d3.select(this.hostElement)
@@ -63,14 +68,12 @@ export class Map2Component implements OnInit {
             	.attr('height', this.height)
             	.style("background-color","#EBF4FA");
 
- //       var path = d3.geo.path()
-//		    .projection(projection);
 		var g = svg.append("g");
 
         svg.call(zoom);
 
     	let projection = d3.geoMercator()
-			.scale(95)
+			.scale(100)
 			.translate( [this.width / 2, this.height / 1.5]);
 
 		var div = d3.select("body").append("div")
@@ -130,6 +133,12 @@ export class Map2Component implements OnInit {
 				"url":"/assets/archive.svg"
 			}];
 		let me = [];
+
+		function symbolGenerator(size) {
+				return d3.symbol()
+					.type(d3.symbolStar)
+					.size(size)
+				};
 		//console.log("in map2; globals=",this.globals);
 		if(this.globals.myinfo == undefined) {
 			//console.log("setting to default; myinfo not set");
@@ -231,24 +240,18 @@ export class Map2Component implements OnInit {
 	                	.attr("class","country");
 	         	})
 
-	        top.selectAll('circle1')
-				  .data(sensors)
+	        top.selectAll('sensors')
+				.data(sensors)
 				  	.enter()
-				  .append("circle")
-				  .attr('d', sensors)
+				.append('path')
+				  //.attr('d', sensors)
 				  .attr("class","sensordot")
-				  .attr("r", dotsize)
-				  .attr("cx", function(d) {
-			               return projection([d.lon, d.lat])[0];
-			       })
-			       .attr("cy", function(d) {
-			               return projection([d.lon, d.lat])[1];
-			       })
-				  //.attr("transform", function(d) {
-				  	//console.log("in map2 sensors; d=",d);
-				//	return "translate(" + projection([d.lon,d.lat]) + ")";
-				  //})
-				  .on('mouseover', function(d) {
+			    .attr("d",  symbolGenerator(100) )
+			    .attr('transform', function(d) { return 'translate(' +
+			    	projection([d.lon, d.lat])[0] 
+			    	+ ',' + 
+			    	projection([d.lon, d.lat])[1] + ')'})
+				.on('mouseover', function(d) {
 				  	div.transition()
 		            	.duration(200)
 		            	.style("opacity",.9);
@@ -265,7 +268,7 @@ export class Map2Component implements OnInit {
 		        	d3.select(this)
 		        		.transition()
 		            	.duration(200)
-		        		.attr("r",dotsize*1.7)
+		        		//.attr("r",dotsize*1.7)
 		        		.attr("class","sensordothover");	
 
 		       		})
@@ -276,29 +279,23 @@ export class Map2Component implements OnInit {
 	                    //.attr("stroke",'black')
 	                     .style("opacity",0);
 	                d3.select(this)
-	                	.attr("r", dotsize)
+	                	// .attr("r", dotsize)
 	                	.attr("class","sensordot")
 	            });
 
-	        top.selectAll('circle2')
+	        top.selectAll('destinations')
 				  .data(destinations)
 				  	.enter()
 				  	.append("circle")
 				  	.attr("class","destdot")
 				  	.attr("r", dotsize)
 				  	.attr('d', destinations)
-				 	.attr("cx", function(d) {
-				 			// console.log('in destinaton circle;d=',d)
-			               return projection([d.lon, d.lat])[0];
-			       		})
-			       	.attr("cy", function(d) {
-			               return projection([d.lon, d.lat])[1];
-			       })
+				 	.attr("cx", function(d) { return projection([d.lon, d.lat])[0]; })
+			       	.attr("cy", function(d) { return projection([d.lon, d.lat])[1]; })
 				  .on('mouseover', function(d) {
 				  	div.transition()
 		            	.duration(200)
 		            	.style("opacity",.9);
-	         		//console.log("in map2 path mouseover;d=",d);
 	                div .html(
 	                    function() {
 	                    	return '<div style="text-align: left">' +
