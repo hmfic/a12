@@ -354,7 +354,7 @@ export class RadarComponent implements OnInit {
 				.attr("cx", (d,i) => rScale(d.value) * cos(angleSlice * i - HALF_PI))
 				.attr("cy", (d,i) => rScale(d.value) * sin(angleSlice * i - HALF_PI))
 				.style("fill", (d) => cfg.color(d.id))
-				.style("fill-opacity", 0.8);
+				.style("fill-opacity", 0.4);
 
 			/////////////////////////////////////////////////////////
 			//////// Append invisible circles for tooltip ///////////
@@ -381,7 +381,8 @@ export class RadarComponent implements OnInit {
 					d3.select("#point"+ d.id + i)
 			          .transition()
 			          .duration(200)
-			          .attr("r", cfg.dotRadius*2);
+			          .attr("r", cfg.dotRadius*2)
+			          .attr("opacity",.8);
 					d3.select(this)
 						.transition().duration(200)
 						.style("fill-opacity", 0.8);
@@ -402,7 +403,8 @@ export class RadarComponent implements OnInit {
 	            	d3.select("#point"+ d.id + i)
 			          .transition()
 			          .duration(200)
-			          .attr("r", cfg.dotRadius);
+			          .attr("r", cfg.dotRadius)
+			          .attr("opacity",.4);
 					/*tooltip.transition()
 						.style('display', 'none').text(''); */
 				});

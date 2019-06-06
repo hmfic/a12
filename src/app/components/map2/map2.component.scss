@@ -1,12 +1,12 @@
 .sensordothover {
-	fill: orange;
+	fill: steelblue;
 	opacity: .7;
 	stroke: #eee;
 	stroke-width:.5px;
 }
 
 .sensordot {
-	fill: orange;
+	fill: steelblue;
 	opacity: 1;
 	stroke:#eee;
 	stroke-width:.5px;
@@ -14,25 +14,27 @@
 
 .country {
 	fill: #ddd;
-	stroke: #888;
+	stroke: #666;
 	opacity: .8;
+	stroke-width: .1px;
 }
 
 .countryhover {
 	fill: #aaa;
 	opacity: 1;
 	stroke:#888;
+	stroke-width: .5px;
 }
 
 .destdot {
-	fill: steelblue;
+	fill: orange;
 	stroke:#eee;
 	stroke-width:.5px;
 	opacity:1;
 }
 
 .destdothover {
-	fill:  steelblue;
+	fill:  orange;
 	opacity: .7;
 	stroke:#eee;
 	stroke-width:.5px;
@@ -50,4 +52,10 @@
 	opacity: .7;
 	stroke:#eee;
 	stroke-width:.5px;
+}
+
+.routes {
+	stroke: steelblue;
+	stroke-width: 2;
+	fill:none;
 }
