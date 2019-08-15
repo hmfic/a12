@@ -65,7 +65,7 @@ import { Globals } from "../globals";
 
       let svg = d3.select(this.hostElement)
         .append('svg')
-        .attr('width',"100%")
+        .attr('width',"40vw")
         .attr('height',"60vh")
         //.attr('style',"margin-bottom:70px;")
         .call(zoom)

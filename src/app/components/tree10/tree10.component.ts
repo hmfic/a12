@@ -168,7 +168,8 @@ export class Tree10Component implements OnInit, AfterViewInit {
       this.hostElement= this.chartContainer.nativeElement;
       this.width=this.chartContainer.nativeElement.offsetWidth;
       this.height=this.chartContainer.nativeElement.offsetHeight;
-
+      //this.width=500;
+      console.log("******************* this.width=",this.width);
 
       // find min and max dates
       let dates = [];
@@ -206,6 +207,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
       //let sliderBoxHeightStr: string =''+sliderBoxHeight;
       let svg2 = d3.select(this.hostElement)
           .append('svg')
+          //.attr('width','100%')
           .attr('width',this.width)
           .attr('height',sliderBoxHeight+8)
           .append('g');
@@ -238,6 +240,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
             .attr("class", "brush")
             .call(d3.brushX()
                 .extent([[0, 0], [this.width, xAxisGridHeight]])
+                //.extent([[0, 0], ['100%', xAxisGridHeight]])
                 .on("end brush", brushed));
                 //.on("move", brushmove));
 
@@ -787,7 +790,7 @@ export class Tree10Component implements OnInit, AfterViewInit {
             } // end click
         }  // end update function
 
-      },10);   // end timeout
+      },500);   // end timeout
     
   }  // end nginit
 
