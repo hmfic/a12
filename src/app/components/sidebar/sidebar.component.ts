@@ -2,7 +2,13 @@ import { Component, OnInit, Inject, ViewEncapsulation, ViewChild } from '@angula
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MatDialog, MatDialogConfig, MatDialogRef, MatSidenav } from "@angular/material";
+//import { MatDialog, MatDialogConfig, MatDialogRef, MatSidenav } from "@angular/material";
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
+//import { MatTable } from '@angular/material/table';
+//import { TableComponent } from "../table/table.component";
 import { Globals } from '../globals';
 import { SettingsmodalComponent } from "../settingsmodal/settingsmodal.component";
 import { HelpmodalComponent } from "../helpmodal/helpmodal.component";

@@ -1,9 +1,14 @@
 import { Component, OnInit, ViewChild, Pipe, PipeTransform , ViewEncapsulation} from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+// import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { TableDataSource } from './table-datasource';
 import { TrimModule } from "../../shared/trim.module";
 import { RiskinfomodalComponent } from "../riskinfomodal/riskinfomodal.component";
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
+//import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Globals } from '../globals';
 
 @Component({

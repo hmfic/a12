@@ -1,6 +1,11 @@
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatTable, MatMenuTrigger } from "@angular/material";
-import { TableComponent } from "../table/table.component";
+// import { MAT_DIALOG_DATA, MatDialogRef, MatTable, MatMenuTrigger } from "@angular/material";
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+//import { MatDialogConfig } from '@angular/material/dialog';
+//import { MatMenuTrigger } from '@angular/material/menu';
+//import { MatTable } from '@angular/material/table';
+//import { TableComponent } from "../table/table.component";
 import { Globals } from '../globals';
 
 @Component({

@@ -1,7 +1,12 @@
 import { Component, OnInit, ViewEncapsulation, Inject, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatTable, MatMenuTrigger } from "@angular/material";
+//import { MAT_DIALOG_DATA, MatDialogRef, MatTable, MatMenuTrigger } from "@angular/material";
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { AlertConfigModalComponent } from '../alert-config-modal/alert-config-modal.component';
-import { MatDialog, MatDialogConfig } from "@angular/material";
+//import { MatDialog, MatDialogConfig } from "@angular/material";
 //import { MatTableModule } from '@angular/material' 
 
 

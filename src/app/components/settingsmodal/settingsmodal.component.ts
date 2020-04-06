@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogContent, MatFormFieldModule, MAT_DIALOG_DATA, MatDialogRef, MatInputModule, MatSelectModule} from "@angular/material";
+//import { MatDialog, MatDialogConfig, MatDialogContent, MatFormFieldModule, MAT_DIALOG_DATA, MatDialogRef, MatInputModule, MatSelectModule} from "@angular/material";
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+//import { MatTable } from '@angular/material/table';
+//import { TableComponent } from "../table/table.component";
 import { FormBuilder, Validators, FormGroup, FormsModule, } from "@angular/forms";
 import { Globals } from '../globals';
 import { Inject } from '@angular/core';
